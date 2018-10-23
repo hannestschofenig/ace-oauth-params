@@ -2,9 +2,9 @@
 
 This is the working area for the IETF ACE Working Group Internet-Draft "Additional OAuth Parameters for Authorization for Constrained Environments (ACE)".
 
-* [Editor's copy](https://ace-wg.github.io/ace-oauth/draft-ietf-ace-oauth-params.html)
+* [Editor's copy](https://ace-wg.github.io/ace-oauth-params/draft-ietf-ace-oauth-params.html)
 * [Working Group Draft](https://tools.ietf.org/html/draft-ietf-ace-oauth-params)
-* [Compare Editor's Copy to Working Group Draft](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-ace-oauth-params.txt&url2=https://ace-wg.github.io/ace-oauth/draft-ietf-ace-oauth-params.txt)
+* [Compare Editor's Copy to Working Group Draft](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-ace-oauth-params.txt&url2=https://ace-wg.github.io/ace-oauth-params/draft-ietf-ace-oauth-params.txt)
  
 ## Building the Draft
 
