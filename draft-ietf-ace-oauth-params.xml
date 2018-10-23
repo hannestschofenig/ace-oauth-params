@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This template is for creating an Internet Draft using xml2rfc,
+     which is available here: http://xml.resource.org. -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!-- One method to get references from the online citation libraries.
+     There has to be one entity for each item to be referenced.
+     An alternate method (rfc include) is described in the references. -->
+
+<!ENTITY RFC2119 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC6749 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.6749.xml">
+<!ENTITY RFC7252 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7252.xml">
+<!ENTITY RFC7800 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7800.xml">
+<!ENTITY RFC8174 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY I-D.ietf-ace-oauth-authz SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-oauth-authz.xml">
+<!ENTITY I-D.ietf-ace-cwt-proof-of-possession SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-cwt-proof-of-possession.xml">
+]>
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<!-- used by XSLT processors -->
+<!-- For a complete list and description of processing instructions (PIs),
+     please see http://xml.resource.org/authoring/README.html. -->
+<!-- Below are generally applicable Processing Instructions (PIs) that most I-Ds might want to use.
+     (Here they are set differently than their defaults in xml2rfc v1.32) -->
+<?rfc strict="yes" ?>
+<!-- give errors regarding ID-nits and DTD validation -->
+<!-- control the table of contents (ToC) -->
+<?rfc toc="yes"?>
+<!-- generate a ToC -->
+<?rfc tocdepth="4"?>
+<!-- the number of levels of subsections in ToC. default: 3 -->
+<!-- control references -->
+<?rfc symrefs="yes"?>
+<!-- use symbolic references tags, i.e, [RFC2119] instead of [1] -->
+<?rfc sortrefs="yes" ?>
+<!-- sort the reference entries alphabetically -->
+<!-- control vertical white space
+     (using these PIs as follows is recommended by the RFC Editor) -->
+<?rfc compact="yes" ?>
+<!-- do not start each main section on a new page -->
+<?rfc subcompact="no" ?>
+<!-- keep one blank line between list items -->
+<!-- end of list of popular I-D processing instructions -->
+<rfc category="std" docName="draft-ietf-ace-oauth-params-00" ipr="trust200902">
+  <!-- category values: std, bcp, info, exp, and historic
+     ipr values: full3667, noModification3667, noDerivatives3667
+     you can add the attributes updates="NNNN" and obsoletes="NNNN"
+     they will automatically be output with "(if approved)" -->
+
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the full title is longer than 39 characters -->
+
+<title abbrev="ACE-OAuth-Params">Additional OAuth Parameters for Authorization in Constrained Environments (ACE)</title>
+
+    <!-- add 'role="editor"' below for the editors if appropriate -->
+
+    <!-- Another author who claims to be an editor -->
+
+    <author fullname="Ludwig Seitz" initials="L." surname="Seitz">
+      <organization>RISE</organization>
+
+      <address>
+        <postal>
+          <street>Scheelevaegen 17</street>
+          <code>223 70</code> <city>Lund</city>
+          <country>Sweden</country>
+       </postal>
+        <email>ludwig.seitz@ri.se</email>
+
+        <!-- uri and facsimile elements may also be added -->
+      </address>
+    </author>
+
+    <date year="2018"/>
+
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
+         in the current day for you. If only the current year is specified, xml2rfc will fill
+	 in the current day and month for you. If the year is not the current one, it is necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the purpose of calculating the expiry date).  With drafts it is normally sufficient to specify just the year. -->
+
+    <!-- Meta-data Declarations -->
+
+    <area>Security</area>
+
+    <workgroup>ACE Working Group</workgroup>
+
+    <!-- WG name at the upperleft corner of the doc,
+         IETF is fine for individual submissions.
+	 If this element is not present, the default is "Network Working Group",
+         which is used by the RFC Editor as a nod to the history of the IETF. -->
+
+    <keyword>CoAP, OAuth 2.0, Access Control, Authorization, Internet of Things</keyword>
+
+    <!-- Keywords will be incorporated into HTML output
+         files in a meta tag but they have no effect on text or nroff
+         output. If you submit your draft to the RFC Editor, the
+         keywords will be used for the search engine. -->
+
+    <abstract>
+      <t>This specification defines new parameters for the  OAuth 2.0 token and
+      introspection endpoints when used with framework for authentication and
+      authorization for constrained environments (ACE).
+      These are used to express the desired audience of a requested access
+      token, the desired proof-of-possession key, the proof-of-possession key
+      that the AS has selected, and the key the RS should use to
+      authenticate to the client.</t>
+    </abstract>
+  </front>
+
+<middle>
+
+<!-- ***************************************************** -->
+
+<section anchor="intro" title="Introduction">
+
+  <t>The Authorization for the Internet of Things specification <xref
+  target="I-D.ietf-ace-oauth-authz"/> requires some new parameters for
+  requests and responses to the OAuth 2.0 <xref target="RFC6749"/> token and
+  introspection endpoints, as well as some new claims to be used in access
+  tokens. This document specifies these new parameters and claims
+  separately from the framework, so they can be used and updated
+  independently.</t>
+</section>
+
+<!-- ***************************************************** -->
+
+<section anchor="terminology" title="Terminology">
+  <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+"OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref
+target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
+
+  <t>Readers are assumed to be familiar with the terminology from <xref
+  target="I-D.ietf-ace-oauth-authz"/>.</t>
+
+  <t>Note that the term "endpoint" is used here following its OAuth 2.0
+  <xref target="RFC6749"/> definition, which is to denote resources such as
+  token and introspection at the AS and authz-info at the RS.  The CoAP
+  <xref target="RFC7252"/> definition, which is "An entity participating in the
+  CoAP protocol" is not used in this specification.</t>
+
+</section>
+
+<!-- ***************************************************** -->
+
+<section anchor="tokenEndpoint" title="Parameters for the Token Endpoint">
+
+ <section anchor="tokenRequest" title="Client-to-AS Request"> 
+  <t>This document defines the following additional parameters for
+  requesting an access token from a token endpoint in the ACE framework
+  <xref target="I-D.ietf-ace-oauth-authz"/>:
+ 
+      <list style="hanging">
+	<t hangText="req_aud"><vspace blankLines="0"/>
+	OPTIONAL.  Specifies the audience for which the client is
+	requesting an access token.  If this parameter is missing, it is
+	assumed that the AS has a default audience for access tokens
+	issued to this client.  If a client submits a request for an access
+	token without specifying a "req_aud" parameter, and the AS does not
+	have a default audience value for this client, then the AS MUST respond
+	with an error message using a response code equivalent to the CoAP
+	response code 4.00 (Bad Request). 
+	<vspace blankLines="1"/></t>
+
+	<t hangText="req_cnf"><vspace blankLines="0"/>
+	OPTIONAL.  This field contains information about the key the
+	client would like to bind to the access token for proof-of-possession.
+	It is RECOMMENDED that an AS reject a request containing a symmetric key
+	value in the 'req_cnf' field, since the AS is expected to be able to
+	generate better symmetric keys than a potentially constrained client.
+	See <xref target="paramCnf"/> for more details on the use of this
+	parameter.</t>
+      </list>
+    </t>
+  </section><!-- C->AS -->
+
+  <section anchor="tokenResponse" title="AS-to-Client Response">
+  
+    <t>This document defines the following additional parameters for
+    an AS response to a request to the token endpoint:
+
+    <list style="hanging">
+	<t hangText="cnf"><vspace blankLines="0"/>
+	REQUIRED if the token type is "pop" and a symmetric key is used.
+	MAY be present for asymmetric proof-of-possession keys.  This field
+	contains the proof-of-possession key that the AS selected for the
+	token. See <xref target="paramCnf"/> for details on the use of this
+	parameter.<vspace blankLines="1"/></t>
+
+	<t hangText="rs_cnf"><vspace blankLines="0"/>
+	OPTIONAL if the token type is "pop" and asymmetric keys are used.
+	MUST NOT be present otherwise. This field contains information about
+	the public key used by the RS to authenticate.  If this	parameter is
+	absent, either the RS does not use a public key or the AS assumes that
+	the client already knows the public key of the RS. See <xref
+	target="paramCnf"/> for details on the use of this parameter. </t>
+      </list>
+    </t>
+  </section><!-- AS->C -->
+</section> <!--Token Endpont-->
+
+<section anchor="introspectionEndpoint"
+	 title="Parameters for the Introspection Endpoint">
+  
+  <section anchor="introAS2RS" title="AS-to-RS Response">
+    <t>This document defines the following additional parameters for
+    an AS response to a request to the introspection endpoint:
+   
+    <list style="hanging">
+      <t hangText="cnf"><vspace blankLines="0"/>
+	OPTIONAL.   This field contains information about the
+	proof-of-possession  key that binds the client to the access token.
+	See <xref target="paramCnf"/> for more details on the use of the "cnf"
+        parameter.<vspace blankLines="1"/></t>
+
+      <t hangText="rs_cnf"><vspace blankLines="0"/>
+	OPTIONAL.  If the RS has several keys it can use to authenticate
+	towards the client, the AS can give the RS a hint using this
+	parameter, as to which key it should use (e.g., if the AS
+	previously informed the client about a public key the RS is
+        holding). See <xref target="paramCnf"/> for more details on the
+        use of this parameter.</t>
+    </list>
+    </t>
+  </section><!-- AS->RS -->
+</section> <!-- introspection -->
+
+<section anchor="paramCnf" title="Confirmation Method Parameters">
+  <t>The confirmation method parameters are used as follows:
+    <list style="symbols">
+      <t>"req_cnf" in the token request C -> AS, OPTIONAL to indicate the
+      client's raw public key, or the key-identifier of a previously
+      established key between C and RS that the client wishes to use
+      for proof-of-possession of the access token.</t>
+
+      <t>"cnf" in the token response AS -> C, OPTIONAL if using an
+      asymmetric key or a key that the client requested via a key identifier
+      in the request. REQUIRED if the client didn't specify a "req_cnf" and
+      symmetric keys are used.  Used to indicate the symmetric key generated
+      by the AS for proof-of-possession of the access token.</t>
+
+      <t>"cnf" in the introspection response AS -> RS, REQUIRED if the
+      token that was subject to introspection is a proof-of-possession
+      token, absent otherwise.  Indicates the proof-of-possession key bound
+      to the token.</t>
+ 
+      <t>"rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
+      public key of the RS if it has one.</t>
+
+      <t>"rs_cnf" in the introspection response AS -> RS, OPTIONAL to
+      indicate to the RS which asymmetric key pair to use for
+      authenticating to the client if the RS has several public keys.</t>
+  </list></t>
+
+  <t>All confirmation parameters use the same formatting and semantics as
+  the "cnf" claim specified in <xref
+  target="I-D.ietf-ace-cwt-proof-of-possession"/> when used with a CBOR
+  encoding.  When these parameters are used with a JSON encoding, the
+  formatting and semantics of the "cnf" claim specified in
+  <xref target="RFC7800"/> is used.</t>
+      
+  <t>Note that the COSE_Key structure in a confirmation claim or parameter
+  may contain an "alg" or "key_ops" parameter.  If such parameters are
+  present, a client MUST NOT use a key that is not compatible with
+  the profile or proof-of-possession algorithm according to those
+  parameters. An RS MUST reject a proof-of-possession using such a key.
+  </t>
+
+  <t>If an access token is issued for an audience that includes several RS,
+  the "rs_cnf" parameter MUST NOT be used, since the client cannot
+  determine for which RS the key applies.  This document recommends to
+  specify a different endpoint that the client can use to acquire RS
+  authentication keys in such cases.  The specification of such an endpoint
+  is out of scope for this document.</t>
+</section>
+ 
+<section anchor="paramsCbor" title="CBOR Mappings">
+  <t>If CBOR is used, the new parameters and claims defined in this document
+  MUST be mapped to CBOR types as specified in <xref
+  target="fig:cborParameters"/>, using the given integer abbreviation for the
+  map key.
+    
+    <figure align="center" anchor="fig:cborParameters"
+            title="CBOR mappings for new parameters.">
+      <artwork align="left"><![CDATA[
+    /-----------------+----------+----------------------------------\
+    | Parameter name  | CBOR Key | Value Type                       |
+    |-----------------+----------+----------------------------------|
+    | cnf             |  8       | map                              |
+    | rs_cnf          | 17       | map                              |
+    | req_aud         | 18       | text string                      |
+    | req_cnf         | 19       | map                              |
+    \-----------------+----------+----------------------------------/
+        ]]></artwork>
+      </figure>
+    </t>
+</section>
+  
+<section anchor="security" title="Security Considerations">
+  <t>This document is an extension to <xref
+  target="I-D.ietf-ace-oauth-authz"/>. All security considerations
+  from that document apply here as well.</t>
+</section>
+
+<section anchor="privacy" title="Privacy Considerations">
+  <t>This document is an extension to <xref
+  target="I-D.ietf-ace-oauth-authz"/>. All privacy considerations
+  from that document apply here as well.</t>
+</section>
+
+<section anchor="iana" title="IANA Considerations">
+  
+  <section anchor="IANAOAuthParameter"
+	   title="OAuth Parameter Registration">
+    <t>This section registers the following parameters in the "OAuth
+    Parameters" registry <xref target="IANA.OAuthParameters"/>:</t>
+	<t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">req_aud</spanx></t>
+      <t>Parameter Usage Location: authorization request, token request</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="tokenRequest"/> of [this document]</t>
+    </list></t>
+    
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">req_cnf</spanx></t>
+      <t>Parameter Usage Location: token request</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="paramCnf"/> of [this document]</t>
+    </list></t>
+    
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">rs_cnf</spanx></t>
+      <t>Parameter Usage Location: token response</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="paramCnf"/> of [this document]</t>
+    </list></t>
+
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">cnf</spanx></t>
+      <t>Parameter Usage Location: token response</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="paramCnf"/> of [this document]</t>
+    </list></t>   
+  </section>
+  
+  <section anchor="IANAOAuthIntrospectionResponseParameterRegistration"
+	   title="OAuth Introspection Response Parameter Registration">
+    <t>This section registers the following parameters in the OAuth
+    Token Introspection Response registry <xref
+    target="IANA.TokenIntrospectionResponse"/>.</t>
+    
+    <t>
+      <?rfc subcompact="yes"?>
+      <list style='symbols'>
+        <t>Name: <spanx style="verb">cnf</spanx></t>
+        <t>Description: Key to prove the right to use a PoP token. </t>
+        <t>Change Controller: IESG</t>
+        <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
+      </list>
+    </t>
+
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">rs_cnf</spanx></t>
+      <t>Description: The key the RS should use to authenticate to the
+      client.</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
+    </list></t>  
+  </section> 
+</section><!-- IANA considerations -->
+
+<section anchor="Acknowledgments" title="Acknowledgments">
+  <t>This document is a product of the ACE working group of the IETF.</t>
+  
+  <t>Ludwig Seitz worked on this document as part of the CelticPlus project
+  CyberWI, with funding from Vinnova.</t>
+</section>
+    
+    <!-- Possibly a 'Contributors' section ... -->
+  </middle>
+
+  <!--  *****BACK MATTER ***** -->
+
+  <back>
+    <!-- References split into informative and normative -->
+
+    <!-- There are 2 ways to insert reference entries from the citation libraries:
+     1. define an ENTITY at the top, and use "ampersand character"RFC2629; here (as shown)
+     2. simply use a PI "less than character"?rfc include="reference.RFC.2119.xml"?> here
+        (for I-Ds: include="reference.I-D.narten-iana-considerations-rfc2434bis.xml")
+
+     Both are cited textually in the same manner: by using xref elements.
+     If you use the PI option, xml2rfc will, by default, try to find included files in the same
+     directory as the including file. You can also define the XML_LIBRARY environment variable
+     with a value containing a set of directories to search.  These can be either in the local
+     filing system or remote ones accessed by http (http://domain/dir/... ).-->
+
+    <references title="Normative References">
+      <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
+      &I-D.ietf-ace-oauth-authz;
+      &I-D.ietf-ace-cwt-proof-of-possession;
+      &RFC2119;
+      &RFC6749;
+      &RFC7252;
+      &RFC7800;
+      &RFC8174;
+      
+      <reference anchor="IANA.OAuthParameters" target="https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#parameters">
+	<front>
+	  <title>OAuth Parameters</title>
+	  <author>
+	    <organization>IANA</organization>
+	  </author>
+	  <date/>
+	</front>
+      </reference>
+
+      <reference anchor="IANA.TokenIntrospectionResponse" target="https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#token-introspection-response">
+	<front>
+	  <title>OAuth Token Introspection Response</title>
+	  <author>
+	    <organization>IANA</organization>
+	  </author>
+	  <date/>
+	</front>
+      </reference>
+    </references>
+  </back>
+</rfc>
