@@ -73,13 +73,16 @@ Table of Contents
      4.1.  AS-to-RS Response . . . . . . . . . . . . . . . . . . . .   4
    5.  Confirmation Method Parameters  . . . . . . . . . . . . . . .   4
    6.  CBOR Mappings . . . . . . . . . . . . . . . . . . . . . . . .   5
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   6
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   5
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
      9.1.  OAuth Parameter Registration  . . . . . . . . . . . . . .   6
      9.2.  OAuth Introspection Response Parameter Registration . . .   6
-   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   7
-   11. Normative References  . . . . . . . . . . . . . . . . . . . .   7
+   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   6
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .   7
+     11.2.  Informative References . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Overlap with OAuth work  . . . . . . . . . . . . . .   8
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
@@ -93,19 +96,16 @@ Table of Contents
    work.  Therefore they have been split out into this document, which
    can be used and updated independently of [I-D.ietf-ace-oauth-authz].
 
-   The parameters introduced here allow a client to ask for a specific
-   audience for a token it it requesting and for a specific public key
-   to be linked to the token as proof-of-possession key.  Furthermore
-   they allow the AS to inform the client or the RS (in case of an
-   introspection request) about the key that the AS choose to link to
-   the token and the public key that the RS uses to authenticate.
-
 2.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
+   Readers are assumed to be familiar with the terminology from
+   [I-D.ietf-ace-oauth-authz].
 
 
 
@@ -113,12 +113,6 @@ Seitz                     Expires May 10, 2019                  [Page 2]
 
 Internet-Draft              ACE-OAuth-Params               November 2018
 
-
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-   Readers are assumed to be familiar with the terminology from
-   [I-D.ietf-ace-oauth-authz].
 
    Note that the term "endpoint" is used here following its OAuth 2.0
    [RFC6749] definition, which is to denote resources such as token and
@@ -162,6 +156,12 @@ Internet-Draft              ACE-OAuth-Params               November 2018
       REQUIRED if the token type is "pop" and a symmetric key is used.
       MAY be present for asymmetric proof-of-possession keys.  This
       field contains the proof-of-possession key that the AS selected
+      for the token.  See Section 5 for details on the use of this
+      parameter.
+
+   rs_cnf
+      OPTIONAL if the token type is "pop" and asymmetric keys are used.
+      MUST NOT be present otherwise.  This field contains information
 
 
 
@@ -170,12 +170,6 @@ Seitz                     Expires May 10, 2019                  [Page 3]
 Internet-Draft              ACE-OAuth-Params               November 2018
 
 
-      for the token.  See Section 5 for details on the use of this
-      parameter.
-
-   rs_cnf
-      OPTIONAL if the token type is "pop" and asymmetric keys are used.
-      MUST NOT be present otherwise.  This field contains information
       about the public key used by the RS to authenticate.  If this
       parameter is absent, either the RS does not use a public key or
       the AS assumes that the client already knows the public key of the
@@ -217,15 +211,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
       access token.
    o  "cnf" in the introspection response AS -> RS, REQUIRED if the
       token that was subject to introspection is a proof-of-possession
-
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 4]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
       token, absent otherwise.  Indicates the proof-of-possession key
       bound to the token.
    o  "rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
@@ -233,6 +218,13 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    o  "rs_cnf" in the introspection response AS -> RS, OPTIONAL to
       indicate to the RS which asymmetric key pair to use for
       authenticating to the client if the RS has several public keys.
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 4]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
    All confirmation parameters use the same formatting and semantics as
    the "cnf" claim specified in [I-D.ietf-ace-cwt-proof-of-possession]
@@ -271,17 +263,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
 
                 Figure 1: CBOR mappings for new parameters.
 
-
-
-
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 5]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
 7.  Security Considerations
 
    This document is an extension to [I-D.ietf-ace-oauth-authz].  All
@@ -291,6 +272,15 @@ Internet-Draft              ACE-OAuth-Params               November 2018
 
    This document is an extension to [I-D.ietf-ace-oauth-authz].  All
    privacy considerations from that document apply here as well.
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 5]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
 9.  IANA Considerations
 
@@ -330,14 +320,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    o  Reference: Section 4.1 of [this document]
 
    o  Name: "rs_cnf"
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 6]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    o  Description: The key the RS should use to authenticate to the
       client.
    o  Change Controller: IESG
@@ -347,10 +329,21 @@ Internet-Draft              ACE-OAuth-Params               November 2018
 
    This document is a product of the ACE working group of the IETF.
 
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 6]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    Ludwig Seitz worked on this document as part of the CelticPlus
    project CyberWI, with funding from Vinnova.
 
-11.  Normative References
+11.  References
+
+11.1.  Normative References
 
    [I-D.ietf-ace-cwt-proof-of-possession]
               Jones, M., Seitz, L., Selander, G., Erdtman, S., and H.
@@ -384,16 +377,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
 
-
-
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 7]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,
               DOI 10.17487/RFC7252, June 2014, <https://www.rfc-
@@ -404,11 +387,68 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/info/rfc7800>.
 
+
+
+Seitz                     Expires May 10, 2019                  [Page 7]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+11.2.  Informative References
+
+   [I-D.ietf-oauth-pop-key-distribution]
+              Bradley, J., Hunt, P., Jones, M., Tschofenig, H., and M.
+              Mihaly, "OAuth 2.0 Proof-of-Possession: Authorization
+              Server to Client Key Distribution", draft-ietf-oauth-pop-
+              key-distribution-04 (work in progress), October 2018.
+
+   [I-D.ietf-oauth-resource-indicators]
+              Campbell, B., Bradley, J., and H. Tschofenig, "Resource
+              Indicators for OAuth 2.0", draft-ietf-oauth-resource-
+              indicators-01 (work in progress), October 2018.
+
+Appendix A.  Overlap with OAuth work
+
+   This document overlaps with draft work from OAuth, namely
+   [I-D.ietf-oauth-pop-key-distribution] and
+   [I-D.ietf-oauth-resource-indicators].
+
+   The former specifies the use of "req_cnf" and "cnf" for requesting
+   proof-of-possession tokens and indicating the key that the AS has
+   selected.  It it was initially deemed that the work at OAuth had been
+   discontinued and therefore equivalent functionality was defined here.
+   Work in OAuth has since resumed, but it is lagging behind the planned
+   milestones of the ACE working group.  We have therefore split this
+   work out into a separate document so that it can later be updated or
+   obsoleted to align it with the final result of the OAuth work,
+   without affecting [I-D.ietf-ace-oauth-authz].
+
+   The latter defines the use of the "resource" parameter, allowing to
+   indicate the location fo the target service or resource where access
+   is being requested.  This partially overlaps with the "req_aud"
+   parameter specified here, however the definition of "req_aud" is more
+   broad, since it can be used in an application specific way that is
+   not necessarily bound to the location of the target audience (e.g. a
+   group identifier referring to several resource servers, or the public
+   key of a resource server).
+
 Author's Address
+
+
+
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 8]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
    Ludwig Seitz
    RISE
@@ -445,4 +485,20 @@ Author's Address
 
 
 
-Seitz                     Expires May 10, 2019                  [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 9]

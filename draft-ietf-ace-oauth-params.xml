@@ -18,6 +18,8 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY I-D.ietf-ace-oauth-authz SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-oauth-authz.xml">
 <!ENTITY I-D.ietf-ace-cwt-proof-of-possession SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-cwt-proof-of-possession.xml">
+<!ENTITY I-D.ietf-oauth-pop-key-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-pop-key-distribution.xml">
+<!ENTITY I-D.ietf-oauth-resource-indicators SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-resource-indicators.xml">
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -126,15 +128,6 @@
   may need to be updated to align them with ongoing OAuth work.  Therefore they
   have been split out into this document, which can be used and updated
   independently of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
-  
-  <t>The parameters introduced here allow a client to ask for a specific
-  audience for a token it it requesting and for a specific public key
-  to be linked to the token as proof-of-possession key.  Furthermore they allow
-  the AS to inform the client or the RS (in case of an introspection request)
-  about the key that the AS choose to link to the token and the public key
-  that the RS uses to authenticate.</t>
-  
-  
 </section>
 
 <!-- ***************************************************** -->
@@ -445,5 +438,35 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	</front>
       </reference>
     </references>
+
+    <references title="Informative References">
+      &I-D.ietf-oauth-pop-key-distribution;
+      &I-D.ietf-oauth-resource-indicators;      
+    </references>
+    
+    <section title="Overlap with OAuth work" anchor="oauth">
+       <t>This document overlaps with draft work from OAuth, namely <xref
+       target="I-D.ietf-oauth-pop-key-distribution"/> and <xref
+       target="I-D.ietf-oauth-resource-indicators"/>.</t>
+
+       <t>The former specifies the use of "req_cnf" and "cnf" for requesting
+       proof-of-possession tokens and indicating the key that the AS has
+       selected.  It it was initially deemed that the work at OAuth had
+       been discontinued and therefore equivalent functionality was defined
+       here.  Work in OAuth has since resumed, but it is lagging behind the
+       planned milestones of the ACE working group. We have therefore split
+       this work out into a separate document so that it can later be updated
+       or obsoleted to align it with the final result of the OAuth work,
+       without affecting <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+
+       <t>The latter defines the use of the "resource" parameter,
+       allowing to indicate the location fo the target service or resource
+       where access is being requested.  This partially overlaps with
+       the "req_aud" parameter specified here, however the definition
+       of "req_aud" is more broad, since it can be used in an application
+       specific way that is not necessarily bound to the location of the
+       target audience (e.g. a group identifier referring to several resource
+       servers, or the public key of a resource server).</t>
+    </section>
   </back>
 </rfc>
