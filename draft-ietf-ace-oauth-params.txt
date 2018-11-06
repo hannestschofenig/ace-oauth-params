@@ -4,8 +4,8 @@
 
 ACE Working Group                                               L. Seitz
 Internet-Draft                                                      RISE
-Intended status: Standards Track                        October 23, 2018
-Expires: April 26, 2019
+Intended status: Standards Track                        November 6, 2018
+Expires: May 10, 2019
 
 
       Additional OAuth Parameters for Authorization in Constrained
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 26, 2019.
+   This Internet-Draft will expire on May 10, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Seitz                    Expires April 26, 2019                 [Page 1]
+Seitz                     Expires May 10, 2019                  [Page 1]
 
-Internet-Draft              ACE-OAuth-Params                October 2018
+Internet-Draft              ACE-OAuth-Params               November 2018
 
 
    include Simplified BSD License text as described in Section 4.e of
@@ -73,29 +73,47 @@ Table of Contents
      4.1.  AS-to-RS Response . . . . . . . . . . . . . . . . . . . .   4
    5.  Confirmation Method Parameters  . . . . . . . . . . . . . . .   4
    6.  CBOR Mappings . . . . . . . . . . . . . . . . . . . . . . . .   5
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   5
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   6
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
      9.1.  OAuth Parameter Registration  . . . . . . . . . . . . . .   6
      9.2.  OAuth Introspection Response Parameter Registration . . .   6
-   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   6
+   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   7
    11. Normative References  . . . . . . . . . . . . . . . . . . . .   7
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
-   The Authorization for the Internet of Things specification
-   [I-D.ietf-ace-oauth-authz] requires some new parameters for requests
-   and responses to the OAuth 2.0 [RFC6749] token and introspection
-   endpoints, as well as some new claims to be used in access tokens.
-   This document specifies these new parameters and claims separately
-   from the framework, so they can be used and updated independently.
+   The Authentication and Authorization for Constrained Environments
+   (ACE) specification [I-D.ietf-ace-oauth-authz] requires some new
+   parameters for interactions with the OAuth 2.0 [RFC6749] token and
+   introspection endpoints, as well as some new claims to be used in
+   access tokens.  These parameters and claims can also be used in other
+   contexts, and may need to be updated to align them with ongoing OAuth
+   work.  Therefore they have been split out into this document, which
+   can be used and updated independently of [I-D.ietf-ace-oauth-authz].
+
+   The parameters introduced here allow a client to ask for a specific
+   audience for a token it it requesting and for a specific public key
+   to be linked to the token as proof-of-possession key.  Furthermore
+   they allow the AS to inform the client or the RS (in case of an
+   introspection request) about the key that the AS choose to link to
+   the token and the public key that the RS uses to authenticate.
 
 2.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in BCP
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 2]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
@@ -105,15 +123,6 @@ Table of Contents
    Note that the term "endpoint" is used here following its OAuth 2.0
    [RFC6749] definition, which is to denote resources such as token and
    introspection at the AS and authz-info at the RS.  The CoAP [RFC7252]
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 2]
-
-Internet-Draft              ACE-OAuth-Params                October 2018
-
-
    definition, which is "An entity participating in the CoAP protocol"
    is not used in this specification.
 
@@ -153,6 +162,14 @@ Internet-Draft              ACE-OAuth-Params                October 2018
       REQUIRED if the token type is "pop" and a symmetric key is used.
       MAY be present for asymmetric proof-of-possession keys.  This
       field contains the proof-of-possession key that the AS selected
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 3]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
       for the token.  See Section 5 for details on the use of this
       parameter.
 
@@ -161,15 +178,6 @@ Internet-Draft              ACE-OAuth-Params                October 2018
       MUST NOT be present otherwise.  This field contains information
       about the public key used by the RS to authenticate.  If this
       parameter is absent, either the RS does not use a public key or
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 3]
-
-Internet-Draft              ACE-OAuth-Params                October 2018
-
-
       the AS assumes that the client already knows the public key of the
       RS.  See Section 5 for details on the use of this parameter.
 
@@ -209,6 +217,15 @@ Internet-Draft              ACE-OAuth-Params                October 2018
       access token.
    o  "cnf" in the introspection response AS -> RS, REQUIRED if the
       token that was subject to introspection is a proof-of-possession
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 4]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
       token, absent otherwise.  Indicates the proof-of-possession key
       bound to the token.
    o  "rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
@@ -216,15 +233,6 @@ Internet-Draft              ACE-OAuth-Params                October 2018
    o  "rs_cnf" in the introspection response AS -> RS, OPTIONAL to
       indicate to the RS which asymmetric key pair to use for
       authenticating to the client if the RS has several public keys.
-
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 4]
-
-Internet-Draft              ACE-OAuth-Params                October 2018
-
 
    All confirmation parameters use the same formatting and semantics as
    the "cnf" claim specified in [I-D.ietf-ace-cwt-proof-of-possession]
@@ -263,6 +271,17 @@ Internet-Draft              ACE-OAuth-Params                October 2018
 
                 Figure 1: CBOR mappings for new parameters.
 
+
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 5]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
 7.  Security Considerations
 
    This document is an extension to [I-D.ietf-ace-oauth-authz].  All
@@ -272,15 +291,6 @@ Internet-Draft              ACE-OAuth-Params                October 2018
 
    This document is an extension to [I-D.ietf-ace-oauth-authz].  All
    privacy considerations from that document apply here as well.
-
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 5]
-
-Internet-Draft              ACE-OAuth-Params                October 2018
-
 
 9.  IANA Considerations
 
@@ -320,6 +330,14 @@ Internet-Draft              ACE-OAuth-Params                October 2018
    o  Reference: Section 4.1 of [this document]
 
    o  Name: "rs_cnf"
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 6]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    o  Description: The key the RS should use to authenticate to the
       client.
    o  Change Controller: IESG
@@ -328,15 +346,6 @@ Internet-Draft              ACE-OAuth-Params                October 2018
 10.  Acknowledgments
 
    This document is a product of the ACE working group of the IETF.
-
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 6]
-
-Internet-Draft              ACE-OAuth-Params                October 2018
-
 
    Ludwig Seitz worked on this document as part of the CelticPlus
    project CyberWI, with funding from Vinnova.
@@ -347,7 +356,7 @@ Internet-Draft              ACE-OAuth-Params                October 2018
               Jones, M., Seitz, L., Selander, G., Erdtman, S., and H.
               Tschofenig, "Proof-of-Possession Key Semantics for CBOR
               Web Tokens (CWTs)", draft-ietf-ace-cwt-proof-of-
-              possession-03 (work in progress), June 2018.
+              possession-04 (work in progress), November 2018.
 
    [I-D.ietf-ace-oauth-authz]
               Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
@@ -375,6 +384,16 @@ Internet-Draft              ACE-OAuth-Params                October 2018
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
 
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 7]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,
               DOI 10.17487/RFC7252, June 2014, <https://www.rfc-
@@ -384,15 +403,6 @@ Internet-Draft              ACE-OAuth-Params                October 2018
               Possession Key Semantics for JSON Web Tokens (JWTs)",
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/info/rfc7800>.
-
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 7]
-
-Internet-Draft              ACE-OAuth-Params                October 2018
-
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -435,14 +445,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-Seitz                    Expires April 26, 2019                 [Page 8]
+Seitz                     Expires May 10, 2019                  [Page 8]

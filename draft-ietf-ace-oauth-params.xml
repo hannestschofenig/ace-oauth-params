@@ -90,8 +90,8 @@
     <workgroup>ACE Working Group</workgroup>
 
     <!-- WG name at the upperleft corner of the doc,
-         IETF is fine for individual submissions.
-	 If this element is not present, the default is "Network Working Group",
+         IETF is fine for individual submissions.	
+ If this element is not present, the default is "Network Working Group",
          which is used by the RFC Editor as a nod to the history of the IETF. -->
 
     <keyword>CoAP, OAuth 2.0, Access Control, Authorization, Internet of Things</keyword>
@@ -118,13 +118,23 @@
 
 <section anchor="intro" title="Introduction">
 
-  <t>The Authorization for the Internet of Things specification <xref
-  target="I-D.ietf-ace-oauth-authz"/> requires some new parameters for
-  requests and responses to the OAuth 2.0 <xref target="RFC6749"/> token and
-  introspection endpoints, as well as some new claims to be used in access
-  tokens. This document specifies these new parameters and claims
-  separately from the framework, so they can be used and updated
-  independently.</t>
+  <t>The Authentication and Authorization for Constrained Environments (ACE)
+  specification <xref target="I-D.ietf-ace-oauth-authz"/> requires some new
+  parameters for interactions with the OAuth 2.0 <xref target="RFC6749"/> token
+  and introspection endpoints, as well as some new claims to be used in access
+  tokens.  These parameters and claims can also be used in other contexts, and
+  may need to be updated to align them with ongoing OAuth work.  Therefore they
+  have been split out into this document, which can be used and updated
+  independently of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+  
+  <t>The parameters introduced here allow a client to ask for a specific
+  audience for a token it it requesting and for a specific public key
+  to be linked to the token as proof-of-possession key.  Furthermore they allow
+  the AS to inform the client or the RS (in case of an introspection request)
+  about the key that the AS choose to link to the token and the public key
+  that the RS uses to authenticate.</t>
+  
+  
 </section>
 
 <!-- ***************************************************** -->
