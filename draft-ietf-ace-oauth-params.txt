@@ -74,16 +74,18 @@ Table of Contents
    5.  Confirmation Method Parameters  . . . . . . . . . . . . . . .   4
    6.  CBOR Mappings . . . . . . . . . . . . . . . . . . . . . . . .   5
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   5
+   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   6
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
      9.1.  OAuth Parameter Registration  . . . . . . . . . . . . . .   6
      9.2.  OAuth Introspection Response Parameter Registration . . .   6
-   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   6
+     9.3.  Token Endpoint CBOR Mappings Registraton  . . . . . . . .   7
+     9.4.  Introspection Endpoint CBOR Mappings Registraton  . . . .   7
+   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   7
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      11.1.  Normative References . . . . . . . . . . . . . . . . . .   7
      11.2.  Informative References . . . . . . . . . . . . . . . . .   8
-   Appendix A.  Overlap with OAuth work  . . . . . . . . . . . . . .   8
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Overlap with OAuth work  . . . . . . . . . . . . . .   9
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -104,8 +106,6 @@ Table of Contents
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   Readers are assumed to be familiar with the terminology from
-   [I-D.ietf-ace-oauth-authz].
 
 
 
@@ -113,6 +113,9 @@ Seitz                     Expires May 10, 2019                  [Page 2]
 
 Internet-Draft              ACE-OAuth-Params               November 2018
 
+
+   Readers are assumed to be familiar with the terminology from
+   [I-D.ietf-ace-oauth-authz].
 
    Note that the term "endpoint" is used here following its OAuth 2.0
    [RFC6749] definition, which is to denote resources such as token and
@@ -159,9 +162,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
       for the token.  See Section 5 for details on the use of this
       parameter.
 
-   rs_cnf
-      OPTIONAL if the token type is "pop" and asymmetric keys are used.
-      MUST NOT be present otherwise.  This field contains information
 
 
 
@@ -170,6 +170,9 @@ Seitz                     Expires May 10, 2019                  [Page 3]
 Internet-Draft              ACE-OAuth-Params               November 2018
 
 
+   rs_cnf
+      OPTIONAL if the token type is "pop" and asymmetric keys are used.
+      MUST NOT be present otherwise.  This field contains information
       about the public key used by the RS to authenticate.  If this
       parameter is absent, either the RS does not use a public key or
       the AS assumes that the client already knows the public key of the
@@ -215,9 +218,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
       bound to the token.
    o  "rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
       public key of the RS if it has one.
-   o  "rs_cnf" in the introspection response AS -> RS, OPTIONAL to
-      indicate to the RS which asymmetric key pair to use for
-      authenticating to the client if the RS has several public keys.
 
 
 
@@ -225,6 +225,10 @@ Seitz                     Expires May 10, 2019                  [Page 4]
 
 Internet-Draft              ACE-OAuth-Params               November 2018
 
+
+   o  "rs_cnf" in the introspection response AS -> RS, OPTIONAL to
+      indicate to the RS which asymmetric key pair to use for
+      authenticating to the client if the RS has several public keys.
 
    All confirmation parameters use the same formatting and semantics as
    the "cnf" claim specified in [I-D.ietf-ace-cwt-proof-of-possession]
@@ -268,10 +272,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    This document is an extension to [I-D.ietf-ace-oauth-authz].  All
    security considerations from that document apply here as well.
 
-8.  Privacy Considerations
-
-   This document is an extension to [I-D.ietf-ace-oauth-authz].  All
-   privacy considerations from that document apply here as well.
 
 
 
@@ -281,6 +281,11 @@ Seitz                     Expires May 10, 2019                  [Page 5]
 
 Internet-Draft              ACE-OAuth-Params               November 2018
 
+
+8.  Privacy Considerations
+
+   This document is an extension to [I-D.ietf-ace-oauth-authz].  All
+   privacy considerations from that document apply here as well.
 
 9.  IANA Considerations
 
@@ -325,11 +330,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    o  Change Controller: IESG
    o  Reference: Section 4.1 of [this document]
 
-10.  Acknowledgments
-
-   This document is a product of the ACE working group of the IETF.
-
-
 
 
 
@@ -337,6 +337,34 @@ Seitz                     Expires May 10, 2019                  [Page 6]
 
 Internet-Draft              ACE-OAuth-Params               November 2018
 
+
+9.3.  Token Endpoint CBOR Mappings Registraton
+
+   This section registers teh following parameter mappings in the "Token
+   Endpoint CBOR Mappings" registry established in section 8.9. of
+   [I-D.ietf-ace-oauth-authz].
+
+   FIXME: req_aud
+
+   FIXME: req_cnf
+
+   FIXME: cnf
+
+   FIXME: rs_cnf
+
+9.4.  Introspection Endpoint CBOR Mappings Registraton
+
+   This section registers teh following parameter mappings in the
+   "Introspection Endpoint CBOR Mappings" registry established in
+   section 8.11. of [I-D.ietf-ace-oauth-authz].
+
+   FIXME: cnf
+
+   FIXME: rs_cnf
+
+10.  Acknowledgments
+
+   This document is a product of the ACE working group of the IETF.
 
    Ludwig Seitz worked on this document as part of the CelticPlus
    project CyberWI, with funding from Vinnova.
@@ -357,6 +385,14 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               Constrained Environments (ACE) using the OAuth 2.0
               Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-16
               (work in progress), October 2018.
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 7]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
    [IANA.OAuthParameters]
               IANA, "OAuth Parameters",
@@ -387,13 +423,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/info/rfc7800>.
 
-
-
-Seitz                     Expires May 10, 2019                  [Page 7]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -410,6 +439,16 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               Campbell, B., Bradley, J., and H. Tschofenig, "Resource
               Indicators for OAuth 2.0", draft-ietf-oauth-resource-
               indicators-01 (work in progress), October 2018.
+
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 8]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
 Appendix A.  Overlap with OAuth work
 
@@ -438,18 +477,6 @@ Appendix A.  Overlap with OAuth work
 
 Author's Address
 
-
-
-
-
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 8]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    Ludwig Seitz
    RISE
    Scheelevaegen 17
@@ -457,33 +484,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    Sweden
 
    Email: ludwig.seitz@ri.se
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

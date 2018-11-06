@@ -379,7 +379,39 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
     </list></t>  
-  </section> 
+  </section>
+
+  <section anchor="IANATokenCBORMappingRegistration"
+	   title="Token Endpoint CBOR Mappings Registraton">
+    <t>This section registers teh following parameter mappings
+    in the "Token Endpoint CBOR Mappings" registry established in
+    section 8.9. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+
+    <t>FIXME: req_aud
+    </t>
+
+    <t>FIXME: req_cnf
+    </t>
+
+    <t>FIXME: cnf
+    </t>
+    
+    <t>FIXME: rs_cnf</t>
+    
+  </section>
+  
+  <section anchor="IANAIntrospectCBORMappingRegistration"
+	   title="Introspection Endpoint CBOR Mappings Registraton">
+    <t>This section registers teh following parameter mappings
+    in the "Introspection Endpoint CBOR Mappings" registry established in
+    section 8.11. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+
+    <t>FIXME: cnf
+    </t>
+    
+    <t>FIXME: rs_cnf</t>
+    
+  </section>
 </section><!-- IANA considerations -->
 
 <section anchor="Acknowledgments" title="Acknowledgments">
