@@ -81,9 +81,9 @@ Table of Contents
      9.3.  Token Endpoint CBOR Mappings Registraton  . . . . . . . .   7
      9.4.  Introspection Endpoint CBOR Mappings Registraton  . . . .   7
    10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   7
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .   7
-     11.2.  Informative References . . . . . . . . . . . . . . . . .   8
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .   8
+     11.2.  Informative References . . . . . . . . . . . . . . . . .   9
    Appendix A.  Overlap with OAuth work  . . . . . . . . . . . . . .   9
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   9
 
@@ -344,13 +344,25 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    Endpoint CBOR Mappings" registry established in section 8.9. of
    [I-D.ietf-ace-oauth-authz].
 
-   FIXME: req_aud
+   o  Name: "req_aud"
+   o  CBOR key: 18
+   o  Change Controller: IESG
+   o  Reference: Section 3.1 of [this document]
 
-   FIXME: req_cnf
+   o  Name: "req_cnf"
+   o  CBOR key: 19
+   o  Change Controller: IESG
+   o  Reference: Section 3.1 of [this document]
 
-   FIXME: cnf
+   o  Name: "cnf"
+   o  CBOR key: 8
+   o  Change Controller: IESG
+   o  Reference: Section 3.2 of [this document]
 
-   FIXME: rs_cnf
+   o  Name: "rs_cnf"
+   o  CBOR key: 17
+   o  Change Controller: IESG
+   o  Reference: Section 3.2 of [this document]
 
 9.4.  Introspection Endpoint CBOR Mappings Registraton
 
@@ -358,9 +370,15 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    "Introspection Endpoint CBOR Mappings" registry established in
    section 8.11. of [I-D.ietf-ace-oauth-authz].
 
-   FIXME: cnf
+   o  Name: "cnf"
+   o  CBOR key: 8
+   o  Change Controller: IESG
+   o  Reference: Section 4.1 of [this document]
 
-   FIXME: rs_cnf
+   o  Name: "rs_cnf"
+   o  CBOR key: 17
+   o  Change Controller: IESG
+   o  Reference: Section 4.1 of [this document]
 
 10.  Acknowledgments
 
@@ -368,6 +386,13 @@ Internet-Draft              ACE-OAuth-Params               November 2018
 
    Ludwig Seitz worked on this document as part of the CelticPlus
    project CyberWI, with funding from Vinnova.
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 7]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
 11.  References
 
@@ -385,14 +410,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               Constrained Environments (ACE) using the OAuth 2.0
               Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-16
               (work in progress), October 2018.
-
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 7]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
 
    [IANA.OAuthParameters]
               IANA, "OAuth Parameters",
@@ -423,6 +440,16 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/info/rfc7800>.
 
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 8]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -439,16 +466,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               Campbell, B., Bradley, J., and H. Tschofenig, "Resource
               Indicators for OAuth 2.0", draft-ietf-oauth-resource-
               indicators-01 (work in progress), October 2018.
-
-
-
-
-
-
-Seitz                     Expires May 10, 2019                  [Page 8]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
 
 Appendix A.  Overlap with OAuth work
 
@@ -477,6 +494,18 @@ Appendix A.  Overlap with OAuth work
 
 Author's Address
 
+
+
+
+
+
+
+
+Seitz                     Expires May 10, 2019                  [Page 9]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    Ludwig Seitz
    RISE
    Scheelevaegen 17
@@ -501,4 +530,31 @@ Author's Address
 
 
 
-Seitz                     Expires May 10, 2019                  [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Seitz                     Expires May 10, 2019                 [Page 10]

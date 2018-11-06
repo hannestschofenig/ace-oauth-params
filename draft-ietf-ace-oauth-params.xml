@@ -386,18 +386,38 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
     <t>This section registers teh following parameter mappings
     in the "Token Endpoint CBOR Mappings" registry established in
     section 8.9. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
-
-    <t>FIXME: req_aud
-    </t>
-
-    <t>FIXME: req_cnf
-    </t>
-
-    <t>FIXME: cnf
-    </t>
     
-    <t>FIXME: rs_cnf</t>
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">req_aud</spanx></t>
+      <t>CBOR key: 18</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="tokenRequest"/> of [this document]</t>
+    </list></t>
     
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">req_cnf</spanx></t>
+      <t>CBOR key: 19</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="tokenRequest"/> of [this document]</t>
+    </list></t>  
+
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">cnf</spanx></t>
+      <t>CBOR key: 8</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="tokenResponse"/> of [this document]</t>
+    </list></t>
+
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">rs_cnf</spanx></t>
+      <t>CBOR key: 17</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="tokenResponse"/> of [this document]</t>
+    </list></t>
   </section>
   
   <section anchor="IANAIntrospectCBORMappingRegistration"
@@ -406,10 +426,21 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
     in the "Introspection Endpoint CBOR Mappings" registry established in
     section 8.11. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
 
-    <t>FIXME: cnf
-    </t>
-    
-    <t>FIXME: rs_cnf</t>
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">cnf</spanx></t>
+      <t>CBOR key: 8</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
+    </list></t>
+
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">rs_cnf</spanx></t>
+      <t>CBOR key: 17</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
+    </list></t>
     
   </section>
 </section><!-- IANA considerations -->
