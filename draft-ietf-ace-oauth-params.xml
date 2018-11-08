@@ -250,8 +250,8 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 <section anchor="paramCnf" title="Confirmation Method Parameters">
   <t>The confirmation method parameters are used as follows:
     <list style="symbols">
-      <t>"req_cnf" in the token request C -> AS, OPTIONAL to indicate the
-      client's raw public key, or the key-identifier of a previously
+      <t>"req_cnf" in the access token request C -> AS, OPTIONAL to indicate
+      the  client's raw public key, or the key-identifier of a previously
       established key between C and RS that the client wishes to use
       for proof-of-possession of the access token.</t>
 
@@ -262,19 +262,16 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
       by the AS for proof-of-possession of the access token.</t>
 
       <t>"cnf" in the introspection response AS -> RS, REQUIRED if the
-      token that was subject to introspection is a proof-of-possession
+      access token that was subject to introspection is a proof-of-possession
       token, absent otherwise.  Indicates the proof-of-possession key bound
-      to the token.</t>
+      to the access token.</t>
  
       <t>"rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
-      public key of the RS if it has one. This parameter MUST only contain
-      a representation of an asymmetric key.</t>
+      public key of the RS, if it uses one to authenticate to the client.</t>
 
-      <t>"rs_cnf" in the introspection response AS -> RS, OPTIONAL to
-      indicate to the RS which asymmetric key pair to use for
-      authenticating to the client if the RS has several public keys.
-      This parameter MUST only contain a representation of an asymmetric
-      key.</t>
+      <t>"rs_cnf" in the introspection response AS -> RS, OPTIONAL, contains
+      the public key that the RS should use for authenticating to the client
+      (e.g. if the RS has several different public keys).</t>
   </list></t>
       
   <t>Note that the COSE_Key structure in a confirmation claim or parameter
