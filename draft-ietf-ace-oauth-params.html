@@ -504,6 +504,29 @@
 </dl>
 
 <p> </p>
+<div id="rfc.figure.1"/>
+<div id="fig:symmATreq"/>
+<pre>
+Header: POST (Code=0.02)
+Uri-Host: "as.example.com"
+Uri-Path: "token"
+Content-Format: "application/ace+cbor"
+Payload:
+{
+   "req_aud" : "tempSensor4711",
+   "req_cnf" : {
+      "COSE_Key" : {
+         "kty" : "EC",
+         "kid" : h'11',
+         "crv" : "P-256",
+         "x" : b64'usWxHK2PmfnHKwXPS54m0kTcGJ90UiglWiGahtagnv8',
+         "y" : b64'IBOL+C3BttVivg+lSreASjpkttcsz+1rb7btKLv8EX4'
+      }
+   }
+ }
+        </pre>
+<p class="figure">Figure 1: Example request for an access token bound to an      asymmetric key.</p>
+<p><a href="#fig:symmATreq">Figure 1</a> shows a request for an access token using the "req_aud" parameter to request a specific audience and the "req_cnf" parameter to request a specific public key as proof-of-possession key.  The content is displayed in CBOR diagnostic notation, without abbreviations for better readability.  </p>
 <h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> <a href="#tokenResponse" id="tokenResponse">AS-to-Client Response</a></h1>
 <p id="rfc.section.3.2.p.1">This document defines the following additional parameters for an AS response to a request to the token endpoint: </p>
 
@@ -515,6 +538,50 @@
 </dl>
 
 <p> </p>
+<div id="rfc.figure.2"/>
+<div id="fig:symmATres"/>
+<pre>
+Header: Created (Code=2.01)
+Content-Format: "application/ace+cbor"
+Payload:
+{
+  "access_token" : b64'SlAV32hkKG ...
+   (remainder of CWT omitted for brevity;
+   CWT contains COSE_Key in the "cnf" claim)',
+  "cnf" : {
+    "COSE_Key" : {
+      "kty" : "Symmetric",
+      "kid" : b64'39Gqlw',
+      "k" : b64'hJtXhkV8FJG+Onbc6mxCcQh'
+    }
+  }
+}
+      </pre>
+<p class="figure">Figure 2: Example AS response with an access token bound to a      symmetric key.</p>
+<p><a href="#fig:symmATres">Figure 2</a> shows an AS response containing a token and a "cnf" parameter with a symmetric proof-of-possession key.  </p>
+<div id="rfc.figure.3"/>
+<div id="fig:asymmATres"/>
+<pre>
+Header: Created (Code=2.01)
+Content-Format: "application/ace+cbor"
+Payload:
+{
+  "access_token" : b64'SlAV32hkKG ...
+   (remainder of CWT omitted for brevity;
+   CWT contains COSE_Key in the "cnf" claim)',
+  "rs_cnf" : {
+    "COSE_Key" : {
+      "kty" : "EC",
+      "kid" : h'12',
+      "crv" : "P-256",
+      "x" : b64'vO5+qsFi+R5vMw9XcSEeIguLVGyWWJsKxK0P0kx34fE',
+      "y" : b64'xkezjFXvu8TmLmUXIPAC1ddbLgwCzRMm5mK8oiK5BBY'
+    }
+  }
+}
+      </pre>
+<p class="figure">Figure 3: Example AS response with an access token bound to a      symmetric key.</p>
+<p><a href="#fig:asymmATres">Figure 3</a> shows an AS response containing a token bound to a previously requested asymmetric proof-of-possession key (not shown) and a "rs_cnf" parameter containing the public key of the RS.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#introspectionEndpoint" id="introspectionEndpoint">Parameters for the Introspection Endpoint</a></h1>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> <a href="#introAS2RS" id="introAS2RS">AS-to-RS Response</a></h1>
 <p id="rfc.section.4.1.p.1">This document defines the following additional parameters for an AS response to a request to the introspection endpoint: </p>
@@ -527,6 +594,38 @@
 </dl>
 
 <p> </p>
+<div id="rfc.figure.4"/>
+<div id="fig:introRes"/>
+<pre>
+Header: Created Code=2.01)
+Content-Format: "application/ace+cbor"
+Payload:
+{
+  "active" : true,
+  "scope" : "read",
+  "aud" : "tempSensor4711",
+  "cnf" : {
+    "COSE_Key" : {
+      "kty" : "EC",
+      "kid" : h'11',
+      "crv" : "P-256",
+      "x" : b64'usWxHK2PmfnHKwXPS54m0kTcGJ90UiglWiGahtagnv8',
+      "y" : b64'IBOL+C3BttVivg+lSreASjpkttcsz+1rb7btKLv8EX4'
+    }
+  },
+  "rs_cnf" : {
+    "COSE_Key" : {
+      "kty" : "EC",
+      "kid" : h'12',
+      "crv" : "P-256",
+      "x" : b64'vO5+qsFi+R5vMw9XcSEeIguLVGyWWJsKxK0P0kx34fE',
+      "y" : b64'xkezjFXvu8TmLmUXIPAC1ddbLgwCzRMm5mK8oiK5BBY'
+    }
+  }
+}
+      </pre>
+<p class="figure">Figure 4: Example introspection response.</p>
+<p><a href="#fig:introRes">Figure 4</a> shows an AS response to an introspection request including the "cnf" parameter to indicate the proof-of-possession key bound to the token and the "rs_cnf" parameter to indicate the key the RS is supposed to use to authenticate to the client.  </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#paramCnf" id="paramCnf">Confirmation Method Parameters</a></h1>
 <p id="rfc.section.5.p.1">The confirmation method parameters are used as follows: </p>
 
@@ -540,7 +639,7 @@
 <p id="rfc.section.5.p.2">Note that the COSE_Key structure in a confirmation claim or parameter may contain an "alg" or "key_ops" parameter.  If such parameters are present, a client MUST NOT use a key that is not compatible with the profile or proof-of-possession algorithm according to those parameters. An RS MUST reject a proof-of-possession using such a key.  </p>
 <p id="rfc.section.5.p.3">If an access token is issued for an audience that includes several RS, the "rs_cnf" parameter MUST NOT be used, since the client cannot determine for which RS the key applies.  This document recommends to specify a different endpoint that the client can use to acquire RS authentication keys in such cases.  The specification of such an endpoint is out of scope for this document.</p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#paramsCbor" id="paramsCbor">CBOR Mappings</a></h1>
-<div id="rfc.figure.1"/>
+<div id="rfc.figure.5"/>
 <div id="fig:cborParameters"/>
 <pre>
     /-----------------+----------+----------------------------------\
@@ -552,8 +651,8 @@
     | req_cnf         | 19       | map                              |
     \-----------------+----------+----------------------------------/
         </pre>
-<p class="figure">Figure 1: CBOR mappings for new parameters.</p>
-<p id="rfc.section.6.p.1">If CBOR is used, the new parameters and claims defined in this document MUST be mapped to CBOR types as specified in <a href="#fig:cborParameters">Figure 1</a>, using the given integer abbreviation for the map key.  </p>
+<p class="figure">Figure 5: CBOR mappings for new parameters.</p>
+<p id="rfc.section.6.p.1">If CBOR is used, the new parameters and claims defined in this document MUST be mapped to CBOR types as specified in <a href="#fig:cborParameters">Figure 5</a>, using the given integer abbreviation for the map key.  </p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.7.p.1">This document is an extension to <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>. All security considerations from that document apply here as well.</p>
 <h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#privacy" id="privacy">Privacy Considerations</a></h1>

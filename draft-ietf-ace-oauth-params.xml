@@ -184,7 +184,37 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>.</t>
       </list>
-    </t>
+  </t>
+
+  <t><xref target="fig:symmATreq"/> shows a request for an access token
+  using the "req_aud" parameter to request a specific audience and
+  the "req_cnf" parameter to request a specific public key as
+  proof-of-possession key.  The content is displayed in CBOR diagnostic
+  notation, without abbreviations for better readability.
+
+    <figure align="center" anchor="fig:symmATreq"
+            title="Example request for an access token bound to an
+		   asymmetric key.">
+        <artwork align="left"><![CDATA[
+Header: POST (Code=0.02)
+Uri-Host: "as.example.com"
+Uri-Path: "token"
+Content-Format: "application/ace+cbor"
+Payload:
+{
+   "req_aud" : "tempSensor4711",
+   "req_cnf" : {
+      "COSE_Key" : {
+         "kty" : "EC",
+         "kid" : h'11',
+         "crv" : "P-256",
+         "x" : b64'usWxHK2PmfnHKwXPS54m0kTcGJ90UiglWiGahtagnv8',
+         "y" : b64'IBOL+C3BttVivg+lSreASjpkttcsz+1rb7btKLv8EX4'
+      }
+   }
+ }
+        ]]></artwork>
+  </figure></t>
   </section><!-- C->AS -->
 
   <section anchor="tokenResponse" title="AS-to-Client Response">
@@ -214,6 +244,58 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	target="paramCnf"/> for details on the use of this parameter. </t>
       </list>
     </t>
+
+    <t><xref target="fig:symmATres"/> shows an AS response containing a token
+    and a "cnf" parameter with a symmetric proof-of-possession key.
+
+    <figure align="center" anchor="fig:symmATres"
+            title="Example AS response with an access token bound to a
+		   symmetric key.">
+      <artwork align="left"><![CDATA[
+Header: Created (Code=2.01)
+Content-Format: "application/ace+cbor"
+Payload:
+{
+  "access_token" : b64'SlAV32hkKG ...
+   (remainder of CWT omitted for brevity;
+   CWT contains COSE_Key in the "cnf" claim)',
+  "cnf" : {
+    "COSE_Key" : {
+      "kty" : "Symmetric",
+      "kid" : b64'39Gqlw',
+      "k" : b64'hJtXhkV8FJG+Onbc6mxCcQh'
+    }
+  }
+}
+      ]]></artwork>
+    </figure></t>
+
+    <t><xref target="fig:asymmATres"/> shows an AS response containing a token
+    bound to a previously requested asymmetric proof-of-possession key (not
+    shown) and a "rs_cnf" parameter containing the public key of the RS.
+  <figure align="center" anchor="fig:asymmATres"
+            title="Example AS response with an access token bound to a
+		   symmetric key.">
+      <artwork align="left"><![CDATA[
+Header: Created (Code=2.01)
+Content-Format: "application/ace+cbor"
+Payload:
+{
+  "access_token" : b64'SlAV32hkKG ...
+   (remainder of CWT omitted for brevity;
+   CWT contains COSE_Key in the "cnf" claim)',
+  "rs_cnf" : {
+    "COSE_Key" : {
+      "kty" : "EC",
+      "kid" : h'12',
+      "crv" : "P-256",
+      "x" : b64'vO5+qsFi+R5vMw9XcSEeIguLVGyWWJsKxK0P0kx34fE',
+      "y" : b64'xkezjFXvu8TmLmUXIPAC1ddbLgwCzRMm5mK8oiK5BBY'
+    }
+  }
+}
+      ]]></artwork>
+    </figure></t>
   </section><!-- AS->C -->
 </section> <!--Token Endpont-->
 
@@ -244,6 +326,42 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
       target="paramCnf"/> for details on the use of this parameter. </t>
     </list>
     </t>
+    <t><xref target="fig:introRes"/> shows an AS response to an introspection
+    request including the "cnf" parameter to indicate the proof-of-possession
+    key bound to the token and the "rs_cnf" parameter to indicate the key the
+    RS is supposed to use to authenticate to the client.
+
+    <figure align="center" anchor="fig:introRes"
+            title="Example introspection response.">
+      <artwork align="left"><![CDATA[
+Header: Created Code=2.01)
+Content-Format: "application/ace+cbor"
+Payload:
+{
+  "active" : true,
+  "scope" : "read",
+  "aud" : "tempSensor4711",
+  "cnf" : {
+    "COSE_Key" : {
+      "kty" : "EC",
+      "kid" : h'11',
+      "crv" : "P-256",
+      "x" : b64'usWxHK2PmfnHKwXPS54m0kTcGJ90UiglWiGahtagnv8',
+      "y" : b64'IBOL+C3BttVivg+lSreASjpkttcsz+1rb7btKLv8EX4'
+    }
+  },
+  "rs_cnf" : {
+    "COSE_Key" : {
+      "kty" : "EC",
+      "kid" : h'12',
+      "crv" : "P-256",
+      "x" : b64'vO5+qsFi+R5vMw9XcSEeIguLVGyWWJsKxK0P0kx34fE',
+      "y" : b64'xkezjFXvu8TmLmUXIPAC1ddbLgwCzRMm5mK8oiK5BBY'
+    }
+  }
+}
+      ]]></artwork>
+    </figure></t>
   </section><!-- AS->RS -->
 </section> <!-- introspection -->
 
