@@ -77,7 +77,7 @@ Table of Contents
    8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   6
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
      9.1.  OAuth Parameter Registration  . . . . . . . . . . . . . .   6
-     9.2.  OAuth Introspection Response Parameter Registration . . .   7
+     9.2.  OAuth Introspection Response Parameter Registration . . .   6
      9.3.  Token Endpoint CBOR Mappings Registraton  . . . . . . . .   7
      9.4.  Introspection Endpoint CBOR Mappings Registraton  . . . .   7
    10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   8
@@ -243,12 +243,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
       This parameter MUST only contain a representation of an asymmetric
       key.
 
-   All confirmation parameters use the same syntax and semantics as the
-   "cnf" claim specified in [I-D.ietf-ace-cwt-proof-of-possession] when
-   used with a CBOR encoding.  When these parameters are used with a
-   JSON encoding, the syntax and semantics of the "cnf" claim specified
-   in [RFC7800] is used.
-
    Note that the COSE_Key structure in a confirmation claim or parameter
    may contain an "alg" or "key_ops" parameter.  If such parameters are
    present, a client MUST NOT use a key that is not compatible with the
@@ -269,19 +263,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    document MUST be mapped to CBOR types as specified in Figure 1, using
    the given integer abbreviation for the map key.
 
-
-
-
-
-
-
-
-
-Seitz                     Expires May 12, 2019                  [Page 5]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
        /-----------------+----------+----------------------------------\
        | Parameter name  | CBOR Key | Value Type                       |
        |-----------------+----------+----------------------------------|
@@ -292,6 +273,14 @@ Internet-Draft              ACE-OAuth-Params               November 2018
        \-----------------+----------+----------------------------------/
 
                 Figure 1: CBOR mappings for new parameters.
+
+
+
+
+Seitz                     Expires May 12, 2019                  [Page 5]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
 7.  Security Considerations
 
@@ -330,14 +319,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    o  Change Controller: IESG
    o  Reference: Section 5 of [this document]
 
-
-
-
-Seitz                     Expires May 12, 2019                  [Page 6]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
 9.2.  OAuth Introspection Response Parameter Registration
 
    This section registers the following parameters in the OAuth Token
@@ -349,6 +330,14 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    o  Reference: Section 4.1 of [this document]
 
    o  Name: "rs_cnf"
+
+
+
+Seitz                     Expires May 12, 2019                  [Page 6]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    o  Description: The key the RS should use to authenticate to the
       client.
    o  Change Controller: IESG
@@ -386,14 +375,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    "Introspection Endpoint CBOR Mappings" registry established in
    section 8.11. of [I-D.ietf-ace-oauth-authz].
 
-
-
-
-Seitz                     Expires May 12, 2019                  [Page 7]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    o  Name: "cnf"
    o  CBOR key: 8
    o  Change Controller: IESG
@@ -403,6 +384,15 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    o  CBOR key: 17
    o  Change Controller: IESG
    o  Reference: Section 4.1 of [this document]
+
+
+
+
+
+Seitz                     Expires May 12, 2019                  [Page 7]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
 10.  Acknowledgments
 
@@ -443,13 +433,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
               editor.org/info/rfc2119>.
 
-
-
-Seitz                     Expires May 12, 2019                  [Page 8]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
@@ -458,6 +441,14 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               Application Protocol (CoAP)", RFC 7252,
               DOI 10.17487/RFC7252, June 2014, <https://www.rfc-
               editor.org/info/rfc7252>.
+
+
+
+
+Seitz                     Expires May 12, 2019                  [Page 8]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
 
    [RFC7800]  Jones, M., Bradley, J., and H. Tschofenig, "Proof-of-
               Possession Key Semantics for JSON Web Tokens (JWTs)",
@@ -498,14 +489,6 @@ Appendix A.  Overlap with OAuth work
    Work in OAuth has since resumed, but it is lagging behind the planned
    milestones of the ACE working group.  We have therefore split this
    work out into a separate document so that it can later be updated or
-
-
-
-Seitz                     Expires May 12, 2019                  [Page 9]
-
-Internet-Draft              ACE-OAuth-Params               November 2018
-
-
    obsoleted to align it with the final result of the OAuth work,
    without affecting [I-D.ietf-ace-oauth-authz].
 
@@ -515,6 +498,14 @@ Internet-Draft              ACE-OAuth-Params               November 2018
    parameter specified here, however the definition of "req_aud" is more
    broad, since it can be used in an application specific way that is
    not necessarily bound to the location of the target audience (e.g. a
+
+
+
+Seitz                     Expires May 12, 2019                  [Page 9]
+
+Internet-Draft              ACE-OAuth-Params               November 2018
+
+
    group identifier referring to several resource servers, or the public
    key of a resource server).
 
@@ -527,6 +518,15 @@ Author's Address
    Sweden
 
    Email: ludwig.seitz@ri.se
+
+
+
+
+
+
+
+
+
 
 
 

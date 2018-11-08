@@ -276,13 +276,6 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
       This parameter MUST only contain a representation of an asymmetric
       key.</t>
   </list></t>
-
-  <t>All confirmation parameters use the same syntax and semantics as
-  the "cnf" claim specified in <xref
-  target="I-D.ietf-ace-cwt-proof-of-possession"/> when used with a CBOR
-  encoding.  When these parameters are used with a JSON encoding, the
-  syntax and semantics of the "cnf" claim specified in
-  <xref target="RFC7800"/> is used.</t>
       
   <t>Note that the COSE_Key structure in a confirmation claim or parameter
   may contain an "alg" or "key_ops" parameter.  If such parameters are
