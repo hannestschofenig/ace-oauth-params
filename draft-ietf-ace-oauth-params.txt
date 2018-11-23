@@ -684,11 +684,6 @@ Internet-Draft              ACE-OAuth-Params               November 2018
               DOI 10.17487/RFC7252, June 2014, <https://www.rfc-
               editor.org/info/rfc7252>.
 
-   [RFC7800]  Jones, M., Bradley, J., and H. Tschofenig, "Proof-of-
-              Possession Key Semantics for JSON Web Tokens (JWTs)",
-              RFC 7800, DOI 10.17487/RFC7800, April 2016,
-              <https://www.rfc-editor.org/info/rfc7800>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -722,6 +717,11 @@ Appendix A.  Overlap with OAuth work
 
    The former specifies the use of "req_cnf" and "cnf" for requesting
    proof-of-possession tokens and indicating the key that the AS has
+   selected.  It it was initially deemed that the work at OAuth had been
+   discontinued and therefore equivalent functionality was defined here.
+   Work in OAuth has since resumed, but it is lagging behind the planned
+   milestones of the ACE working group.  We have therefore split this
+   work out into a separate document so that it can later be updated or
 
 
 
@@ -730,11 +730,6 @@ Seitz                     Expires May 27, 2019                 [Page 13]
 Internet-Draft              ACE-OAuth-Params               November 2018
 
 
-   selected.  It it was initially deemed that the work at OAuth had been
-   discontinued and therefore equivalent functionality was defined here.
-   Work in OAuth has since resumed, but it is lagging behind the planned
-   milestones of the ACE working group.  We have therefore split this
-   work out into a separate document so that it can later be updated or
    obsoleted to align it with the final result of the OAuth work,
    without affecting [I-D.ietf-ace-oauth-authz].
 
@@ -756,6 +751,11 @@ Author's Address
    Sweden
 
    Email: ludwig.seitz@ri.se
+
+
+
+
+
 
 
 
