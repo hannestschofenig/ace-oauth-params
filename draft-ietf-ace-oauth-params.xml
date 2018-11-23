@@ -10,8 +10,12 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC6749 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6749.xml">
+<!ENTITY RFC6920 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.6920.xml">
 <!ENTITY RFC7252 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7252.xml">
+<!ENTITY RFC7519 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7519.xml">
 <!ENTITY RFC7800 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7800.xml">
 <!ENTITY RFC8174 SYSTEM
@@ -297,6 +301,13 @@ Payload:
       ]]></artwork>
     </figure></t>
   </section><!-- AS->C -->
+  <section anchor="claimRsCnf" title="The Resource Server Confirmation Claim">
+    <t>If the AS needs to convey a hint to the RS about which key it
+    should use to authenticate towards the client, this specification
+    defines the "rs_cnf" claim, which MAY be used in the access token,
+    with the same syntax and semantics as defined in for the "rs_cnf"
+    parameter.</t>
+  </section>
 </section> <!--Token Endpont-->
 
 <section anchor="introspectionEndpoint"
@@ -419,10 +430,10 @@ Payload:
     /-----------------+----------+----------------------------------\
     | Parameter name  | CBOR Key | Value Type                       |
     |-----------------+----------+----------------------------------|
+    | req_aud         |  3       | text string                      |
     | cnf             |  8       | map                              |
-    | rs_cnf          | 17       | map                              |
-    | req_aud         | 18       | text string                      |
-    | req_cnf         | 19       | map                              |
+    | rs_cnf          | 11       | map                              |
+    | req_cnf         | 12       | map                              |
     \-----------------+----------+----------------------------------/
         ]]></artwork>
       </figure>
@@ -433,6 +444,32 @@ Payload:
   <t>This document is an extension to <xref
   target="I-D.ietf-ace-oauth-authz"/>. All security considerations
   from that document apply here as well.</t>
+
+  <t>The audience claim as defined in <xref target="RFC7519"/>
+  and the equivalent "req_aud" parameter are intentionally vague
+  on how to match the audience value to a specific RS.  This is intended to
+  allow application specific semantics to be used.  This section attempts to
+  give some general guidance for the use of audiences in constrained
+  environments.</t>
+
+  <t>URLs are not a good way of identifying mobile devices that can
+  switch networks and thus be associated with new URLs.  If the
+  audience represents a single RS, and asymmetric keys are used,
+  the RS can be uniquely identified by a hash of its public key.
+  If this approach is used this framework RECOMMENDS to apply the
+  procedure from section 3 of <xref target="RFC6920"/>.</t>
+  
+  <t>If the audience addresses a group of resource servers, the
+  mapping of group identifier to individual RS has to be
+  provisioned to each RS before the group-audience is usable.
+  Managing dynamic groups could be an issue, if the RS is not always
+  reachable when the group memberships change. Furthermore issuing
+  access tokens bound to symmetric proof-of-possession keys that apply
+  to a group-audience is problematic, as an RS that is in possession
+  of the access token can impersonate the client towards the other RSs
+  that are part of the group.  It is therefore NOT RECOMMENDED to
+  issue access tokens bound to a group audience and symmetric proof-of
+  possession keys.</t>
 </section>
 
 <section anchor="privacy" title="Privacy Considerations">
@@ -442,7 +479,40 @@ Payload:
 </section>
 
 <section anchor="iana" title="IANA Considerations">
-  
+
+ <section anchor="IANAJWTClaims" title="JSON Web Token Claims">
+   <t>This specification registers the following new claim in the JSON
+   Web Token (JWT) registry of JSON Web Token Claims <xref
+   target="IANA.JsonWebTokenClaims"/>:</t>
+   
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Claim Name: <spanx style="verb">rs_cnf</spanx></t>
+      <t>Claim Description: The public key the RS is supposed to use
+      to authenticate to the client wielding this token.</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: <xref target="claimRsCnf"/> of [this document]</t>
+    </list></t>
+ </section>
+
+ <section anchor="IANACWTClaims" title="CBOR Web Token Claims">
+    <t>This specification registers the following new claim in the "CBOR
+    Web Token (CWT) Claims" registry <xref
+    target="IANA.CborWebTokenClaims"/>.</t>
+     
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Claim Name: <spanx style="verb">rs_cnf</spanx></t>
+      <t>Claim Description: The public key the RS is supposed to use
+      to authenticate to the client wielding this token.</t>
+      <t>JWT Claim Name: N/A</t>
+      <t>Claim Key: TBD (suggested: 39)</t>
+      <t>Claim Value Type(s): map</t>
+      <t>Change Controller: IESG</t>
+      <t>Specification Document(s): <xref target="claimRsCnf"/> of [this document]</t>
+    </list></t>
+ </section>
+ 
   <section anchor="IANAOAuthParameter"
 	   title="OAuth Parameter Registration">
     <t>This section registers the following parameters in the "OAuth
@@ -602,6 +672,7 @@ Payload:
       &I-D.ietf-ace-cwt-proof-of-possession;
       &RFC2119;
       &RFC6749;
+      &RFC6920;
       &RFC7252;
       &RFC7800;
       &RFC8174;
@@ -626,9 +697,31 @@ Payload:
 	  <date/>
 	</front>
       </reference>
+  
+      <reference anchor="IANA.JsonWebTokenClaims" target="https://www.iana.org/assignments/jwt/jwt.xhtml#claims">
+	<front>
+	  <title>JSON Web Token Claims</title>
+	  <author>
+	    <organization>IANA</organization>
+	  </author>
+	  <date/>
+	</front>
+      </reference>
+
+      <reference anchor="IANA.CborWebTokenClaims" target="https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry">
+	<front>
+	  <title>CBOR Web Token (CWT) Claims</title>
+	  <author>
+	    <organization>IANA</organization>
+	  </author>
+	  <date/>
+	</front>
+      </reference>
+      
     </references>
 
     <references title="Informative References">
+      &RFC7519; 
       &I-D.ietf-oauth-pop-key-distribution;
       &I-D.ietf-oauth-resource-indicators;      
     </references>

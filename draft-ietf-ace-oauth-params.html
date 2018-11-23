@@ -379,6 +379,7 @@
 <link href="#rfc.section.3" rel="Chapter" title="3 Parameters for the Token Endpoint"/>
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Client-to-AS Request"/>
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 AS-to-Client Response"/>
+<link href="#rfc.section.3.3" rel="Chapter" title="3.3 The Resource Server Confirmation Claim"/>
 <link href="#rfc.section.4" rel="Chapter" title="4 Parameters for the Introspection Endpoint"/>
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 AS-to-RS Response"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Confirmation Method Parameters"/>
@@ -386,10 +387,12 @@
 <link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations"/>
 <link href="#rfc.section.8" rel="Chapter" title="8 Privacy Considerations"/>
 <link href="#rfc.section.9" rel="Chapter" title="9 IANA Considerations"/>
-<link href="#rfc.section.9.1" rel="Chapter" title="9.1 OAuth Parameter Registration"/>
-<link href="#rfc.section.9.2" rel="Chapter" title="9.2 OAuth Introspection Response Parameter Registration"/>
-<link href="#rfc.section.9.3" rel="Chapter" title="9.3 Token Endpoint CBOR Mappings Registraton"/>
-<link href="#rfc.section.9.4" rel="Chapter" title="9.4 Introspection Endpoint CBOR Mappings Registraton"/>
+<link href="#rfc.section.9.1" rel="Chapter" title="9.1 JSON Web Token Claims"/>
+<link href="#rfc.section.9.2" rel="Chapter" title="9.2 CBOR Web Token Claims"/>
+<link href="#rfc.section.9.3" rel="Chapter" title="9.3 OAuth Parameter Registration"/>
+<link href="#rfc.section.9.4" rel="Chapter" title="9.4 OAuth Introspection Response Parameter Registration"/>
+<link href="#rfc.section.9.5" rel="Chapter" title="9.5 Token Endpoint CBOR Mappings Registraton"/>
+<link href="#rfc.section.9.6" rel="Chapter" title="9.6 Introspection Endpoint CBOR Mappings Registraton"/>
 <link href="#rfc.section.10" rel="Chapter" title="10 Acknowledgments"/>
 <link href="#rfc.references" rel="Chapter" title="11 References"/>
 <link href="#rfc.references.1" rel="Chapter" title="11.1 Normative References"/>
@@ -403,7 +406,7 @@
 
   <meta name="dct.creator" content="Seitz, L." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-11-8" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-11-23" />
   <meta name="dct.abstract" content="This specification defines new parameters for the  OAuth 2.0 token and introspection endpoints when used with framework for authentication and authorization for constrained environments (ACE).  These are used to express the desired audience of a requested access token, the desired proof-of-possession key, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
   <meta name="description" content="This specification defines new parameters for the  OAuth 2.0 token and introspection endpoints when used with framework for authentication and authorization for constrained environments (ACE).  These are used to express the desired audience of a requested access token, the desired proof-of-possession key, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
 
@@ -424,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">November 8, 2018</td>
+  <td class="right">November 23, 2018</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 12, 2019</td>
+  <td class="left">Expires: May 27, 2019</td>
   <td class="right"></td>
 </tr>
 
@@ -448,7 +451,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 12, 2019.</p>
+<p>This Internet-Draft will expire on May 27, 2019.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -465,6 +468,7 @@
 <li>3.   <a href="#rfc.section.3">Parameters for the Token Endpoint</a></li>
 <ul><li>3.1.   <a href="#rfc.section.3.1">Client-to-AS Request</a></li>
 <li>3.2.   <a href="#rfc.section.3.2">AS-to-Client Response</a></li>
+<li>3.3.   <a href="#rfc.section.3.3">The Resource Server Confirmation Claim</a></li>
 </ul><li>4.   <a href="#rfc.section.4">Parameters for the Introspection Endpoint</a></li>
 <ul><li>4.1.   <a href="#rfc.section.4.1">AS-to-RS Response</a></li>
 </ul><li>5.   <a href="#rfc.section.5">Confirmation Method Parameters</a></li>
@@ -472,10 +476,12 @@
 <li>7.   <a href="#rfc.section.7">Security Considerations</a></li>
 <li>8.   <a href="#rfc.section.8">Privacy Considerations</a></li>
 <li>9.   <a href="#rfc.section.9">IANA Considerations</a></li>
-<ul><li>9.1.   <a href="#rfc.section.9.1">OAuth Parameter Registration</a></li>
-<li>9.2.   <a href="#rfc.section.9.2">OAuth Introspection Response Parameter Registration</a></li>
-<li>9.3.   <a href="#rfc.section.9.3">Token Endpoint CBOR Mappings Registraton</a></li>
-<li>9.4.   <a href="#rfc.section.9.4">Introspection Endpoint CBOR Mappings Registraton</a></li>
+<ul><li>9.1.   <a href="#rfc.section.9.1">JSON Web Token Claims</a></li>
+<li>9.2.   <a href="#rfc.section.9.2">CBOR Web Token Claims</a></li>
+<li>9.3.   <a href="#rfc.section.9.3">OAuth Parameter Registration</a></li>
+<li>9.4.   <a href="#rfc.section.9.4">OAuth Introspection Response Parameter Registration</a></li>
+<li>9.5.   <a href="#rfc.section.9.5">Token Endpoint CBOR Mappings Registraton</a></li>
+<li>9.6.   <a href="#rfc.section.9.6">Introspection Endpoint CBOR Mappings Registraton</a></li>
 </ul><li>10.   <a href="#rfc.section.10">Acknowledgments</a></li>
 <li>11.   <a href="#rfc.references">References</a></li>
 <ul><li>11.1.   <a href="#rfc.references.1">Normative References</a></li>
@@ -582,6 +588,8 @@ Payload:
       </pre>
 <p class="figure">Figure 3: Example AS response with an access token bound to a      symmetric key.</p>
 <p><a href="#fig:asymmATres">Figure 3</a> shows an AS response containing a token bound to a previously requested asymmetric proof-of-possession key (not shown) and a "rs_cnf" parameter containing the public key of the RS.  </p>
+<h1 id="rfc.section.3.3"><a href="#rfc.section.3.3">3.3.</a> <a href="#claimRsCnf" id="claimRsCnf">The Resource Server Confirmation Claim</a></h1>
+<p id="rfc.section.3.3.p.1">If the AS needs to convey a hint to the RS about which key it should use to authenticate towards the client, this specification defines the "rs_cnf" claim, which MAY be used in the access token, with the same syntax and semantics as defined in for the "rs_cnf" parameter.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#introspectionEndpoint" id="introspectionEndpoint">Parameters for the Introspection Endpoint</a></h1>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> <a href="#introAS2RS" id="introAS2RS">AS-to-RS Response</a></h1>
 <p id="rfc.section.4.1.p.1">This document defines the following additional parameters for an AS response to a request to the introspection endpoint: </p>
@@ -645,21 +653,47 @@ Payload:
     /-----------------+----------+----------------------------------\
     | Parameter name  | CBOR Key | Value Type                       |
     |-----------------+----------+----------------------------------|
+    | req_aud         |  3       | text string                      |
     | cnf             |  8       | map                              |
-    | rs_cnf          | 17       | map                              |
-    | req_aud         | 18       | text string                      |
-    | req_cnf         | 19       | map                              |
+    | rs_cnf          | 11       | map                              |
+    | req_cnf         | 12       | map                              |
     \-----------------+----------+----------------------------------/
         </pre>
 <p class="figure">Figure 5: CBOR mappings for new parameters.</p>
 <p id="rfc.section.6.p.1">If CBOR is used, the new parameters and claims defined in this document MUST be mapped to CBOR types as specified in <a href="#fig:cborParameters">Figure 5</a>, using the given integer abbreviation for the map key.  </p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.7.p.1">This document is an extension to <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>. All security considerations from that document apply here as well.</p>
+<p id="rfc.section.7.p.2">The audience claim as defined in <a href="#RFC7519">[RFC7519]</a> and the equivalent "req_aud" parameter are intentionally vague on how to match the audience value to a specific RS.  This is intended to allow application specific semantics to be used.  This section attempts to give some general guidance for the use of audiences in constrained environments.</p>
+<p id="rfc.section.7.p.3">URLs are not a good way of identifying mobile devices that can switch networks and thus be associated with new URLs.  If the audience represents a single RS, and asymmetric keys are used, the RS can be uniquely identified by a hash of its public key.  If this approach is used this framework RECOMMENDS to apply the procedure from section 3 of <a href="#RFC6920">[RFC6920]</a>.</p>
+<p id="rfc.section.7.p.4">If the audience addresses a group of resource servers, the mapping of group identifier to individual RS has to be provisioned to each RS before the group-audience is usable.  Managing dynamic groups could be an issue, if the RS is not always reachable when the group memberships change. Furthermore issuing access tokens bound to symmetric proof-of-possession keys that apply to a group-audience is problematic, as an RS that is in possession of the access token can impersonate the client towards the other RSs that are part of the group.  It is therefore NOT RECOMMENDED to issue access tokens bound to a group audience and symmetric proof-of possession keys.</p>
 <h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#privacy" id="privacy">Privacy Considerations</a></h1>
 <p id="rfc.section.8.p.1">This document is an extension to <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>. All privacy considerations from that document apply here as well.</p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
-<h1 id="rfc.section.9.1"><a href="#rfc.section.9.1">9.1.</a> <a href="#IANAOAuthParameter" id="IANAOAuthParameter">OAuth Parameter Registration</a></h1>
-<p id="rfc.section.9.1.p.1">This section registers the following parameters in the "OAuth Parameters" registry <a href="#IANA.OAuthParameters">[IANA.OAuthParameters]</a>:</p>
+<h1 id="rfc.section.9.1"><a href="#rfc.section.9.1">9.1.</a> <a href="#IANAJWTClaims" id="IANAJWTClaims">JSON Web Token Claims</a></h1>
+<p id="rfc.section.9.1.p.1">This specification registers the following new claim in the JSON Web Token (JWT) registry of JSON Web Token Claims <a href="#IANA.JsonWebTokenClaims">[IANA.JsonWebTokenClaims]</a>:</p>
+<p/>
+
+<ul>
+  <li>Claim Name: <samp>rs_cnf</samp></li>
+  <li>Claim Description: The public key the RS is supposed to use to authenticate to the client wielding this token.</li>
+  <li>Change Controller: IESG</li>
+  <li>Reference: <a href="#claimRsCnf">Section 3.3</a> of [this document]</li>
+</ul>
+<h1 id="rfc.section.9.2"><a href="#rfc.section.9.2">9.2.</a> <a href="#IANACWTClaims" id="IANACWTClaims">CBOR Web Token Claims</a></h1>
+<p id="rfc.section.9.2.p.1">This specification registers the following new claim in the "CBOR Web Token (CWT) Claims" registry <a href="#IANA.CborWebTokenClaims">[IANA.CborWebTokenClaims]</a>.</p>
+<p/>
+
+<ul>
+  <li>Claim Name: <samp>rs_cnf</samp></li>
+  <li>Claim Description: The public key the RS is supposed to use to authenticate to the client wielding this token.</li>
+  <li>JWT Claim Name: N/A</li>
+  <li>Claim Key: TBD (suggested: 39)</li>
+  <li>Claim Value Type(s): map</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): <a href="#claimRsCnf">Section 3.3</a> of [this document]</li>
+</ul>
+<h1 id="rfc.section.9.3"><a href="#rfc.section.9.3">9.3.</a> <a href="#IANAOAuthParameter" id="IANAOAuthParameter">OAuth Parameter Registration</a></h1>
+<p id="rfc.section.9.3.p.1">This section registers the following parameters in the "OAuth Parameters" registry <a href="#IANA.OAuthParameters">[IANA.OAuthParameters]</a>:</p>
 <p/>
 
 <ul>
@@ -692,8 +726,8 @@ Payload:
   <li>Change Controller: IESG</li>
   <li>Reference: <a href="#paramCnf">Section 5</a> of [this document]</li>
 </ul>
-<h1 id="rfc.section.9.2"><a href="#rfc.section.9.2">9.2.</a> <a href="#IANAOAuthIntrospectionResponseParameterRegistration" id="IANAOAuthIntrospectionResponseParameterRegistration">OAuth Introspection Response Parameter Registration</a></h1>
-<p id="rfc.section.9.2.p.1">This section registers the following parameters in the OAuth Token Introspection Response registry <a href="#IANA.TokenIntrospectionResponse">[IANA.TokenIntrospectionResponse]</a>.</p>
+<h1 id="rfc.section.9.4"><a href="#rfc.section.9.4">9.4.</a> <a href="#IANAOAuthIntrospectionResponseParameterRegistration" id="IANAOAuthIntrospectionResponseParameterRegistration">OAuth Introspection Response Parameter Registration</a></h1>
+<p id="rfc.section.9.4.p.1">This section registers the following parameters in the OAuth Token Introspection Response registry <a href="#IANA.TokenIntrospectionResponse">[IANA.TokenIntrospectionResponse]</a>.</p>
 <p/>
 
 <ul>
@@ -712,8 +746,8 @@ Payload:
   <li>Change Controller: IESG</li>
   <li>Reference: <a href="#introAS2RS">Section 4.1</a> of [this document]</li>
 </ul>
-<h1 id="rfc.section.9.3"><a href="#rfc.section.9.3">9.3.</a> <a href="#IANATokenCBORMappingRegistration" id="IANATokenCBORMappingRegistration">Token Endpoint CBOR Mappings Registraton</a></h1>
-<p id="rfc.section.9.3.p.1">This section registers teh following parameter mappings in the "Token Endpoint CBOR Mappings" registry established in section 8.9. of <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>.</p>
+<h1 id="rfc.section.9.5"><a href="#rfc.section.9.5">9.5.</a> <a href="#IANATokenCBORMappingRegistration" id="IANATokenCBORMappingRegistration">Token Endpoint CBOR Mappings Registraton</a></h1>
+<p id="rfc.section.9.5.p.1">This section registers teh following parameter mappings in the "Token Endpoint CBOR Mappings" registry established in section 8.9. of <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>.</p>
 <p/>
 
 <ul>
@@ -746,8 +780,8 @@ Payload:
   <li>Change Controller: IESG</li>
   <li>Reference: <a href="#tokenResponse">Section 3.2</a> of [this document]</li>
 </ul>
-<h1 id="rfc.section.9.4"><a href="#rfc.section.9.4">9.4.</a> <a href="#IANAIntrospectCBORMappingRegistration" id="IANAIntrospectCBORMappingRegistration">Introspection Endpoint CBOR Mappings Registraton</a></h1>
-<p id="rfc.section.9.4.p.1">This section registers teh following parameter mappings in the "Introspection Endpoint CBOR Mappings" registry established in section 8.11. of <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>.</p>
+<h1 id="rfc.section.9.6"><a href="#rfc.section.9.6">9.6.</a> <a href="#IANAIntrospectCBORMappingRegistration" id="IANAIntrospectCBORMappingRegistration">Introspection Endpoint CBOR Mappings Registraton</a></h1>
+<p id="rfc.section.9.6.p.1">This section registers teh following parameter mappings in the "Introspection Endpoint CBOR Mappings" registry established in section 8.11. of <a href="#I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</a>.</p>
 <p/>
 
 <ul>
@@ -775,13 +809,25 @@ Payload:
       <td class="reference">
         <b id="I-D.ietf-ace-cwt-proof-of-possession">[I-D.ietf-ace-cwt-proof-of-possession]</b>
       </td>
-      <td class="top"><a>Jones, M.</a>, <a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="http://tools.ietf.org/html/draft-ietf-ace-cwt-proof-of-possession-04">Proof-of-Possession Key Semantics for CBOR Web Tokens (CWTs)</a>", Internet-Draft draft-ietf-ace-cwt-proof-of-possession-04, November 2018.</td>
+      <td class="top"><a>Jones, M.</a>, <a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="http://tools.ietf.org/html/draft-ietf-ace-cwt-proof-of-possession-05">Proof-of-Possession Key Semantics for CBOR Web Tokens (CWTs)</a>", Internet-Draft draft-ietf-ace-cwt-proof-of-possession-05, November 2018.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</b>
       </td>
       <td class="top"><a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="http://tools.ietf.org/html/draft-ietf-ace-oauth-authz-16">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-16, October 2018.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="IANA.CborWebTokenClaims">[IANA.CborWebTokenClaims]</b>
+      </td>
+      <td class="top"><a>IANA</a>, "<a href="https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry">CBOR Web Token (CWT) Claims</a>"</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="IANA.JsonWebTokenClaims">[IANA.JsonWebTokenClaims]</b>
+      </td>
+      <td class="top"><a>IANA</a>, "<a href="https://www.iana.org/assignments/jwt/jwt.xhtml#claims">JSON Web Token Claims</a>"</td>
     </tr>
     <tr>
       <td class="reference">
@@ -806,6 +852,12 @@ Payload:
         <b id="RFC6749">[RFC6749]</b>
       </td>
       <td class="top"><a>Hardt, D.</a>, "<a href="http://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a>", RFC 6749, DOI 10.17487/RFC6749, October 2012.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6920">[RFC6920]</b>
+      </td>
+      <td class="top"><a>Farrell, S.</a>, <a>Kutscher, D.</a>, <a>Dannewitz, C.</a>, <a>Ohlman, B.</a>, <a>Keranen, A.</a> and <a>P. Hallam-Baker</a>, "<a href="http://tools.ietf.org/html/rfc6920">Naming Things with Hashes</a>", RFC 6920, DOI 10.17487/RFC6920, April 2013.</td>
     </tr>
     <tr>
       <td class="reference">
@@ -847,6 +899,12 @@ Payload:
         <b id="I-D.ietf-oauth-resource-indicators">[I-D.ietf-oauth-resource-indicators]</b>
       </td>
       <td class="top"><a>Campbell, B.</a>, <a>Bradley, J.</a> and <a>H. Tschofenig</a>, "<a href="http://tools.ietf.org/html/draft-ietf-oauth-resource-indicators-01">Resource Indicators for OAuth 2.0</a>", Internet-Draft draft-ietf-oauth-resource-indicators-01, October 2018.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7519">[RFC7519]</b>
+      </td>
+      <td class="top"><a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="http://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>", RFC 7519, DOI 10.17487/RFC7519, May 2015.</td>
     </tr>
   </tbody>
 </table>
