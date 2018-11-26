@@ -406,7 +406,7 @@
 
   <meta name="dct.creator" content="Seitz, L." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-11-23" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-11-26" />
   <meta name="dct.abstract" content="This specification defines new parameters for the  OAuth 2.0 token and introspection endpoints when used with framework for authentication and authorization for constrained environments (ACE).  These are used to express the desired audience of a requested access token, the desired proof-of-possession key, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
   <meta name="description" content="This specification defines new parameters for the  OAuth 2.0 token and introspection endpoints when used with framework for authentication and authorization for constrained environments (ACE).  These are used to express the desired audience of a requested access token, the desired proof-of-possession key, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">November 23, 2018</td>
+  <td class="right">November 26, 2018</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 27, 2019</td>
+  <td class="left">Expires: May 30, 2019</td>
   <td class="right"></td>
 </tr>
 
@@ -451,7 +451,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 27, 2019.</p>
+<p>This Internet-Draft will expire on May 30, 2019.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -506,7 +506,7 @@
   <dt>req_aud</dt>
   <dd style="margin-left: 8"><br/> OPTIONAL.  Specifies the audience for which the client is requesting an access token.  If this parameter is missing, it is assumed that the AS has a default audience for access tokens issued to this client.  If a client submits a request for an access token without specifying a "req_aud" parameter, and the AS does not have a default audience value for this client, then the AS MUST respond with an error message using a response code equivalent to the CoAP response code 4.00 (Bad Request). Values of this parameter follow the syntax of the "aud" claim from section 3.1.3 of <a href="#RFC8392">[RFC8392]</a>.  <br/><br/></dd>
   <dt>req_cnf</dt>
-  <dd style="margin-left: 8"><br/> OPTIONAL.  This field contains information about the key the client would like to bind to the access token for proof-of-possession.  It is RECOMMENDED that an AS reject a request containing a symmetric key value in the 'req_cnf' field, since the AS is expected to be able to generate better symmetric keys than a potentially constrained client.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession">[I-D.ietf-ace-cwt-proof-of-possession]</a>.</dd>
+  <dd style="margin-left: 8"><br/> OPTIONAL.  This field contains information about the key the client would like to bind to the access token for proof-of-possession.  It is RECOMMENDED that an AS reject a request containing a symmetric key value in the 'req_cnf' field, since the AS is expected to be able to generate better symmetric keys than a potentially constrained client.  The AS MUST verify that the client really is in possession of the corresponding key.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession">[I-D.ietf-ace-cwt-proof-of-possession]</a>.</dd>
 </dl>
 
 <p> </p>

@@ -182,8 +182,9 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	It is RECOMMENDED that an AS reject a request containing a symmetric key
 	value in the 'req_cnf' field, since the AS is expected to be able to
 	generate better symmetric keys than a potentially constrained client.
-	Values of this parameter follow the syntax of the "cnf" claim
-	from section 3.1 of <xref
+	The AS MUST verify that the client really is in possession of the
+	corresponding key.  Values of this parameter follow the syntax of the
+	"cnf" claim from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>.</t>
       </list>
   </t>
