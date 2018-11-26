@@ -505,7 +505,7 @@ Payload:
       <t>Claim Description: The public key the RS is supposed to use
       to authenticate to the client wielding this token.</t>
       <t>JWT Claim Name: N/A</t>
-      <t>Claim Key: TBD (suggested: 39)</t>
+      <t>Claim Key: TBD (suggested: 40)</t>
       <t>Claim Value Type(s): map</t>
       <t>Change Controller: IESG</t>
       <t>Specification Document(s): <xref target="claimRsCnf"/> of [this document]</t>
