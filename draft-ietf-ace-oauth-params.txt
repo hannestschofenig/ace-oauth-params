@@ -4,7 +4,7 @@
 
 ACE Working Group                                               L. Seitz
 Internet-Draft                                                      RISE
-Intended status: Standards Track                                    2018
+Intended status: Standards Track                        January 29, 2019
 Expires: August 2, 2019
 
 
@@ -41,7 +41,7 @@ Status of This Memo
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -55,7 +55,7 @@ Copyright Notice
 
 Seitz                    Expires August 2, 2019                 [Page 1]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    include Simplified BSD License text as described in Section 4.e of
@@ -111,7 +111,7 @@ Table of Contents
 
 Seitz                    Expires August 2, 2019                 [Page 2]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
@@ -167,7 +167,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 3]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    Header: POST (Code=0.02)
@@ -223,7 +223,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 4]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    Header: Created (Code=2.01)
@@ -279,7 +279,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 5]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
 3.3.  The Resource Server Confirmation Claim
@@ -335,7 +335,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 6]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    Header: Created Code=2.01)
@@ -391,7 +391,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 7]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    o  "rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
@@ -447,7 +447,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 8]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    give some general guidance for the use of audiences in constrained
@@ -503,7 +503,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                 [Page 9]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
 9.2.  CBOR Web Token Claims
@@ -559,7 +559,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                [Page 10]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    o  Name: "rs_cnf"
@@ -615,7 +615,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                [Page 11]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
 10.  Acknowledgments
@@ -671,7 +671,7 @@ Internet-Draft              ACE-OAuth-Params                        2018
 
 Seitz                    Expires August 2, 2019                [Page 12]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
@@ -727,7 +727,7 @@ Appendix A.  Overlap with OAuth work
 
 Seitz                    Expires August 2, 2019                [Page 13]
 
-Internet-Draft              ACE-OAuth-Params                        2018
+Internet-Draft              ACE-OAuth-Params                January 2019
 
 
    discontinued and therefore equivalent functionality was defined here.
