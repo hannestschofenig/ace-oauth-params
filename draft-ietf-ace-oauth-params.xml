@@ -512,7 +512,7 @@ Payload:
       <t>Claim Name: <spanx style="verb">rs_cnf</spanx></t>
       <t>Claim Description: The public key the RS is supposed to use
       to authenticate to the client wielding this token.</t>
-      <t>JWT Claim Name: N/A</t>
+      <t>JWT Claim Name: rs_cnf</t>
       <t>Claim Key: TBD (suggested: 40)</t>
       <t>Claim Value Type(s): map</t>
       <t>Change Controller: IESG</t>

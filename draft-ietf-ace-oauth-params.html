@@ -406,7 +406,7 @@
 
   <meta name="dct.creator" content="Seitz, L." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-02" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-1-29" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-1-30" />
   <meta name="dct.abstract" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the desired audience of a requested access token, the desired proof-of-possession key, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
   <meta name="description" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the desired audience of a requested access token, the desired proof-of-possession key, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">January 29, 2019</td>
+  <td class="right">January 30, 2019</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 2, 2019</td>
+  <td class="left">Expires: August 3, 2019</td>
   <td class="right"></td>
 </tr>
 
@@ -451,7 +451,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 2, 2019.</p>
+<p>This Internet-Draft will expire on August 3, 2019.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -687,7 +687,7 @@ Payload:
 <ul>
   <li>Claim Name: <samp>rs_cnf</samp></li>
   <li>Claim Description: The public key the RS is supposed to use to authenticate to the client wielding this token.</li>
-  <li>JWT Claim Name: N/A</li>
+  <li>JWT Claim Name: rs_cnf</li>
   <li>Claim Key: TBD (suggested: 40)</li>
   <li>Claim Value Type(s): map</li>
   <li>Change Controller: IESG</li>
