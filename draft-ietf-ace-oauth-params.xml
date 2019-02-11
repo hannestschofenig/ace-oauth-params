@@ -10,16 +10,10 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC6749 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6749.xml">
-<!ENTITY RFC6920 SYSTEM
-"http://xml.resource.org/public/rfc/bibxml/reference.RFC.6920.xml">
 <!ENTITY RFC7252 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7252.xml">
-<!ENTITY RFC7519 SYSTEM
-"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7519.xml">
 <!ENTITY RFC8174 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
-<!ENTITY RFC8392 SYSTEM
-"http://xml.resource.org/public/rfc/bibxml/reference.RFC.8392.xml">
 <!ENTITY I-D.ietf-ace-oauth-authz SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-oauth-authz.xml">
 <!ENTITY I-D.ietf-ace-cwt-proof-of-possession SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-cwt-proof-of-possession.xml">
 <!ENTITY I-D.ietf-oauth-pop-key-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-pop-key-distribution.xml">
@@ -612,10 +606,8 @@ Payload:
       &I-D.ietf-ace-cwt-proof-of-possession;
       &RFC2119;
       &RFC6749;
-      &RFC6920;
       &RFC7252;
       &RFC8174;
-      &RFC8392;
       
       <reference anchor="IANA.OAuthParameters" target="https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#parameters">
 	<front>
@@ -660,7 +652,6 @@ Payload:
     </references>
 
     <references title="Informative References">
-      &RFC7519; 
       &I-D.ietf-oauth-pop-key-distribution;
     </references>
     

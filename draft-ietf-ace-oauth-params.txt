@@ -86,7 +86,7 @@ Table of Contents
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  11
      11.2.  Informative References . . . . . . . . . . . . . . . . .  12
-   Appendix A.  Overlap with OAuth work  . . . . . . . . . . . . . .  13
+   Appendix A.  Overlap with OAuth work  . . . . . . . . . . . . . .  12
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  13
 
 1.  Introduction
@@ -632,11 +632,6 @@ Internet-Draft              ACE-OAuth-Params               February 2019
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
 
-   [RFC6920]  Farrell, S., Kutscher, D., Dannewitz, C., Ohlman, B.,
-              Keranen, A., and P. Hallam-Baker, "Naming Things with
-              Hashes", RFC 6920, DOI 10.17487/RFC6920, April 2013,
-              <https://www.rfc-editor.org/info/rfc6920>.
-
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,
               DOI 10.17487/RFC7252, June 2014,
@@ -646,10 +641,6 @@ Internet-Draft              ACE-OAuth-Params               February 2019
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
-              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
-              May 2018, <https://www.rfc-editor.org/info/rfc8392>.
-
 11.2.  Informative References
 
    [I-D.ietf-oauth-pop-key-distribution]
@@ -657,22 +648,6 @@ Internet-Draft              ACE-OAuth-Params               February 2019
               Mihaly, "OAuth 2.0 Proof-of-Possession: Authorization
               Server to Client Key Distribution", draft-ietf-oauth-pop-
               key-distribution-04 (work in progress), October 2018.
-
-   [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
-              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
-              <https://www.rfc-editor.org/info/rfc7519>.
-
-
-
-
-
-
-
-
-Seitz                    Expires August 15, 2019               [Page 12]
-
-Internet-Draft              ACE-OAuth-Params               February 2019
-
 
 Appendix A.  Overlap with OAuth work
 
@@ -689,6 +664,16 @@ Appendix A.  Overlap with OAuth work
    later be updated or obsoleted to align it with the final result of
    the OAuth work, without affecting [I-D.ietf-ace-oauth-authz].
 
+
+
+
+
+
+Seitz                    Expires August 15, 2019               [Page 12]
+
+Internet-Draft              ACE-OAuth-Params               February 2019
+
+
 Author's Address
 
    Ludwig Seitz
@@ -698,6 +683,21 @@ Author's Address
    Sweden
 
    Email: ludwig.seitz@ri.se
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
