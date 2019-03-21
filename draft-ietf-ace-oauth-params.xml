@@ -406,9 +406,9 @@ Payload:
     /-----------------+----------+----------------------------------\
     | Parameter name  | CBOR Key | Value Type                       |
     |-----------------+----------+----------------------------------|
-    | cnf             |  8       | map                              |
-    | rs_cnf          | 11       | map                              |
-    | req_cnf         | 12       | map                              |
+    | req_cnf         | TBD (4)  | map                              |
+    | cnf             | TBD (8)  | map                              |
+    | rs_cnf          | TBD (41) | map                              |
     \-----------------+----------+----------------------------------/
         ]]></artwork>
       </figure>
@@ -455,7 +455,7 @@ Payload:
       <t>Claim Description: The public key the RS is supposed to use
       to authenticate to the client wielding this token.</t>
       <t>JWT Claim Name: rs_cnf</t>
-      <t>Claim Key: TBD (suggested: 40)</t>
+      <t>Claim Key: TBD (suggested: 41)</t>
       <t>Claim Value Type(s): map</t>
       <t>Change Controller: IESG</t>
       <t>Specification Document(s): <xref target="claimRsCnf"/> of [this document]</t>
@@ -527,7 +527,7 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">req_cnf</spanx></t>
-      <t>CBOR key: 19</t>
+      <t>CBOR key: TBD (suggested: 4)</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="tokenRequest"/> of [this document]</t>
     </list></t>  
@@ -535,7 +535,7 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">cnf</spanx></t>
-      <t>CBOR key: 8</t>
+      <t>CBOR key: TBD (suggested: 8)</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="tokenResponse"/> of [this document]</t>
     </list></t>
@@ -543,7 +543,7 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">rs_cnf</spanx></t>
-      <t>CBOR key: 17</t>
+      <t>CBOR key: TBD (suggested: 41)</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="tokenResponse"/> of [this document]</t>
     </list></t>
@@ -558,7 +558,7 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">cnf</spanx></t>
-      <t>CBOR key: 8</t>
+      <t>CBOR key: TBD (suggested: 8)</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
     </list></t>
@@ -566,7 +566,7 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">rs_cnf</spanx></t>
-      <t>CBOR key: 17</t>
+      <t>CBOR key: TBD (suggested: 41)</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
     </list></t>
@@ -577,8 +577,8 @@ Payload:
 <section anchor="Acknowledgments" title="Acknowledgments">
   <t>This document is a product of the ACE working group of the IETF.</t>
   
-  <t>Ludwig Seitz worked on this document as part of the CelticPlus project
-  CyberWI, with funding from Vinnova.</t>
+  <t>Ludwig Seitz worked on this document as part of the CelticNext projects
+  CyberWI, and CRITISEC with funding from Vinnova.</t>
 </section>
     
     <!-- Possibly a 'Contributors' section ... -->

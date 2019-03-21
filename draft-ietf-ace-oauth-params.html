@@ -406,7 +406,7 @@
 
   <meta name="dct.creator" content="Seitz, L." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-04" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-11" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-21" />
   <meta name="dct.abstract" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client whishes to use, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
   <meta name="description" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client whishes to use, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
 <td class="left">Intended status: Standards Track</td>
-<td class="right">February 11, 2019</td>
+<td class="right">March 21, 2019</td>
 </tr>
 <tr>
-<td class="left">Expires: August 15, 2019</td>
+<td class="left">Expires: September 22, 2019</td>
 <td class="right"></td>
 </tr>
 
@@ -447,7 +447,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 15, 2019.</p>
+<p>This Internet-Draft will expire on September 22, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -696,9 +696,9 @@ Payload:
     /-----------------+----------+----------------------------------\
     | Parameter name  | CBOR Key | Value Type                       |
     |-----------------+----------+----------------------------------|
-    | cnf             |  8       | map                              |
-    | rs_cnf          | 11       | map                              |
-    | req_cnf         | 12       | map                              |
+    | req_cnf         | TBD (4)  | map                              |
+    | cnf             | TBD (8)  | map                              |
+    | rs_cnf          | TBD (41) | map                              |
     \-----------------+----------+----------------------------------/
         </pre>
 <p class="figure">Figure 5: CBOR mappings for new parameters.</p>
@@ -738,7 +738,7 @@ Payload:
 </li>
 <li>Claim Description: The public key the RS is supposed to use to authenticate to the client wielding this token.</li>
 <li>JWT Claim Name: rs_cnf</li>
-<li>Claim Key: TBD (suggested: 40)</li>
+<li>Claim Key: TBD (suggested: 41)</li>
 <li>Claim Value Type(s): map</li>
 <li>Change Controller: IESG</li>
 <li>Specification Document(s): <a href="#claimRsCnf" class="xref">Section 3.3</a> of [this document]</li>
@@ -807,7 +807,7 @@ Payload:
 <ul>
 <li>Name: <samp>req_cnf</samp>
 </li>
-<li>CBOR key: 19</li>
+<li>CBOR key: TBD (suggested: 4)</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#tokenRequest" class="xref">Section 3.1</a> of [this document]</li>
 </ul>
@@ -816,7 +816,7 @@ Payload:
 <ul>
 <li>Name: <samp>cnf</samp>
 </li>
-<li>CBOR key: 8</li>
+<li>CBOR key: TBD (suggested: 8)</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#tokenResponse" class="xref">Section 3.2</a> of [this document]</li>
 </ul>
@@ -825,7 +825,7 @@ Payload:
 <ul>
 <li>Name: <samp>rs_cnf</samp>
 </li>
-<li>CBOR key: 17</li>
+<li>CBOR key: TBD (suggested: 41)</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#tokenResponse" class="xref">Section 3.2</a> of [this document]</li>
 </ul>
@@ -838,7 +838,7 @@ Payload:
 <ul>
 <li>Name: <samp>cnf</samp>
 </li>
-<li>CBOR key: 8</li>
+<li>CBOR key: TBD (suggested: 8)</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#introAS2RS" class="xref">Section 4.1</a> of [this document]</li>
 </ul>
@@ -847,7 +847,7 @@ Payload:
 <ul>
 <li>Name: <samp>rs_cnf</samp>
 </li>
-<li>CBOR key: 17</li>
+<li>CBOR key: TBD (suggested: 41)</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#introAS2RS" class="xref">Section 4.1</a> of [this document]</li>
 </ul>
@@ -855,7 +855,7 @@ Payload:
 <a href="#rfc.section.10">10.</a> <a href="#Acknowledgments" id="Acknowledgments">Acknowledgments</a>
 </h1>
 <p id="rfc.section.10.p.1">This document is a product of the ACE working group of the IETF.</p>
-<p id="rfc.section.10.p.2">Ludwig Seitz worked on this document as part of the CelticPlus project CyberWI, with funding from Vinnova.</p>
+<p id="rfc.section.10.p.2">Ludwig Seitz worked on this document as part of the CelticNext projects CyberWI, and CRITISEC with funding from Vinnova.</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">11.</a> References</h1>
 <h1 id="rfc.references.1">
@@ -864,12 +864,12 @@ Payload:
 <tr>
 <td class="reference"><b id="I-D.ietf-ace-cwt-proof-of-possession">[I-D.ietf-ace-cwt-proof-of-possession]</b></td>
 <td class="top">
-<a>Jones, M.</a>, <a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-cwt-proof-of-possession-05">Proof-of-Possession Key Semantics for CBOR Web Tokens (CWTs)</a>", Internet-Draft draft-ietf-ace-cwt-proof-of-possession-05, November 2018.</td>
+<a>Jones, M.</a>, <a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-cwt-proof-of-possession-06">Proof-of-Possession Key Semantics for CBOR Web Tokens (CWTs)</a>", Internet-Draft draft-ietf-ace-cwt-proof-of-possession-06, February 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</b></td>
 <td class="top">
-<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-18">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-18, January 2019.</td>
+<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-22">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-22, March 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="IANA.CborWebTokenClaims">[IANA.CborWebTokenClaims]</b></td>
@@ -917,7 +917,7 @@ Payload:
 <table><tbody><tr>
 <td class="reference"><b id="I-D.ietf-oauth-pop-key-distribution">[I-D.ietf-oauth-pop-key-distribution]</b></td>
 <td class="top">
-<a>Bradley, J.</a>, <a>Hunt, P.</a>, <a>Jones, M.</a>, <a>Tschofenig, H.</a> and <a>M. Mihaly</a>, "<a href="https://tools.ietf.org/html/draft-ietf-oauth-pop-key-distribution-04">OAuth 2.0 Proof-of-Possession: Authorization Server to Client Key Distribution</a>", Internet-Draft draft-ietf-oauth-pop-key-distribution-04, October 2018.</td>
+<a>Bradley, J.</a>, <a>Hunt, P.</a>, <a>Jones, M.</a>, <a>Tschofenig, H.</a> and <a>M. Meszaros</a>, "<a href="https://tools.ietf.org/html/draft-ietf-oauth-pop-key-distribution-06">OAuth 2.0 Proof-of-Possession: Authorization Server to Client Key Distribution</a>", Internet-Draft draft-ietf-oauth-pop-key-distribution-06, March 2019.</td>
 </tr></tbody></table>
 <h1 id="rfc.appendix.A">
 <a href="#rfc.appendix.A">Appendix A.</a> <a href="#oauth" id="oauth">Overlap with OAuth work</a>

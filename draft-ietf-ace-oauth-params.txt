@@ -4,8 +4,8 @@
 
 ACE Working Group                                               L. Seitz
 Internet-Draft                                                      RISE
-Intended status: Standards Track                       February 11, 2019
-Expires: August 15, 2019
+Intended status: Standards Track                          March 21, 2019
+Expires: September 22, 2019
 
 
       Additional OAuth Parameters for Authorization in Constrained
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 15, 2019.
+   This Internet-Draft will expire on September 22, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Seitz                    Expires August 15, 2019                [Page 1]
+Seitz                  Expires September 22, 2019               [Page 1]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Seitz                    Expires August 15, 2019                [Page 2]
+Seitz                  Expires September 22, 2019               [Page 2]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
@@ -165,9 +165,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 3]
+Seitz                  Expires September 22, 2019               [Page 3]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    Header: POST (Code=0.02)
@@ -221,9 +221,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 4]
+Seitz                  Expires September 22, 2019               [Page 4]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    Header: Created (Code=2.01)
@@ -277,9 +277,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 5]
+Seitz                  Expires September 22, 2019               [Page 5]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
 3.3.  The Resource Server Confirmation Claim
@@ -333,9 +333,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 6]
+Seitz                  Expires September 22, 2019               [Page 6]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    Header: Created Code=2.01)
@@ -389,9 +389,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 7]
+Seitz                  Expires September 22, 2019               [Page 7]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
       possession token, absent otherwise.  Indicates the proof-of-
@@ -428,9 +428,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
        /-----------------+----------+----------------------------------\
        | Parameter name  | CBOR Key | Value Type                       |
        |-----------------+----------+----------------------------------|
-       | cnf             |  8       | map                              |
-       | rs_cnf          | 11       | map                              |
-       | req_cnf         | 12       | map                              |
+       | req_cnf         | TBD (4)  | map                              |
+       | cnf             | TBD (8)  | map                              |
+       | rs_cnf          | TBD (41) | map                              |
        \-----------------+----------+----------------------------------/
 
                 Figure 5: CBOR mappings for new parameters.
@@ -445,9 +445,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 8]
+Seitz                  Expires September 22, 2019               [Page 8]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
 8.  Privacy Considerations
@@ -478,7 +478,7 @@ Internet-Draft              ACE-OAuth-Params               February 2019
    o  Claim Description: The public key the RS is supposed to use to
       authenticate to the client wielding this token.
    o  JWT Claim Name: rs_cnf
-   o  Claim Key: TBD (suggested: 40)
+   o  Claim Key: TBD (suggested: 41)
    o  Claim Value Type(s): map
    o  Change Controller: IESG
    o  Specification Document(s): Section 3.3 of [this document]
@@ -501,9 +501,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019                [Page 9]
+Seitz                  Expires September 22, 2019               [Page 9]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    o  Name: "cnf"
@@ -534,17 +534,17 @@ Internet-Draft              ACE-OAuth-Params               February 2019
    [I-D.ietf-ace-oauth-authz].
 
    o  Name: "req_cnf"
-   o  CBOR key: 19
+   o  CBOR key: TBD (suggested: 4)
    o  Change Controller: IESG
    o  Reference: Section 3.1 of [this document]
 
    o  Name: "cnf"
-   o  CBOR key: 8
+   o  CBOR key: TBD (suggested: 8)
    o  Change Controller: IESG
    o  Reference: Section 3.2 of [this document]
 
    o  Name: "rs_cnf"
-   o  CBOR key: 17
+   o  CBOR key: TBD (suggested: 41)
    o  Change Controller: IESG
    o  Reference: Section 3.2 of [this document]
 
@@ -557,18 +557,18 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019               [Page 10]
+Seitz                  Expires September 22, 2019              [Page 10]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    o  Name: "cnf"
-   o  CBOR key: 8
+   o  CBOR key: TBD (suggested: 8)
    o  Change Controller: IESG
    o  Reference: Section 4.1 of [this document]
 
    o  Name: "rs_cnf"
-   o  CBOR key: 17
+   o  CBOR key: TBD (suggested: 41)
    o  Change Controller: IESG
    o  Reference: Section 4.1 of [this document]
 
@@ -576,8 +576,8 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
    This document is a product of the ACE working group of the IETF.
 
-   Ludwig Seitz worked on this document as part of the CelticPlus
-   project CyberWI, with funding from Vinnova.
+   Ludwig Seitz worked on this document as part of the CelticNext
+   projects CyberWI, and CRITISEC with funding from Vinnova.
 
 11.  References
 
@@ -587,14 +587,14 @@ Internet-Draft              ACE-OAuth-Params               February 2019
               Jones, M., Seitz, L., Selander, G., Erdtman, S., and H.
               Tschofenig, "Proof-of-Possession Key Semantics for CBOR
               Web Tokens (CWTs)", draft-ietf-ace-cwt-proof-of-
-              possession-05 (work in progress), November 2018.
+              possession-06 (work in progress), February 2019.
 
    [I-D.ietf-ace-oauth-authz]
               Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
               H. Tschofenig, "Authentication and Authorization for
               Constrained Environments (ACE) using the OAuth 2.0
-              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-18
-              (work in progress), January 2019.
+              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-22
+              (work in progress), March 2019.
 
    [IANA.CborWebTokenClaims]
               IANA, "CBOR Web Token (CWT) Claims",
@@ -613,9 +613,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
 
 
-Seitz                    Expires August 15, 2019               [Page 11]
+Seitz                  Expires September 22, 2019              [Page 11]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
    [IANA.TokenIntrospectionResponse]
@@ -645,9 +645,9 @@ Internet-Draft              ACE-OAuth-Params               February 2019
 
    [I-D.ietf-oauth-pop-key-distribution]
               Bradley, J., Hunt, P., Jones, M., Tschofenig, H., and M.
-              Mihaly, "OAuth 2.0 Proof-of-Possession: Authorization
+              Meszaros, "OAuth 2.0 Proof-of-Possession: Authorization
               Server to Client Key Distribution", draft-ietf-oauth-pop-
-              key-distribution-04 (work in progress), October 2018.
+              key-distribution-06 (work in progress), March 2019.
 
 Appendix A.  Overlap with OAuth work
 
@@ -669,9 +669,9 @@ Appendix A.  Overlap with OAuth work
 
 
 
-Seitz                    Expires August 15, 2019               [Page 12]
+Seitz                  Expires September 22, 2019              [Page 12]
 
-Internet-Draft              ACE-OAuth-Params               February 2019
+Internet-Draft              ACE-OAuth-Params                  March 2019
 
 
 Author's Address
@@ -725,4 +725,4 @@ Author's Address
 
 
 
-Seitz                    Expires August 15, 2019               [Page 13]
+Seitz                  Expires September 22, 2019              [Page 13]
