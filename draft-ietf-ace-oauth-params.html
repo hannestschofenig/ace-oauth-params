@@ -391,8 +391,8 @@
 <link href="#rfc.section.9.2" rel="Chapter" title="9.2 CBOR Web Token Claims">
 <link href="#rfc.section.9.3" rel="Chapter" title="9.3 OAuth Parameter Registration">
 <link href="#rfc.section.9.4" rel="Chapter" title="9.4 OAuth Introspection Response Parameter Registration">
-<link href="#rfc.section.9.5" rel="Chapter" title="9.5 Token Endpoint CBOR Mappings Registraton">
-<link href="#rfc.section.9.6" rel="Chapter" title="9.6 Introspection Endpoint CBOR Mappings Registraton">
+<link href="#rfc.section.9.5" rel="Chapter" title="9.5 OAuth Parameters CBOR Mappings Registraton">
+<link href="#rfc.section.9.6" rel="Chapter" title="9.6 OAuth Token Introspection Response CBOR Mappings     Registration">
 <link href="#rfc.section.10" rel="Chapter" title="10 Acknowledgments">
 <link href="#rfc.references" rel="Chapter" title="11 References">
 <link href="#rfc.references.1" rel="Chapter" title="11.1 Normative References">
@@ -405,8 +405,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Seitz, L." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-05" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-25" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-06" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-17" />
   <meta name="dct.abstract" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client whishes to use, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
   <meta name="description" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client whishes to use, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client." />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
 <td class="left">Intended status: Standards Track</td>
-<td class="right">March 25, 2019</td>
+<td class="right">November 17, 2019</td>
 </tr>
 <tr>
-<td class="left">Expires: September 26, 2019</td>
+<td class="left">Expires: May 20, 2020</td>
 <td class="right"></td>
 </tr>
 
@@ -439,7 +439,7 @@
   </table>
 
   <p class="title">Additional OAuth Parameters for Authorization in Constrained Environments (ACE)<br />
-  <span class="filename">draft-ietf-ace-oauth-params-05</span></p>
+  <span class="filename">draft-ietf-ace-oauth-params-06</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
 <p>This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client whishes to use, the proof-of-possession key that the AS has selected, and the key the RS should use to authenticate to the client.</p>
@@ -447,7 +447,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 26, 2019.</p>
+<p>This Internet-Draft will expire on May 20, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -491,9 +491,9 @@
 </li>
 <li>9.4.   <a href="#rfc.section.9.4">OAuth Introspection Response Parameter Registration</a>
 </li>
-<li>9.5.   <a href="#rfc.section.9.5">Token Endpoint CBOR Mappings Registraton</a>
+<li>9.5.   <a href="#rfc.section.9.5">OAuth Parameters CBOR Mappings Registraton</a>
 </li>
-<li>9.6.   <a href="#rfc.section.9.6">Introspection Endpoint CBOR Mappings Registraton</a>
+<li>9.6.   <a href="#rfc.section.9.6">OAuth Token Introspection Response CBOR Mappings     Registration</a>
 </li>
 </ul><li>10.   <a href="#rfc.section.10">Acknowledgments</a>
 </li>
@@ -514,7 +514,7 @@
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">The Authentication and Authorization for Constrained Environments (ACE) specification <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a> requires some new parameters for interactions with the OAuth 2.0 <a href="#RFC6749" class="xref">[RFC6749]</a> token and introspection endpoints, as well as some new claims to be used in access tokens.  These parameters and claims can also be used in other contexts, and may need to be updated to align them with ongoing OAuth work.  Therefore they have been split out into this document, which can be used and updated independently of <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
+<p id="rfc.section.1.p.1">The Authentication and Authorization for Constrained Environments (ACE) specification <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a> requires some new parameters for interactions with the OAuth 2.0 <a href="#RFC6749" class="xref">[RFC6749]</a> token and introspection endpoints, as well as some new claims to be used in access tokens.  These parameters and claims can also be used in other contexts, and may need to be updated to align them with ongoing OAuth work.  Therefore, these parameters and claims have been put into a dedicated document, to facilitate their use and any potential updates in a manner independent of <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#terminology" id="terminology">Terminology</a>
 </h1>
@@ -532,7 +532,7 @@
 <dl>
 <dt>req_cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL.  This field contains information about the key the client would like to bind to the access token for proof-of-possession.  It is RECOMMENDED that an AS reject a request containing a symmetric key value in the 'req_cnf' field, since the AS is expected to be able to generate better symmetric keys than a potentially constrained client.  The AS MUST verify that the client really is in possession of the corresponding key.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.</dd>
+<br> OPTIONAL.  This field contains information about the key the client would like to bind to the access token for proof-of-possession.  It is RECOMMENDED that an AS reject a request containing a symmetric key value in the 'req_cnf' field, since the AS is expected to be able to generate better symmetric keys than a constrained client.  The AS MUST verify that the client really is in possession of the corresponding key.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.</dd>
 </dl>
 
 <p> </p>
@@ -566,11 +566,11 @@ Payload:
 <dl>
 <dt>cnf</dt>
 <dd style="margin-left: 8">
-<br> REQUIRED if the token type is "pop" and a symmetric key is used.  MAY be present for asymmetric proof-of-possession keys.  This field contains the proof-of-possession key that the AS selected for the token. 	Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for details on the use of this parameter.<br><br>
+<br> REQUIRED if the token type is "pop" and a symmetric key is used.  MAY be present for asymmetric proof-of-possession keys.  This field contains the proof-of-possession key that the AS selected for the token. 	Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter.<br><br>
 </dd>
 <dt>rs_cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL if the token type is "pop" and asymmetric keys are used.  MUST NOT be present otherwise. This field contains information about the public key used by the RS to authenticate.  If this	parameter is absent, either the RS does not use a public key or the AS assumes that the client already knows the public key of the RS.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for details on the use of this parameter. </dd>
+<br> OPTIONAL if the token type is "pop" and asymmetric keys are used.  MUST NOT be present otherwise. This field contains information about the public key used by the RS to authenticate.  If this	parameter is absent, either the RS does not use a public key or the AS knows that the RS can authenticate itself to the client without additional information.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter. </dd>
 </dl>
 
 <p> </p>
@@ -602,7 +602,7 @@ Header: Created (Code=2.01)
 Content-Format: "application/ace+cbor"
 Payload:
 {
-  "access_token" : b64'SlAV32hkKG ...
+  "access_token" : b64'0INDoQEKoQVNKkXfb7xaWqMTf6 ...
    (remainder of CWT omitted for brevity;
    CWT contains COSE_Key in the "cnf" claim)',
   "rs_cnf" : {
@@ -616,7 +616,7 @@ Payload:
   }
 }
       </pre>
-<p class="figure">Figure 3: Example AS response with an access token bound to a      symmetric key.</p>
+<p class="figure">Figure 3: Example AS response, including the RS's public key.</p>
 <p><a href="#fig:asymmATres" class="xref">Figure 3</a> shows an AS response containing a token bound to a previously requested asymmetric proof-of-possession key (not shown) and a "rs_cnf" parameter containing the public key of the RS.  </p>
 <h1 id="rfc.section.3.3">
 <a href="#rfc.section.3.3">3.3.</a> <a href="#claimRsCnf" id="claimRsCnf">The Resource Server Confirmation Claim</a>
@@ -633,11 +633,11 @@ Payload:
 <dl>
 <dt>cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL.   This field contains information about the proof-of-possession  key that binds the client to the access token.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>. See <a href="#paramCnf" class="xref">Section 5</a> for more details on the use of the "cnf" parameter.<br><br>
+<br> OPTIONAL.   This field contains information about the proof-of-possession  key that binds the client to the access token.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>. See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter.<br><br>
 </dd>
 <dt>rs_cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL.  If the RS uses asymmetric keys to authenticate towards the client (e.g. with a DTLS-RPK handshake) and it has several such keys (e.g. for different elliptic curves), the AS can give the RS a hint using this parameter, as to which key it should use.  Values of this parameter follow the syntax of the "cnf"	claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for details on the use of this parameter. </dd>
+<br> OPTIONAL.  If the RS uses asymmetric keys to authenticate towards the client (e.g. with a DTLS-RPK handshake) and it has several such keys (e.g. for different elliptic curves), the AS can give the RS a hint using this parameter, as to which key it should use.  Values of this parameter follow the syntax of the "cnf"	claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter. </dd>
 </dl>
 
 <p> </p>
@@ -682,10 +682,10 @@ Payload:
 <li>"req_cnf" in the access token request C -&gt; AS, OPTIONAL to indicate the  client's raw public key, or the key-identifier of a previously established key between C and RS that the client wishes to use for proof-of-possession of the access token.</li>
 <li>"cnf" in the token response AS -&gt; C, OPTIONAL if using an asymmetric key or a key that the client requested via a key identifier in the request. REQUIRED if the client didn't specify a "req_cnf" and symmetric keys are used.  Used to indicate the symmetric key generated by the AS for proof-of-possession of the access token.</li>
 <li>"cnf" in the introspection response AS -&gt; RS, REQUIRED if the access token that was subject to introspection is a proof-of-possession token, absent otherwise.  Indicates the proof-of-possession key bound to the access token.</li>
-<li>"rs_cnf" in the token response AS -&gt; C, OPTIONAL to indicate the public key of the RS, if it uses one to authenticate to the client.</li>
-<li>"rs_cnf" in the introspection response AS -&gt; RS, OPTIONAL, contains the public key that the RS should use for authenticating to the client (e.g. if the RS has several different public keys).</li>
+<li>"rs_cnf" in the token response AS -&gt; C, OPTIONAL to indicate the public key of the RS, if it uses one to authenticate itself to the client and the binding between key and RS identity is not established through other means.</li>
+<li>"rs_cnf" in the introspection response AS -&gt; RS, OPTIONAL, contains the public key that the RS should use for authenticating itself to the client (e.g. if the RS has several different public keys, and there may be ambiguity as to which key to use).</li>
 </ul>
-<p id="rfc.section.5.p.2">Note that the COSE_Key structure in a confirmation claim or parameter may contain an "alg" or "key_ops" parameter.  If such parameters are present, a client MUST NOT use a key that is not compatible with the profile or proof-of-possession algorithm according to those parameters. An RS MUST reject a proof-of-possession using such a key.  </p>
+<p id="rfc.section.5.p.2">Note that the COSE_Key structure in a confirmation claim or parameter may contain an "alg" or "key_ops" parameter.  If such parameters are present, a client MUST NOT use a key that is incompatible with the profile or proof-of-possession algorithm according to those parameters. An RS MUST reject a proof-of-possession using such a key.  </p>
 <p id="rfc.section.5.p.3">If an access token is issued for an audience that includes several RS, the "rs_cnf" parameter MUST NOT be used, since the client cannot determine for which RS the key applies.  This document recommends to specify a different endpoint that the client can use to acquire RS authentication keys in such cases.  The specification of such an endpoint is out of scope for this document.</p>
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#paramsCbor" id="paramsCbor">CBOR Mappings</a>
@@ -693,15 +693,18 @@ Payload:
 <div id="rfc.figure.5"></div>
 <div id="fig:cborParameters"></div>
 <pre>
-    /-----------------+----------+----------------------------------\
-    | Parameter name  | CBOR Key | Value Type                       |
-    |-----------------+----------+----------------------------------|
-    | req_cnf         | TBD (4)  | map                              |
-    | cnf             | TBD (8)  | map                              |
-    | rs_cnf          | TBD (41) | map                              |
-    \-----------------+----------+----------------------------------/
+    /----------+----------+-------------------------------------\
+    | Name     | CBOR Key | Value Type | Usage                  |
+    |----------+----------+-------------------------------------|
+    | req_cnf  | TBD (4)  | map        | token request          |
+    | cnf      | TBD (8)  | map        | token response         |
+    | cnf      | TBD (8)  | map        | introspection response |
+    | rs_cnf   | TBD (41) | map        | token response         |
+    | rs_cnf   | TBD (41) | map        | introspection response |
+    | rs_cnf   | TBD (41) | map        | CWT claim              |
+    \----------+----------+------------+------------------------/
         </pre>
-<p class="figure">Figure 5: CBOR mappings for new parameters.</p>
+<p class="figure">Figure 5: CBOR mappings for new parameters and claims.</p>
 <p id="rfc.section.6.p.1">If CBOR is used, the new parameters and claims defined in this document MUST be mapped to CBOR types as specified in <a href="#fig:cborParameters" class="xref">Figure 5</a>, using the given integer abbreviation for the map key.  </p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#security" id="security">Security Considerations</a>
@@ -723,7 +726,7 @@ Payload:
 <ul>
 <li>Claim Name: <samp>rs_cnf</samp>
 </li>
-<li>Claim Description: The public key the RS is supposed to use to authenticate to the client wielding this token.</li>
+<li>Claim Description: public key used by RS to authenticate itself to the client.</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#claimRsCnf" class="xref">Section 3.3</a> of [this document]</li>
 </ul>
@@ -736,7 +739,7 @@ Payload:
 <ul>
 <li>Claim Name: <samp>rs_cnf</samp>
 </li>
-<li>Claim Description: The public key the RS is supposed to use to authenticate to the client wielding this token.</li>
+<li>Claim Description: public key used by RS to authenticate itself to the client.</li>
 <li>JWT Claim Name: rs_cnf</li>
 <li>Claim Key: TBD (suggested: 41)</li>
 <li>Claim Value Type(s): map</li>
@@ -794,14 +797,14 @@ Payload:
 <ul>
 <li>Name: <samp>rs_cnf</samp>
 </li>
-<li>Description: The key the RS should use to authenticate to the client.</li>
+<li>Description: public key used by RS to authenticate itself to the client.</li>
 <li>Change Controller: IESG</li>
 <li>Reference: <a href="#introAS2RS" class="xref">Section 4.1</a> of [this document]</li>
 </ul>
 <h1 id="rfc.section.9.5">
-<a href="#rfc.section.9.5">9.5.</a> <a href="#IANATokenCBORMappingRegistration" id="IANATokenCBORMappingRegistration">Token Endpoint CBOR Mappings Registraton</a>
+<a href="#rfc.section.9.5">9.5.</a> <a href="#IANATokenCBORMappingRegistration" id="IANATokenCBORMappingRegistration">OAuth Parameters CBOR Mappings Registraton</a>
 </h1>
-<p id="rfc.section.9.5.p.1">This section registers the following parameter mappings in the "Token Endpoint CBOR Mappings" registry established in section 8.9. of <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
+<p id="rfc.section.9.5.p.1">This section registers the following parameter mappings in the "OAuth Parameters CBOR Mappings" registry established in section 8.9. of <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
 <p></p>
 
 <ul>
@@ -830,9 +833,9 @@ Payload:
 <li>Reference: <a href="#tokenResponse" class="xref">Section 3.2</a> of [this document]</li>
 </ul>
 <h1 id="rfc.section.9.6">
-<a href="#rfc.section.9.6">9.6.</a> <a href="#IANAIntrospectCBORMappingRegistration" id="IANAIntrospectCBORMappingRegistration">Introspection Endpoint CBOR Mappings Registraton</a>
+<a href="#rfc.section.9.6">9.6.</a> <a href="#IANAIntrospectCBORMappingRegistration" id="IANAIntrospectCBORMappingRegistration">OAuth Token Introspection Response CBOR Mappings     Registration</a>
 </h1>
-<p id="rfc.section.9.6.p.1">This section registers the following parameter mappings in the "Introspection Endpoint CBOR Mappings" registry established in section 8.11. of <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
+<p id="rfc.section.9.6.p.1">This section registers the following parameter mappings in the "OAuth Token Introspection Response CBOR Mappings" registry established in section 8.11. of <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
 <p></p>
 
 <ul>
@@ -864,12 +867,12 @@ Payload:
 <tr>
 <td class="reference"><b id="I-D.ietf-ace-cwt-proof-of-possession">[I-D.ietf-ace-cwt-proof-of-possession]</b></td>
 <td class="top">
-<a>Jones, M.</a>, <a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-cwt-proof-of-possession-06">Proof-of-Possession Key Semantics for CBOR Web Tokens (CWTs)</a>", Internet-Draft draft-ietf-ace-cwt-proof-of-possession-06, February 2019.</td>
+<a>Jones, M.</a>, <a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-cwt-proof-of-possession-11">Proof-of-Possession Key Semantics for CBOR Web Tokens (CWTs)</a>", Internet-Draft draft-ietf-ace-cwt-proof-of-possession-11, October 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</b></td>
 <td class="top">
-<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-22">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-22, March 2019.</td>
+<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-25">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-25, October 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="IANA.CborWebTokenClaims">[IANA.CborWebTokenClaims]</b></td>
@@ -902,11 +905,6 @@ Payload:
 <a>Hardt, D.</a>, "<a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a>", RFC 6749, DOI 10.17487/RFC6749, October 2012.</td>
 </tr>
 <tr>
-<td class="reference"><b id="RFC7252">[RFC7252]</b></td>
-<td class="top">
-<a>Shelby, Z.</a>, <a>Hartke, K.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/rfc7252">The Constrained Application Protocol (CoAP)</a>", RFC 7252, DOI 10.17487/RFC7252, June 2014.</td>
-</tr>
-<tr>
 <td class="reference"><b id="RFC8174">[RFC8174]</b></td>
 <td class="top">
 <a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
@@ -914,11 +912,18 @@ Payload:
 </tbody></table>
 <h1 id="rfc.references.2">
 <a href="#rfc.references.2">11.2.</a> Informative References</h1>
-<table><tbody><tr>
+<table><tbody>
+<tr>
 <td class="reference"><b id="I-D.ietf-oauth-pop-key-distribution">[I-D.ietf-oauth-pop-key-distribution]</b></td>
 <td class="top">
-<a>Bradley, J.</a>, <a>Hunt, P.</a>, <a>Jones, M.</a>, <a>Tschofenig, H.</a> and <a>M. Meszaros</a>, "<a href="https://tools.ietf.org/html/draft-ietf-oauth-pop-key-distribution-06">OAuth 2.0 Proof-of-Possession: Authorization Server to Client Key Distribution</a>", Internet-Draft draft-ietf-oauth-pop-key-distribution-06, March 2019.</td>
-</tr></tbody></table>
+<a>Bradley, J.</a>, <a>Hunt, P.</a>, <a>Jones, M.</a>, <a>Tschofenig, H.</a> and <a>M. Meszaros</a>, "<a href="https://tools.ietf.org/html/draft-ietf-oauth-pop-key-distribution-07">OAuth 2.0 Proof-of-Possession: Authorization Server to Client Key Distribution</a>", Internet-Draft draft-ietf-oauth-pop-key-distribution-07, March 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7252">[RFC7252]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, <a>Hartke, K.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/rfc7252">The Constrained Application Protocol (CoAP)</a>", RFC 7252, DOI 10.17487/RFC7252, June 2014.</td>
+</tr>
+</tbody></table>
 <h1 id="rfc.appendix.A">
 <a href="#rfc.appendix.A">Appendix A.</a> <a href="#oauth" id="oauth">Overlap with OAuth work</a>
 </h1>

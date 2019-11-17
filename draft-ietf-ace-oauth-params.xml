@@ -44,7 +44,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-ace-oauth-params-05" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ace-oauth-params-06" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -121,9 +121,10 @@
   parameters for interactions with the OAuth 2.0 <xref target="RFC6749"/> token
   and introspection endpoints, as well as some new claims to be used in access
   tokens.  These parameters and claims can also be used in other contexts, and
-  may need to be updated to align them with ongoing OAuth work.  Therefore they
-  have been split out into this document, which can be used and updated
-  independently of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+  may need to be updated to align them with ongoing OAuth work.  Therefore,
+  these parameters and claims have been put into a dedicated document, to
+  facilitate their use and any potential updates in a manner independent
+  of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
 </section>
 
 <!-- ***************************************************** -->
@@ -160,7 +161,7 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	client would like to bind to the access token for proof-of-possession.
 	It is RECOMMENDED that an AS reject a request containing a symmetric key
 	value in the 'req_cnf' field, since the AS is expected to be able to
-	generate better symmetric keys than a potentially constrained client.
+	generate better symmetric keys than a constrained client.
 	The AS MUST verify that the client really is in possession of the
 	corresponding key.  Values of this parameter follow the syntax of the
 	"cnf" claim from section 3.1 of <xref
@@ -210,18 +211,20 @@ Payload:
 	token. 	Values of this parameter follow the syntax of the "cnf" claim
 	from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>. 
-	See <xref target="paramCnf"/> for details on the use of this
-	parameter.<vspace blankLines="1"/></t>
+	See <xref target="paramCnf"/> for additional discussion of the usage of
+	this parameter.<vspace blankLines="1"/></t>
 
 	<t hangText="rs_cnf"><vspace blankLines="0"/>
 	OPTIONAL if the token type is "pop" and asymmetric keys are used.
 	MUST NOT be present otherwise. This field contains information about
 	the public key used by the RS to authenticate.  If this	parameter is
-	absent, either the RS does not use a public key or the AS assumes that
-	the client already knows the public key of the RS.  Values of this
-	parameter follow the syntax of the "cnf" claim from section 3.1 of <xref
+	absent, either the RS does not use a public key or the AS knows that
+	the RS can authenticate itself to the client without additional
+	information.  Values of this parameter follow the syntax of the "cnf"
+	claim from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
-	target="paramCnf"/> for details on the use of this parameter. </t>
+	target="paramCnf"/> for additional discussion of the usage of
+	this parameter. </t>
       </list>
     </t>
 
@@ -254,14 +257,13 @@ Payload:
     bound to a previously requested asymmetric proof-of-possession key (not
     shown) and a "rs_cnf" parameter containing the public key of the RS.
   <figure align="center" anchor="fig:asymmATres"
-            title="Example AS response with an access token bound to a
-		   symmetric key.">
+            title="Example AS response, including the RS's public key.">
       <artwork align="left"><![CDATA[
 Header: Created (Code=2.01)
 Content-Format: "application/ace+cbor"
 Payload:
 {
-  "access_token" : b64'SlAV32hkKG ...
+  "access_token" : b64'0INDoQEKoQVNKkXfb7xaWqMTf6 ...
    (remainder of CWT omitted for brevity;
    CWT contains COSE_Key in the "cnf" claim)',
   "rs_cnf" : {
@@ -300,7 +302,7 @@ Payload:
       Values of this parameter follow the syntax of the "cnf" claim
       from section 3.1 of <xref
       target="I-D.ietf-ace-cwt-proof-of-possession"/>. See
-      <xref target="paramCnf"/> for more details on the use of the "cnf"
+      <xref target="paramCnf"/> for additional discussion of the usage of this
       parameter.<vspace blankLines="1"/></t>
 
       <t hangText="rs_cnf"><vspace blankLines="0"/>
@@ -310,7 +312,8 @@ Payload:
       using this parameter, as to which key it should use.  Values of this
       parameter follow the syntax of the "cnf"	claim from section 3.1 of <xref
       target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
-      target="paramCnf"/> for details on the use of this parameter. </t>
+      target="paramCnf"/> for additional discussion of the usage of this
+      parameter. </t>
     </list>
     </t>
     <t><xref target="fig:introRes"/> shows an AS response to an introspection
@@ -372,16 +375,19 @@ Payload:
       to the access token.</t>
  
       <t>"rs_cnf" in the token response AS -> C, OPTIONAL to indicate the
-      public key of the RS, if it uses one to authenticate to the client.</t>
+      public key of the RS, if it uses one to authenticate itself to the client
+      and the binding between key and RS identity is not established through
+      other means.</t>
 
       <t>"rs_cnf" in the introspection response AS -> RS, OPTIONAL, contains
-      the public key that the RS should use for authenticating to the client
-      (e.g. if the RS has several different public keys).</t>
+      the public key that the RS should use for authenticating itself to the
+      client (e.g. if the RS has several different public keys, and there may
+      be ambiguity as to which key to use).</t>
   </list></t>
       
   <t>Note that the COSE_Key structure in a confirmation claim or parameter
   may contain an "alg" or "key_ops" parameter.  If such parameters are
-  present, a client MUST NOT use a key that is not compatible with
+  present, a client MUST NOT use a key that is incompatible with
   the profile or proof-of-possession algorithm according to those
   parameters. An RS MUST reject a proof-of-possession using such a key.
   </t>
@@ -401,15 +407,18 @@ Payload:
   map key.
     
     <figure align="center" anchor="fig:cborParameters"
-            title="CBOR mappings for new parameters.">
+            title="CBOR mappings for new parameters and claims.">
       <artwork align="left"><![CDATA[
-    /-----------------+----------+----------------------------------\
-    | Parameter name  | CBOR Key | Value Type                       |
-    |-----------------+----------+----------------------------------|
-    | req_cnf         | TBD (4)  | map                              |
-    | cnf             | TBD (8)  | map                              |
-    | rs_cnf          | TBD (41) | map                              |
-    \-----------------+----------+----------------------------------/
+    /----------+----------+-------------------------------------\
+    | Name     | CBOR Key | Value Type | Usage                  |
+    |----------+----------+-------------------------------------|
+    | req_cnf  | TBD (4)  | map        | token request          |
+    | cnf      | TBD (8)  | map        | token response         |
+    | cnf      | TBD (8)  | map        | introspection response |
+    | rs_cnf   | TBD (41) | map        | token response         |
+    | rs_cnf   | TBD (41) | map        | introspection response |
+    | rs_cnf   | TBD (41) | map        | CWT claim              |
+    \----------+----------+------------+------------------------/
         ]]></artwork>
       </figure>
     </t>
@@ -437,8 +446,8 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Claim Name: <spanx style="verb">rs_cnf</spanx></t>
-      <t>Claim Description: The public key the RS is supposed to use
-      to authenticate to the client wielding this token.</t>
+      <t>Claim Description: public key used by RS to authenticate itself
+      to the client.</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="claimRsCnf"/> of [this document]</t>
     </list></t>
@@ -452,8 +461,8 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Claim Name: <spanx style="verb">rs_cnf</spanx></t>
-      <t>Claim Description: The public key the RS is supposed to use
-      to authenticate to the client wielding this token.</t>
+      <t>Claim Description: public key used by RS to authenticate itself
+      to the client.</t>
       <t>JWT Claim Name: rs_cnf</t>
       <t>Claim Key: TBD (suggested: 41)</t>
       <t>Claim Value Type(s): map</t>
@@ -511,7 +520,7 @@ Payload:
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">rs_cnf</spanx></t>
-      <t>Description: The key the RS should use to authenticate to the
+      <t>Description: public key used by RS to authenticate itself to the
       client.</t>
       <t>Change Controller: IESG</t>
       <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
@@ -519,9 +528,9 @@ Payload:
   </section>
 
   <section anchor="IANATokenCBORMappingRegistration"
-	   title="Token Endpoint CBOR Mappings Registraton">
+	   title="OAuth Parameters CBOR Mappings Registraton">
     <t>This section registers the following parameter mappings
-    in the "Token Endpoint CBOR Mappings" registry established in
+    in the "OAuth Parameters CBOR Mappings" registry established in
     section 8.9. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
         
     <t><?rfc subcompact="yes"?>
@@ -550,10 +559,12 @@ Payload:
   </section>
   
   <section anchor="IANAIntrospectCBORMappingRegistration"
-	   title="Introspection Endpoint CBOR Mappings Registraton">
+	   title="OAuth Token Introspection Response CBOR Mappings
+		  Registration">
     <t>This section registers the following parameter mappings
-    in the "Introspection Endpoint CBOR Mappings" registry established in
-    section 8.11. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+    in the "OAuth Token Introspection Response CBOR Mappings" registry
+    established in section 8.11. of <xref
+    target="I-D.ietf-ace-oauth-authz"/>.</t>
 
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
@@ -606,7 +617,6 @@ Payload:
       &I-D.ietf-ace-cwt-proof-of-possession;
       &RFC2119;
       &RFC6749;
-      &RFC7252;
       &RFC8174;
       
       <reference anchor="IANA.OAuthParameters" target="https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#parameters">
@@ -653,6 +663,7 @@ Payload:
 
     <references title="Informative References">
       &I-D.ietf-oauth-pop-key-distribution;
+      &RFC7252;
     </references>
     
     <section title="Overlap with OAuth work" anchor="oauth">
