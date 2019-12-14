@@ -3,14 +3,14 @@
 
 
 ACE Working Group                                               L. Seitz
-Internet-Draft                                                      RISE
-Intended status: Standards Track                       November 17, 2019
-Expires: May 20, 2020
+Internet-Draft                                                 Combitech
+Intended status: Standards Track                       December 14, 2019
+Expires: June 16, 2020
 
 
       Additional OAuth Parameters for Authorization in Constrained
                            Environments (ACE)
-                     draft-ietf-ace-oauth-params-06
+                     draft-ietf-ace-oauth-params-07
 
 Abstract
 
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 20, 2020.
+   This Internet-Draft will expire on June 16, 2020.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 1]
+Seitz                     Expires June 16, 2020                 [Page 1]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 2]
+Seitz                     Expires June 16, 2020                 [Page 2]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 2.  Terminology
@@ -165,9 +165,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 3]
+Seitz                     Expires June 16, 2020                 [Page 3]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    Header: POST (Code=0.02)
@@ -221,9 +221,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 4]
+Seitz                     Expires June 16, 2020                 [Page 4]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    Header: Created (Code=2.01)
@@ -277,9 +277,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 5]
+Seitz                     Expires June 16, 2020                 [Page 5]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    the "rs_cnf" claim, which MAY be used in the access token, with the
@@ -333,9 +333,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 6]
+Seitz                     Expires June 16, 2020                 [Page 6]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    Header: Created Code=2.01)
@@ -389,9 +389,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 7]
+Seitz                     Expires June 16, 2020                 [Page 7]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
       possession token, absent otherwise.  Indicates the proof-of-
@@ -445,9 +445,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 8]
+Seitz                     Expires June 16, 2020                 [Page 8]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 7.  Security Considerations
@@ -501,9 +501,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                  [Page 9]
+Seitz                     Expires June 16, 2020                 [Page 9]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    o  Name: "rs_cnf"
@@ -557,9 +557,9 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                 [Page 10]
+Seitz                     Expires June 16, 2020                [Page 10]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 9.6.  OAuth Token Introspection Response CBOR Mappings Registration
@@ -599,13 +599,13 @@ Internet-Draft              ACE-OAuth-Params               November 2019
               Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
               H. Tschofenig, "Authentication and Authorization for
               Constrained Environments (ACE) using the OAuth 2.0
-              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-25
-              (work in progress), October 2019.
+              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-27
+              (work in progress), November 2019.
 
    [IANA.CborWebTokenClaims]
               IANA, "CBOR Web Token (CWT) Claims",
-              <https://www.iana.org/assignments/cwt/
-              cwt.xhtml#claims-registry>.
+              <https://www.iana.org/assignments/cwt/cwt.xhtml#claims-
+              registry>.
 
    [IANA.JsonWebTokenClaims]
               IANA, "JSON Web Token Claims",
@@ -613,20 +613,20 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 
 
 
-Seitz                     Expires May 20, 2020                 [Page 11]
+Seitz                     Expires June 16, 2020                [Page 11]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    [IANA.OAuthParameters]
               IANA, "OAuth Parameters",
-              <https://www.iana.org/assignments/oauth-parameters/
-              oauth-parameters.xhtml#parameters>.
+              <https://www.iana.org/assignments/oauth-parameters/oauth-
+              parameters.xhtml#parameters>.
 
    [IANA.TokenIntrospectionResponse]
               IANA, "OAuth Token Introspection Response",
-              <https://www.iana.org/assignments/oauth-parameters/
-              oauth-parameters.xhtml#token-introspection-response>.
+              <https://www.iana.org/assignments/oauth-parameters/oauth-
+              parameters.xhtml#token-introspection-response>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -669,9 +669,9 @@ Appendix A.  Overlap with OAuth work
 
 
 
-Seitz                     Expires May 20, 2020                 [Page 12]
+Seitz                     Expires June 16, 2020                [Page 12]
 
-Internet-Draft              ACE-OAuth-Params               November 2019
+Internet-Draft              ACE-OAuth-Params               December 2019
 
 
    later be updated or obsoleted to align it with the final result of
@@ -680,12 +680,12 @@ Internet-Draft              ACE-OAuth-Params               November 2019
 Author's Address
 
    Ludwig Seitz
-   RISE
-   Scheelevaegen 17
-   Lund  223 70
+   Combitech
+   Djaeknegatan 31
+   Malmoe  211 35
    Sweden
 
-   Email: ludwig.seitz@ri.se
+   Email: ludwig.seitz@combitech.se
 
 
 
@@ -725,4 +725,4 @@ Author's Address
 
 
 
-Seitz                     Expires May 20, 2020                 [Page 13]
+Seitz                     Expires June 16, 2020                [Page 13]
