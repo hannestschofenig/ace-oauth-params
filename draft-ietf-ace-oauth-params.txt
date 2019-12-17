@@ -4,8 +4,8 @@
 
 ACE Working Group                                               L. Seitz
 Internet-Draft                                                 Combitech
-Intended status: Standards Track                       December 14, 2019
-Expires: June 16, 2020
+Intended status: Standards Track                       December 17, 2019
+Expires: June 19, 2020
 
 
       Additional OAuth Parameters for Authorization in Constrained
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 16, 2020.
+   This Internet-Draft will expire on June 19, 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 1]
+Seitz                     Expires June 19, 2020                 [Page 1]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 2]
+Seitz                     Expires June 19, 2020                 [Page 2]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -165,7 +165,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 3]
+Seitz                     Expires June 19, 2020                 [Page 3]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -221,7 +221,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 4]
+Seitz                     Expires June 19, 2020                 [Page 4]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -277,7 +277,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 5]
+Seitz                     Expires June 19, 2020                 [Page 5]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -333,7 +333,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 6]
+Seitz                     Expires June 19, 2020                 [Page 6]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -389,7 +389,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 7]
+Seitz                     Expires June 19, 2020                 [Page 7]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -445,7 +445,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 8]
+Seitz                     Expires June 19, 2020                 [Page 8]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -501,7 +501,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                 [Page 9]
+Seitz                     Expires June 19, 2020                 [Page 9]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -557,7 +557,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                [Page 10]
+Seitz                     Expires June 19, 2020                [Page 10]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -613,7 +613,7 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 16, 2020                [Page 11]
+Seitz                     Expires June 19, 2020                [Page 11]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -669,7 +669,7 @@ Appendix A.  Overlap with OAuth work
 
 
 
-Seitz                     Expires June 16, 2020                [Page 12]
+Seitz                     Expires June 19, 2020                [Page 12]
 
 Internet-Draft              ACE-OAuth-Params               December 2019
 
@@ -725,4 +725,4 @@ Author's Address
 
 
 
-Seitz                     Expires June 16, 2020                [Page 13]
+Seitz                     Expires June 19, 2020                [Page 13]
