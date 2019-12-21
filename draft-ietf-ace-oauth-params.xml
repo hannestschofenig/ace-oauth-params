@@ -16,7 +16,6 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY I-D.ietf-ace-oauth-authz SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-oauth-authz.xml">
 <!ENTITY I-D.ietf-ace-cwt-proof-of-possession SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-cwt-proof-of-possession.xml">
-<!ENTITY I-D.ietf-oauth-pop-key-distribution SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-pop-key-distribution.xml">
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -669,7 +668,6 @@ Payload:
     </references>
 
     <references title="Informative References">
-      &I-D.ietf-oauth-pop-key-distribution;
       &RFC7252;
     </references>
   </back>

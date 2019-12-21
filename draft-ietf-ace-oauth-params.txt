@@ -643,12 +643,6 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 11.2.  Informative References
 
-   [I-D.ietf-oauth-pop-key-distribution]
-              Bradley, J., Hunt, P., Jones, M., Tschofenig, H., and M.
-              Meszaros, "OAuth 2.0 Proof-of-Possession: Authorization
-              Server to Client Key Distribution", draft-ietf-oauth-pop-
-              key-distribution-07 (work in progress), March 2019.
-
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,
               DOI 10.17487/RFC7252, June 2014,
@@ -663,6 +657,12 @@ Author's Address
    Sweden
 
    Email: ludwig.seitz@combitech.se
+
+
+
+
+
+
 
 
 
