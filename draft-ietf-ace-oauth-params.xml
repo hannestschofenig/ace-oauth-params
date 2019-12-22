@@ -10,10 +10,18 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC6749 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6749.xml">
+<!ENTITY RFC7049 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7049.xml">
+<!ENTITY RFC7250 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7250.xml">
 <!ENTITY RFC7252 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7252.xml">
+<!ENTITY RFC8152 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.8152.xml">
 <!ENTITY RFC8174 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC8259 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.8259.xml">
 <!ENTITY I-D.ietf-ace-oauth-authz SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-oauth-authz.xml">
 <!ENTITY I-D.ietf-ace-cwt-proof-of-possession SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-cwt-proof-of-possession.xml">
 ]>
@@ -43,7 +51,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-ace-oauth-params-08" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ace-oauth-params-09" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -104,8 +112,9 @@
       introspection endpoints when used with the framework for authentication
       and authorization for constrained environments (ACE).
       These are used to express the proof-of-possession key the client
-      whishes to use, the proof-of-possession key that the AS has selected,
-      and the key the RS should use to authenticate to the client.</t>
+      wishes to use, the proof-of-possession key that the Authorization Server
+      has selected, and the key the Resource Server should use to authenticate
+      to the client.</t>
     </abstract>
   </front>
 
@@ -123,6 +132,11 @@
   and have therefore been put into a dedicated document, to
   facilitate their use in a manner independent of
   <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
+  
+  <t>Note that although all examples are shown in CBOR
+  <xref target="RFC7049"/>, JSON <xref target="RFC8259"/> MAY be used as an
+  alternative for HTTP-based communications, as specified in
+  <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
 </section>
 
 <!-- ***************************************************** -->
@@ -134,35 +148,42 @@ NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
 target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
 
   <t>Readers are assumed to be familiar with the terminology from <xref
-  target="I-D.ietf-ace-oauth-authz"/>.</t>
+  target="I-D.ietf-ace-oauth-authz"/>, especially the terminology
+  for entities in the architecture such as client (C), resource server (RS)
+  and authorization server (AS).</t>
+
+  <t>Terminology from <xref target="RFC8152"/> is used in the examples,
+  especially COSE_Key defined in section 7 of <xref target="RFC8152"/>.</t>  
 
   <t>Note that the term "endpoint" is used here following its OAuth 2.0
   <xref target="RFC6749"/> definition, which is to denote resources such as
   token and introspection at the AS and authz-info at the RS.  The CoAP
   <xref target="RFC7252"/> definition, which is "An entity participating in the
   CoAP protocol" is not used in this specification.</t>
-
 </section>
 
 <!-- ***************************************************** -->
 
 <section anchor="tokenEndpoint" title="Parameters for the Token Endpoint">
-
+  <t>This section defines additional parameters for the interations with
+  the token endpoint in the ACE framework <xref
+  target="I-D.ietf-ace-oauth-authz"/>.</t>
+  
  <section anchor="tokenRequest" title="Client-to-AS Request"> 
-  <t>This document defines the following additional parameters for
-  requesting an access token from a token endpoint in the ACE framework
-  <xref target="I-D.ietf-ace-oauth-authz"/>:
+   <t>This section defines the "req_cnf" parameter allowing clients to
+   request a specific proof-of-possession key in an access token from a token
+   endpoint in the ACE framework <xref target="I-D.ietf-ace-oauth-authz"/>:
  
       <list style="hanging">
 	<t hangText="req_cnf"><vspace blankLines="0"/>
 	OPTIONAL.  This field contains information about the key the
 	client would like to bind to the access token for proof-of-possession.
-	It is RECOMMENDED that an AS reject a request containing a symmetric key
-	value in the 'req_cnf' field, since the AS is expected to be able to
-	generate better symmetric keys than a constrained client.
-	The AS MUST verify that the client really is in possession of the
-	corresponding key.  Values of this parameter follow the syntax of the
-	"cnf" claim from section 3.1 of <xref
+	It is RECOMMENDED that an AS reject a request containing a symmetric
+	key value in the 'req_cnf' field (kty=Symmetric), since the AS is
+	expected to be able to generate better symmetric keys than a
+	constrained client.  The AS MUST verify that the client really is in
+	possession of the corresponding key.  Values of this parameter follow
+	the syntax of the "cnf" claim from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>.</t>
       </list>
   </t>
@@ -170,7 +191,7 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
   <t><xref target="fig:symmATreq"/> shows a request for an access token
   using the "req_cnf" parameter to request a specific public key as
   proof-of-possession key.  The content is displayed in CBOR diagnostic
-  notation, without abbreviations and with linebreaks for better readability.
+  notation, without abbreviations and with line-breaks for better readability.
 
     <figure align="center" anchor="fig:symmATreq"
             title="Example request for an access token bound to an
@@ -184,7 +205,7 @@ Payload:
 {
    "req_cnf" : {
       "COSE_Key" : {
-         "kty" : "EC",
+         "kty" : "EC2",
          "kid" : h'11',
          "crv" : "P-256",
          "x" : h'BAC5B11CAD8F99F9C72B05CF4B9E26D24
@@ -200,7 +221,7 @@ Payload:
 
   <section anchor="tokenResponse" title="AS-to-Client Response">
   
-    <t>This document defines the following additional parameters for
+    <t>This section defines the following additional parameters for
     an AS response to a request to the token endpoint:
 
     <list style="hanging">
@@ -268,7 +289,7 @@ Payload:
    CWT contains COSE_Key in the "cnf" claim)',
   "rs_cnf" : {
     "COSE_Key" : {
-      "kty" : "EC",
+      "kty" : "EC2",
       "kid" : h'12',
       "crv" : "P-256",
       "x" : h'BCEE7EAAC162F91E6F330F5771211E220
@@ -292,9 +313,12 @@ Payload:
 
 <section anchor="introspectionEndpoint"
 	 title="Parameters for the Introspection Endpoint">
+  <t>This section defines additional parameters for the interations with
+  the introspection endpoint in the ACE framework <xref
+  target="I-D.ietf-ace-oauth-authz"/>.</t>
   
   <section anchor="introAS2RS" title="AS-to-RS Response">
-    <t>This document defines the following additional parameters for
+    <t>This section defines the following additional parameters for
     an AS response to a request to the introspection endpoint:
    
     <list style="hanging">
@@ -309,10 +333,11 @@ Payload:
 
       <t hangText="rs_cnf"><vspace blankLines="0"/>
       OPTIONAL.  If the RS uses asymmetric keys to authenticate towards
-      the client (e.g. with a DTLS-RPK handshake) and it has several such
-      keys (e.g. for different elliptic curves), the AS can give the RS a hint
-      using this parameter, as to which key it should use.  Values of this
-      parameter follow the syntax of the "cnf"	claim from section 3.1 of <xref
+      the client (e.g., with a DTLS Raw Public Key handshake
+      <xref target="RFC7250"/> and it has several such keys (e.g., for
+      different elliptic curves), the AS can give the RS a hint using this
+      parameter, as to which key it should use.  Values of this parameter
+      follow the syntax of the "cnf" claim from section 3.1 of <xref
       target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
       target="paramCnf"/> for additional discussion of the usage of this
       parameter. </t>
@@ -335,7 +360,7 @@ Payload:
   "aud" : "tempSensor4711",
   "cnf" : {
     "COSE_Key" : {
-      "kty" : "EC",
+      "kty" : "EC2",
       "kid" : h'11',
       "crv" : "P-256",
       "x" : h'BAC5B11CAD8F99F9C72B05CF4B9E26D24
@@ -346,7 +371,7 @@ Payload:
   },
   "rs_cnf" : {
     "COSE_Key" : {
-      "kty" : "EC",
+      "kty" : "EC2",
       "kid" : h'12',
       "crv" : "P-256",
       "x" : h'BCEE7EAAC162F91E6F330F5771211E220
@@ -387,7 +412,7 @@ Payload:
 
       <t>"rs_cnf" in the introspection response AS -> RS, OPTIONAL, contains
       the public key that the RS should use for authenticating itself to the
-      client (e.g. if the RS has several different public keys, and there may
+      client (e.g., if the RS has several different public keys, and there may
       be ambiguity as to which key to use).</t>
   </list></t>
       
@@ -623,7 +648,10 @@ Payload:
       &I-D.ietf-ace-cwt-proof-of-possession;
       &RFC2119;
       &RFC6749;
+      &RFC7049;
+      &RFC8152;
       &RFC8174;
+      &RFC8259;
       
       <reference anchor="IANA.OAuthParameters" target="https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#parameters">
 	<front>
@@ -668,7 +696,17 @@ Payload:
     </references>
 
     <references title="Informative References">
+      &RFC7250;
       &RFC7252;
     </references>
   </back>
 </rfc>
+
+<!--  LocalWords:  Combitech Djäknegatan Malmö CoAP CBOR JSON BCP req
+-->
+<!--  LocalWords:  authz cnf DTLS RPK COSE alg JWT IESG TBD PoP IETF
+-->
+<!--  LocalWords:  Seitz CelticNext CyberWI CRITISEC Vinnova Ds xml
+-->
+<!--  LocalWords:  rfc http IANA
+-->
