@@ -404,8 +404,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Seitz, L." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-09" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-22" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-ace-oauth-params-10" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-07" />
   <meta name="dct.abstract" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client wishes to use, the proof-of-possession key that the Authorization Server has selected, and the key the Resource Server should use to authenticate to the client." />
   <meta name="description" content="This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client wishes to use, the proof-of-possession key that the Authorization Server has selected, and the key the Resource Server should use to authenticate to the client." />
 
@@ -426,10 +426,10 @@
 </tr>
 <tr>
 <td class="left">Intended status: Standards Track</td>
-<td class="right">December 22, 2019</td>
+<td class="right">January 7, 2020</td>
 </tr>
 <tr>
-<td class="left">Expires: June 24, 2020</td>
+<td class="left">Expires: July 10, 2020</td>
 <td class="right"></td>
 </tr>
 
@@ -438,7 +438,7 @@
   </table>
 
   <p class="title">Additional OAuth Parameters for Authorization in Constrained Environments (ACE)<br />
-  <span class="filename">draft-ietf-ace-oauth-params-09</span></p>
+  <span class="filename">draft-ietf-ace-oauth-params-10</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
 <p>This specification defines new parameters for the OAuth 2.0 token and introspection endpoints when used with the framework for authentication and authorization for constrained environments (ACE).  These are used to express the proof-of-possession key the client wishes to use, the proof-of-possession key that the Authorization Server has selected, and the key the Resource Server should use to authenticate to the client.</p>
@@ -446,9 +446,9 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 24, 2020.</p>
+<p>This Internet-Draft will expire on July 10, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
-<p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -532,7 +532,7 @@
 <dl>
 <dt>req_cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL.  This field contains information about the key the client would like to bind to the access token for proof-of-possession.  It is RECOMMENDED that an AS reject a request containing a symmetric key value in the 'req_cnf' field (kty=Symmetric), since the AS is expected to be able to generate better symmetric keys than a constrained client.  The AS MUST verify that the client really is in possession of the corresponding key.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.</dd>
+<br> OPTIONAL.  This field contains information about the key the client would like to bind to the access token for proof-of-possession.  It is RECOMMENDED that an AS reject a request containing a symmetric key value in the 'req_cnf' field (kty=Symmetric), since the AS is expected to be able to generate better symmetric keys than a constrained client.  The AS MUST verify that the client really is in possession of the corresponding key.  Values of this parameter follow the syntax and semantics of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.</dd>
 </dl>
 
 <p> </p>
@@ -568,11 +568,11 @@ Payload:
 <dl>
 <dt>cnf</dt>
 <dd style="margin-left: 8">
-<br> REQUIRED if the token type is "pop" and a symmetric key is used.  MAY be present for asymmetric proof-of-possession keys.  This field contains the proof-of-possession key that the AS selected for the token. 	Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter.<br><br>
+<br> REQUIRED if the token type is "pop" and a symmetric key is used.  MAY be present for asymmetric proof-of-possession keys.  This field contains the proof-of-possession key that the AS selected for the token. 	Values of this parameter follow the syntax and semantics of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter.<br><br>
 </dd>
 <dt>rs_cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL if the token type is "pop" and asymmetric keys are used.  MUST NOT be present otherwise. This field contains information about the public key used by the RS to authenticate.  If this	parameter is absent, either the RS does not use a public key or the AS knows that the RS can authenticate itself to the client without additional information.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter. </dd>
+<br> OPTIONAL if the token type is "pop" and asymmetric keys are used.  MUST NOT be present otherwise. This field contains information about the public key used by the RS to authenticate.  If this	parameter is absent, either the RS does not use a public key or the AS knows that the RS can authenticate itself to the client without additional information.  Values of this parameter follow the syntax and semantics of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter. </dd>
 </dl>
 
 <p> </p>
@@ -615,7 +615,7 @@ Payload:
       "x" : h'BCEE7EAAC162F91E6F330F5771211E220
               B8B546C96589B0AC4AD0FD24C77E1F1',
       "y" : h'C647B38C55EFBBC4E62E651720F002D5D
-	      75B2E0C02CD1326E662BCA222B90416'
+              75B2E0C02CD1326E662BCA222B90416'
     }
   }
 }
@@ -629,23 +629,20 @@ Payload:
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#introspectionEndpoint" id="introspectionEndpoint">Parameters for the Introspection Endpoint</a>
 </h1>
-<p id="rfc.section.4.p.1">This section defines additional parameters for the interations with the introspection endpoint in the ACE framework <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
+<p id="rfc.section.4.p.1">This section defines an additional parameter for the interations with the introspection endpoint in the ACE framework <a href="#I-D.ietf-ace-oauth-authz" class="xref">[I-D.ietf-ace-oauth-authz]</a>.</p>
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> <a href="#introAS2RS" id="introAS2RS">AS-to-RS Response</a>
 </h1>
-<p id="rfc.section.4.1.p.1">This section defines the following additional parameters for an AS response to a request to the introspection endpoint: </p>
+<p id="rfc.section.4.1.p.1">This section defines the following additional parameter for an AS response to a request to the introspection endpoint: </p>
 
 <dl>
-<dt>cnf</dt>
-<dd style="margin-left: 8">
-<br> OPTIONAL.   This field contains information about the proof-of-possession  key that binds the client to the access token.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>. See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter.<br><br>
-</dd>
 <dt>rs_cnf</dt>
 <dd style="margin-left: 8">
-<br> OPTIONAL.  If the RS uses asymmetric keys to authenticate towards the client (e.g., with a DTLS Raw Public Key handshake <a href="#RFC7250" class="xref">[RFC7250]</a> and it has several such keys (e.g., for different elliptic curves), the AS can give the RS a hint using this parameter, as to which key it should use.  Values of this parameter follow the syntax of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter. </dd>
+<br> OPTIONAL.  If the RS uses asymmetric keys to authenticate towards the client (e.g., with a DTLS Raw Public Key handshake <a href="#RFC7250" class="xref">[RFC7250]</a> and it has several such keys (e.g., for different elliptic curves), the AS can give the RS a hint using this parameter, as to which key it should use.  Values of this parameter follow the syntax and semantics of the "cnf" claim from section 3.1 of <a href="#I-D.ietf-ace-cwt-proof-of-possession" class="xref">[I-D.ietf-ace-cwt-proof-of-possession]</a>.  See <a href="#paramCnf" class="xref">Section 5</a> for additional discussion of the usage of this parameter. </dd>
 </dl>
 
 <p> </p>
+<p id="rfc.section.4.1.p.2">Furthermore the AS can use the "cnf" parameter specified in section 9.4 of <a href="#I-D.ietf-oauth-mtls" class="xref">[I-D.ietf-oauth-mtls]</a> in an introspection response.  For CBOR-based interactions the AS MUST use the parameter mapping specified in <a href="#fig:cborParameters" class="xref">Figure 5</a>.</p>
 <div id="rfc.figure.4"></div>
 <div id="fig:introRes"></div>
 <pre>
@@ -675,7 +672,7 @@ Payload:
       "x" : h'BCEE7EAAC162F91E6F330F5771211E220
               B8B546C96589B0AC4AD0FD24C77E1F1',
       "y" : h'C647B38C55EFBBC4E62E651720F002D5D
-	      75B2E0C02CD1326E662BCA222B90416'
+              75B2E0C02CD1326E662BCA222B90416'
     }
   }
 }
@@ -789,18 +786,7 @@ Payload:
 <h1 id="rfc.section.9.4">
 <a href="#rfc.section.9.4">9.4.</a> <a href="#IANAOAuthIntrospectionResponseParameterRegistration" id="IANAOAuthIntrospectionResponseParameterRegistration">OAuth Introspection Response Parameter Registration</a>
 </h1>
-<p id="rfc.section.9.4.p.1">This section registers the following parameters in the OAuth Token Introspection Response registry <a href="#IANA.TokenIntrospectionResponse" class="xref">[IANA.TokenIntrospectionResponse]</a>.</p>
-<p></p>
-
-<ul>
-<li>Name: <samp>cnf</samp>
-</li>
-<li>Description: Key to prove the right to use a PoP token. </li>
-<li>Change Controller: IESG</li>
-<li>Reference: <a href="#introAS2RS" class="xref">Section 4.1</a> of [this document]</li>
-</ul>
-
-<p> </p>
+<p id="rfc.section.9.4.p.1">This section registers the following parameter in the OAuth Token Introspection Response registry <a href="#IANA.TokenIntrospectionResponse" class="xref">[IANA.TokenIntrospectionResponse]</a>.</p>
 <p></p>
 
 <ul>
@@ -881,7 +867,12 @@ Payload:
 <tr>
 <td class="reference"><b id="I-D.ietf-ace-oauth-authz">[I-D.ietf-ace-oauth-authz]</b></td>
 <td class="top">
-<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-27">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-27, November 2019.</td>
+<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-29">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-29, December 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-oauth-mtls">[I-D.ietf-oauth-mtls]</b></td>
+<td class="top">
+<a>Campbell, B.</a>, <a>Bradley, J.</a>, <a>Sakimura, N.</a> and <a>T. Lodderstedt</a>, "<a href="https://tools.ietf.org/html/draft-ietf-oauth-mtls-17">OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens</a>", Internet-Draft draft-ietf-oauth-mtls-17, August 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="IANA.CborWebTokenClaims">[IANA.CborWebTokenClaims]</b></td>

@@ -24,6 +24,7 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8259.xml">
 <!ENTITY I-D.ietf-ace-oauth-authz SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-oauth-authz.xml">
 <!ENTITY I-D.ietf-ace-cwt-proof-of-possession SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-ace-cwt-proof-of-possession.xml">
+<!ENTITY I-D.ietf-oauth-mtls SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-mtls">
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -51,7 +52,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-ace-oauth-params-09" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ace-oauth-params-10" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -83,7 +84,7 @@
       </address>
     </author>
 
-    <date year="2019"/>
+    <date year="2020"/>
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
          in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -183,7 +184,7 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	expected to be able to generate better symmetric keys than a
 	constrained client.  The AS MUST verify that the client really is in
 	possession of the corresponding key.  Values of this parameter follow
-	the syntax of the "cnf" claim from section 3.1 of <xref
+	the syntax and semantics of the "cnf" claim from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>.</t>
       </list>
   </t>
@@ -229,8 +230,8 @@ Payload:
 	REQUIRED if the token type is "pop" and a symmetric key is used.
 	MAY be present for asymmetric proof-of-possession keys.  This field
 	contains the proof-of-possession key that the AS selected for the
-	token. 	Values of this parameter follow the syntax of the "cnf" claim
-	from section 3.1 of <xref
+	token. 	Values of this parameter follow the syntax and semantics of the
+	"cnf" claim from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>. 
 	See <xref target="paramCnf"/> for additional discussion of the usage of
 	this parameter.<vspace blankLines="1"/></t>
@@ -241,8 +242,8 @@ Payload:
 	the public key used by the RS to authenticate.  If this	parameter is
 	absent, either the RS does not use a public key or the AS knows that
 	the RS can authenticate itself to the client without additional
-	information.  Values of this parameter follow the syntax of the "cnf"
-	claim from section 3.1 of <xref
+	information.  Values of this parameter follow the syntax and semantics
+	of the "cnf" claim from section 3.1 of <xref
 	target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
 	target="paramCnf"/> for additional discussion of the usage of
 	this parameter. </t>
@@ -278,7 +279,7 @@ Payload:
     bound to a previously requested asymmetric proof-of-possession key (not
     shown) and a "rs_cnf" parameter containing the public key of the RS.
   <figure align="center" anchor="fig:asymmATres"
-            title="Example AS response, including the RS's public key.">
+          title="Example AS response, including the RS's public key.">
       <artwork align="left"><![CDATA[
 Header: Created (Code=2.01)
 Content-Format: "application/ace+cbor"
@@ -295,7 +296,7 @@ Payload:
       "x" : h'BCEE7EAAC162F91E6F330F5771211E220
               B8B546C96589B0AC4AD0FD24C77E1F1',
       "y" : h'C647B38C55EFBBC4E62E651720F002D5D
-	      75B2E0C02CD1326E662BCA222B90416'
+              75B2E0C02CD1326E662BCA222B90416'
     }
   }
 }
@@ -312,37 +313,34 @@ Payload:
 </section> <!--Token Endpont-->
 
 <section anchor="introspectionEndpoint"
-	 title="Parameters for the Introspection Endpoint">
-  <t>This section defines additional parameters for the interations with
+ title="Parameters for the Introspection Endpoint">
+  <t>This section defines an additional parameter for the interations with
   the introspection endpoint in the ACE framework <xref
   target="I-D.ietf-ace-oauth-authz"/>.</t>
   
   <section anchor="introAS2RS" title="AS-to-RS Response">
-    <t>This section defines the following additional parameters for
+    <t>This section defines the following additional parameter for
     an AS response to a request to the introspection endpoint:
    
     <list style="hanging">
-      <t hangText="cnf"><vspace blankLines="0"/>
-      OPTIONAL.   This field contains information about the
-      proof-of-possession  key that binds the client to the access token.
-      Values of this parameter follow the syntax of the "cnf" claim
-      from section 3.1 of <xref
-      target="I-D.ietf-ace-cwt-proof-of-possession"/>. See
-      <xref target="paramCnf"/> for additional discussion of the usage of this
-      parameter.<vspace blankLines="1"/></t>
-
       <t hangText="rs_cnf"><vspace blankLines="0"/>
       OPTIONAL.  If the RS uses asymmetric keys to authenticate towards
       the client (e.g., with a DTLS Raw Public Key handshake
       <xref target="RFC7250"/> and it has several such keys (e.g., for
       different elliptic curves), the AS can give the RS a hint using this
       parameter, as to which key it should use.  Values of this parameter
-      follow the syntax of the "cnf" claim from section 3.1 of <xref
-      target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
+      follow the syntax and semantics of the "cnf" claim from section 3.1 of
+      <xref target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
       target="paramCnf"/> for additional discussion of the usage of this
       parameter. </t>
     </list>
     </t>
+
+    <t>Furthermore the AS can use the "cnf" parameter specified in section 9.4
+    of <xref target="I-D.ietf-oauth-mtls"/> in an introspection response.
+    For CBOR-based interactions the AS MUST use the parameter mapping specified
+    in <xref target="fig:cborParameters"/>.</t>
+    
     <t><xref target="fig:introRes"/> shows an AS response to an introspection
     request including the "cnf" parameter to indicate the proof-of-possession
     key bound to the token and the "rs_cnf" parameter to indicate the key the
@@ -377,7 +375,7 @@ Payload:
       "x" : h'BCEE7EAAC162F91E6F330F5771211E220
               B8B546C96589B0AC4AD0FD24C77E1F1',
       "y" : h'C647B38C55EFBBC4E62E651720F002D5D
-	      75B2E0C02CD1326E662BCA222B90416'
+              75B2E0C02CD1326E662BCA222B90416'
     }
   }
 }
@@ -503,7 +501,7 @@ Payload:
  </section>
  
   <section anchor="IANAOAuthParameter"
-	   title="OAuth Parameter Registration">
+           title="OAuth Parameter Registration">
     <t>This section registers the following parameters in the "OAuth
     Parameters" registry <xref target="IANA.OAuthParameters"/>:</t>
     
@@ -533,21 +531,11 @@ Payload:
   </section>
   
   <section anchor="IANAOAuthIntrospectionResponseParameterRegistration"
-	   title="OAuth Introspection Response Parameter Registration">
-    <t>This section registers the following parameters in the OAuth
+           title="OAuth Introspection Response Parameter Registration">
+    <t>This section registers the following parameter in the OAuth
     Token Introspection Response registry <xref
     target="IANA.TokenIntrospectionResponse"/>.</t>
     
-    <t>
-      <?rfc subcompact="yes"?>
-      <list style='symbols'>
-        <t>Name: <spanx style="verb">cnf</spanx></t>
-        <t>Description: Key to prove the right to use a PoP token. </t>
-        <t>Change Controller: IESG</t>
-        <t>Reference: <xref target="introAS2RS"/> of [this document]</t>
-      </list>
-    </t>
-
     <t><?rfc subcompact="yes"?>
     <list style='symbols'>
       <t>Name: <spanx style="verb">rs_cnf</spanx></t>
@@ -646,6 +634,7 @@ Payload:
       <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
       &I-D.ietf-ace-oauth-authz;
       &I-D.ietf-ace-cwt-proof-of-possession;
+      &I-D.ietf-oauth-mtls;
       &RFC2119;
       &RFC6749;
       &RFC7049;

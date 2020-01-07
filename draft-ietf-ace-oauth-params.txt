@@ -4,13 +4,13 @@
 
 ACE Working Group                                               L. Seitz
 Internet-Draft                                                 Combitech
-Intended status: Standards Track                       December 22, 2019
-Expires: June 24, 2020
+Intended status: Standards Track                         January 7, 2020
+Expires: July 10, 2020
 
 
       Additional OAuth Parameters for Authorization in Constrained
                            Environments (ACE)
-                     draft-ietf-ace-oauth-params-09
+                     draft-ietf-ace-oauth-params-10
 
 Abstract
 
@@ -37,11 +37,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 24, 2020.
+   This Internet-Draft will expire on July 10, 2020.
 
 Copyright Notice
 
-   Copyright (c) 2019 IETF Trust and the persons identified as the
+   Copyright (c) 2020 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 1]
+Seitz                     Expires July 10, 2020                 [Page 1]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
    include Simplified BSD License text as described in Section 4.e of
@@ -81,12 +81,12 @@ Table of Contents
      9.2.  CBOR Web Token Claims . . . . . . . . . . . . . . . . . .   9
      9.3.  OAuth Parameter Registration  . . . . . . . . . . . . . .  10
      9.4.  OAuth Introspection Response Parameter Registration . . .  10
-     9.5.  OAuth Parameters CBOR Mappings Registraton  . . . . . . .  11
+     9.5.  OAuth Parameters CBOR Mappings Registraton  . . . . . . .  10
      9.6.  OAuth Token Introspection Response CBOR Mappings
            Registration  . . . . . . . . . . . . . . . . . . . . . .  11
    10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  11
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  12
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  11
      11.2.  Informative References . . . . . . . . . . . . . . . . .  13
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  13
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 2]
+Seitz                     Expires July 10, 2020                 [Page 2]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 2.  Terminology
@@ -155,8 +155,8 @@ Internet-Draft              ACE-OAuth-Params               December 2019
       (kty=Symmetric), since the AS is expected to be able to generate
       better symmetric keys than a constrained client.  The AS MUST
       verify that the client really is in possession of the
-      corresponding key.  Values of this parameter follow the syntax of
-      the "cnf" claim from section 3.1 of
+      corresponding key.  Values of this parameter follow the syntax and
+      semantics of the "cnf" claim from section 3.1 of
       [I-D.ietf-ace-cwt-proof-of-possession].
 
    Figure 1 shows a request for an access token using the "req_cnf"
@@ -165,9 +165,9 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 3]
+Seitz                     Expires July 10, 2020                 [Page 3]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
    key.  The content is displayed in CBOR diagnostic notation, without
@@ -204,8 +204,8 @@ Internet-Draft              ACE-OAuth-Params               December 2019
       REQUIRED if the token type is "pop" and a symmetric key is used.
       MAY be present for asymmetric proof-of-possession keys.  This
       field contains the proof-of-possession key that the AS selected
-      for the token.  Values of this parameter follow the syntax of the
-      "cnf" claim from section 3.1 of
+      for the token.  Values of this parameter follow the syntax and
+      semantics of the "cnf" claim from section 3.1 of
       [I-D.ietf-ace-cwt-proof-of-possession].  See Section 5 for
       additional discussion of the usage of this parameter.
 
@@ -217,13 +217,13 @@ Internet-Draft              ACE-OAuth-Params               December 2019
       parameter is absent, either the RS does not use a public key or
       the AS knows that the RS can authenticate itself to the client
       without additional information.  Values of this parameter follow
-      the syntax of the "cnf" claim from section 3.1 of
+      the syntax and semantics of the "cnf" claim from section 3.1 of
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 4]
+Seitz                     Expires July 10, 2020                 [Page 4]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
       [I-D.ietf-ace-cwt-proof-of-possession].  See Section 5 for
@@ -277,9 +277,9 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 5]
+Seitz                     Expires July 10, 2020                 [Page 5]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
    Header: Created (Code=2.01)
@@ -313,30 +313,14 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 4.  Parameters for the Introspection Endpoint
 
-   This section defines additional parameters for the interations with
+   This section defines an additional parameter for the interations with
    the introspection endpoint in the ACE framework
    [I-D.ietf-ace-oauth-authz].
 
 4.1.  AS-to-RS Response
 
-   This section defines the following additional parameters for an AS
+   This section defines the following additional parameter for an AS
    response to a request to the introspection endpoint:
-
-   cnf
-      OPTIONAL.  This field contains information about the proof-of-
-      possession key that binds the client to the access token.  Values
-      of this parameter follow the syntax of the "cnf" claim from
-      section 3.1 of [I-D.ietf-ace-cwt-proof-of-possession].  See
-      Section 5 for additional discussion of the usage of this
-      parameter.
-
-
-
-
-Seitz                     Expires June 24, 2020                 [Page 6]
-
-Internet-Draft              ACE-OAuth-Params               December 2019
-
 
    rs_cnf
       OPTIONAL.  If the RS uses asymmetric keys to authenticate towards
@@ -344,9 +328,23 @@ Internet-Draft              ACE-OAuth-Params               December 2019
       and it has several such keys (e.g., for different elliptic
       curves), the AS can give the RS a hint using this parameter, as to
       which key it should use.  Values of this parameter follow the
-      syntax of the "cnf" claim from section 3.1 of
+      syntax and semantics of the "cnf" claim from section 3.1 of
+
+
+
+
+Seitz                     Expires July 10, 2020                 [Page 6]
+
+Internet-Draft              ACE-OAuth-Params                January 2020
+
+
       [I-D.ietf-ace-cwt-proof-of-possession].  See Section 5 for
       additional discussion of the usage of this parameter.
+
+   Furthermore the AS can use the "cnf" parameter specified in section
+   9.4 of [I-D.ietf-oauth-mtls] in an introspection response.  For CBOR-
+   based interactions the AS MUST use the parameter mapping specified in
+   Figure 5.
 
    Figure 4 shows an AS response to an introspection request including
    the "cnf" parameter to indicate the proof-of-possession key bound to
@@ -389,9 +387,11 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 7]
+
+
+Seitz                     Expires July 10, 2020                 [Page 7]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 5.  Confirmation Method Parameters
@@ -445,9 +445,9 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 8]
+Seitz                     Expires July 10, 2020                 [Page 8]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 6.  CBOR Mappings
@@ -501,9 +501,9 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 
 
-Seitz                     Expires June 24, 2020                 [Page 9]
+Seitz                     Expires July 10, 2020                 [Page 9]
 
-Internet-Draft              ACE-OAuth-Params               December 2019
+Internet-Draft              ACE-OAuth-Params                January 2020
 
 
    o  Claim Name: "rs_cnf"
@@ -537,30 +537,14 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
 9.4.  OAuth Introspection Response Parameter Registration
 
-   This section registers the following parameters in the OAuth Token
+   This section registers the following parameter in the OAuth Token
    Introspection Response registry [IANA.TokenIntrospectionResponse].
-
-   o  Name: "cnf"
-   o  Description: Key to prove the right to use a PoP token.
-   o  Change Controller: IESG
-   o  Reference: Section 4.1 of [this document]
 
    o  Name: "rs_cnf"
    o  Description: public key used by RS to authenticate itself to the
       client.
    o  Change Controller: IESG
    o  Reference: Section 4.1 of [this document]
-
-
-
-
-
-
-
-Seitz                     Expires June 24, 2020                [Page 10]
-
-Internet-Draft              ACE-OAuth-Params               December 2019
-
 
 9.5.  OAuth Parameters CBOR Mappings Registraton
 
@@ -570,6 +554,14 @@ Internet-Draft              ACE-OAuth-Params               December 2019
 
    o  Name: "req_cnf"
    o  CBOR key: TBD (suggested: 4)
+
+
+
+Seitz                     Expires July 10, 2020                [Page 10]
+
+Internet-Draft              ACE-OAuth-Params                January 2020
+
+
    o  Change Controller: IESG
    o  Reference: Section 3.1 of [this document]
 
@@ -606,18 +598,6 @@ Internet-Draft              ACE-OAuth-Params               December 2019
    Ludwig Seitz worked on this document as part of the CelticNext
    projects CyberWI, and CRITISEC with funding from Vinnova.
 
-
-
-
-
-
-
-
-Seitz                     Expires June 24, 2020                [Page 11]
-
-Internet-Draft              ACE-OAuth-Params               December 2019
-
-
 11.  References
 
 11.1.  Normative References
@@ -628,12 +608,28 @@ Internet-Draft              ACE-OAuth-Params               December 2019
               Web Tokens (CWTs)", draft-ietf-ace-cwt-proof-of-
               possession-11 (work in progress), October 2019.
 
+
+
+
+
+
+Seitz                     Expires July 10, 2020                [Page 11]
+
+Internet-Draft              ACE-OAuth-Params                January 2020
+
+
    [I-D.ietf-ace-oauth-authz]
               Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
               H. Tschofenig, "Authentication and Authorization for
               Constrained Environments (ACE) using the OAuth 2.0
-              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-27
-              (work in progress), November 2019.
+              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-29
+              (work in progress), December 2019.
+
+   [I-D.ietf-oauth-mtls]
+              Campbell, B., Bradley, J., Sakimura, N., and T.
+              Lodderstedt, "OAuth 2.0 Mutual-TLS Client Authentication
+              and Certificate-Bound Access Tokens", draft-ietf-oauth-
+              mtls-17 (work in progress), August 2019.
 
    [IANA.CborWebTokenClaims]
               IANA, "CBOR Web Token (CWT) Claims",
@@ -667,16 +663,16 @@ Internet-Draft              ACE-OAuth-Params               December 2019
               Representation (CBOR)", RFC 7049, DOI 10.17487/RFC7049,
               October 2013, <https://www.rfc-editor.org/info/rfc7049>.
 
-
-
-Seitz                     Expires June 24, 2020                [Page 12]
-
-Internet-Draft              ACE-OAuth-Params               December 2019
-
-
    [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
               RFC 8152, DOI 10.17487/RFC8152, July 2017,
               <https://www.rfc-editor.org/info/rfc8152>.
+
+
+
+Seitz                     Expires July 10, 2020                [Page 12]
+
+Internet-Draft              ACE-OAuth-Params                January 2020
+
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -725,4 +721,8 @@ Author's Address
 
 
 
-Seitz                     Expires June 24, 2020                [Page 13]
+
+
+
+
+Seitz                     Expires July 10, 2020                [Page 13]
