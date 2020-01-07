@@ -138,7 +138,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 3.  Parameters for the Token Endpoint
 
-   This section defines additional parameters for the interations with
+   This section defines additional parameters for the interactions with
    the token endpoint in the ACE framework [I-D.ietf-ace-oauth-authz].
 
 3.1.  Client-to-AS Request
@@ -313,8 +313,8 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 4.  Parameters for the Introspection Endpoint
 
-   This section defines an additional parameter for the interations with
-   the introspection endpoint in the ACE framework
+   This section defines an additional parameter for the interactions
+   with the introspection endpoint in the ACE framework
    [I-D.ietf-ace-oauth-authz].
 
 4.1.  AS-to-RS Response

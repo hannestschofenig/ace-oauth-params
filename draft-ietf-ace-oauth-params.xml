@@ -166,7 +166,7 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 <!-- ***************************************************** -->
 
 <section anchor="tokenEndpoint" title="Parameters for the Token Endpoint">
-  <t>This section defines additional parameters for the interations with
+  <t>This section defines additional parameters for the interactions with
   the token endpoint in the ACE framework <xref
   target="I-D.ietf-ace-oauth-authz"/>.</t>
   
@@ -314,7 +314,7 @@ Payload:
 
 <section anchor="introspectionEndpoint"
  title="Parameters for the Introspection Endpoint">
-  <t>This section defines an additional parameter for the interations with
+  <t>This section defines an additional parameter for the interactions with
   the introspection endpoint in the ACE framework <xref
   target="I-D.ietf-ace-oauth-authz"/>.</t>
   
