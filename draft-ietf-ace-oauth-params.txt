@@ -81,7 +81,7 @@ Table of Contents
      9.2.  CBOR Web Token Claims . . . . . . . . . . . . . . . . . .   9
      9.3.  OAuth Parameter Registration  . . . . . . . . . . . . . .  10
      9.4.  OAuth Introspection Response Parameter Registration . . .  10
-     9.5.  OAuth Parameters CBOR Mappings Registraton  . . . . . . .  10
+     9.5.  OAuth Parameters CBOR Mappings Registration . . . . . . .  10
      9.6.  OAuth Token Introspection Response CBOR Mappings
            Registration  . . . . . . . . . . . . . . . . . . . . . .  11
    10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  11
@@ -338,7 +338,7 @@ Seitz                     Expires July 14, 2020                 [Page 6]
 Internet-Draft              ACE-OAuth-Params                January 2020
 
 
-      or section 3.1 of [RFC7800] for JSON-based interacions.  See
+      or section 3.1 of [RFC7800] for JSON-based interactions.  See
       Section 5 for additional discussion of the usage of this
       parameter.
 
@@ -546,7 +546,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
    o  Change Controller: IESG
    o  Reference: Section 4.1 of [this document]
 
-9.5.  OAuth Parameters CBOR Mappings Registraton
+9.5.  OAuth Parameters CBOR Mappings Registration
 
    This section registers the following parameter mappings in the "OAuth
    Parameters CBOR Mappings" registry established in section 8.9. of

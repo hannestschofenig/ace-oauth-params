@@ -338,7 +338,7 @@ Payload:
       follow the syntax and semantics of the "cnf" claim from either
       section 3.1 of <xref target="I-D.ietf-ace-cwt-proof-of-possession"/>
       for CBOR-based interactions or section 3.1 of <xref target="RFC7800"/>
-      for JSON-based interacions.  See <xref target="paramCnf"/> for additional
+      for JSON-based interactions.  See <xref target="paramCnf"/> for additional
       discussion of the usage of this parameter. </t>
     </list>
     </t>
@@ -556,7 +556,7 @@ Payload:
   </section>
 
   <section anchor="IANATokenCBORMappingRegistration"
-	   title="OAuth Parameters CBOR Mappings Registraton">
+	   title="OAuth Parameters CBOR Mappings Registration">
     <t>This section registers the following parameter mappings
     in the "OAuth Parameters CBOR Mappings" registry established in
     section 8.9. of <xref target="I-D.ietf-ace-oauth-authz"/>.</t>
