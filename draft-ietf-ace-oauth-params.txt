@@ -4,13 +4,13 @@
 
 ACE Working Group                                               L. Seitz
 Internet-Draft                                                 Combitech
-Intended status: Standards Track                         January 7, 2020
-Expires: July 10, 2020
+Intended status: Standards Track                        January 11, 2020
+Expires: July 14, 2020
 
 
       Additional OAuth Parameters for Authorization in Constrained
                            Environments (ACE)
-                     draft-ietf-ace-oauth-params-10
+                     draft-ietf-ace-oauth-params-11
 
 Abstract
 
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on July 10, 2020.
+   This Internet-Draft will expire on July 14, 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Seitz                     Expires July 10, 2020                 [Page 1]
+Seitz                     Expires July 14, 2020                 [Page 1]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Seitz                     Expires July 10, 2020                 [Page 2]
+Seitz                     Expires July 14, 2020                 [Page 2]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -156,16 +156,16 @@ Internet-Draft              ACE-OAuth-Params                January 2020
       better symmetric keys than a constrained client.  The AS MUST
       verify that the client really is in possession of the
       corresponding key.  Values of this parameter follow the syntax and
-      semantics of the "cnf" claim from section 3.1 of
-      [I-D.ietf-ace-cwt-proof-of-possession].
+      semantics of the "cnf" claim either from section 3.1 of
+      [I-D.ietf-ace-cwt-proof-of-possession] for CBOR-based interactions
+      or from section 3.1 of [RFC7800] for JSON-based interactions.
 
    Figure 1 shows a request for an access token using the "req_cnf"
    parameter to request a specific public key as proof-of-possession
 
 
 
-
-Seitz                     Expires July 10, 2020                 [Page 3]
+Seitz                     Expires July 14, 2020                 [Page 3]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -205,9 +205,11 @@ Internet-Draft              ACE-OAuth-Params                January 2020
       MAY be present for asymmetric proof-of-possession keys.  This
       field contains the proof-of-possession key that the AS selected
       for the token.  Values of this parameter follow the syntax and
-      semantics of the "cnf" claim from section 3.1 of
-      [I-D.ietf-ace-cwt-proof-of-possession].  See Section 5 for
-      additional discussion of the usage of this parameter.
+      semantics of the "cnf" claim either from section 3.1 of
+      [I-D.ietf-ace-cwt-proof-of-possession] for CBOR-based interactions
+      of from section 3.1 of [RFC7800] for JSON-based interactions.  See
+      Section 5 for additional discussion of the usage of this
+      parameter.
 
 
    rs_cnf
@@ -216,18 +218,20 @@ Internet-Draft              ACE-OAuth-Params                January 2020
       about the public key used by the RS to authenticate.  If this
       parameter is absent, either the RS does not use a public key or
       the AS knows that the RS can authenticate itself to the client
-      without additional information.  Values of this parameter follow
-      the syntax and semantics of the "cnf" claim from section 3.1 of
 
 
 
-Seitz                     Expires July 10, 2020                 [Page 4]
+Seitz                     Expires July 14, 2020                 [Page 4]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
 
-      [I-D.ietf-ace-cwt-proof-of-possession].  See Section 5 for
-      additional discussion of the usage of this parameter.
+      without additional information.  Values of this parameter follow
+      the syntax and semantics of the "cnf" claim either from section
+      3.1 of [I-D.ietf-ace-cwt-proof-of-possession] for CBOR-based
+      interactions or from section 3.1 of [RFC7800] for JSON-based
+      interactions.  See Section 5 for additional discussion of the
+      usage of this parameter.
 
    Figure 2 shows an AS response containing a token and a "cnf"
    parameter with a symmetric proof-of-possession key.
@@ -273,11 +277,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 
-
-
-
-
-Seitz                     Expires July 10, 2020                 [Page 5]
+Seitz                     Expires July 14, 2020                 [Page 5]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -328,23 +328,25 @@ Internet-Draft              ACE-OAuth-Params                January 2020
       and it has several such keys (e.g., for different elliptic
       curves), the AS can give the RS a hint using this parameter, as to
       which key it should use.  Values of this parameter follow the
-      syntax and semantics of the "cnf" claim from section 3.1 of
+      syntax and semantics of the "cnf" claim from either section 3.1 of
+      [I-D.ietf-ace-cwt-proof-of-possession] for CBOR-based interactions
 
 
 
-
-Seitz                     Expires July 10, 2020                 [Page 6]
+Seitz                     Expires July 14, 2020                 [Page 6]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
 
-      [I-D.ietf-ace-cwt-proof-of-possession].  See Section 5 for
-      additional discussion of the usage of this parameter.
+      or section 3.1 of [RFC7800] for JSON-based interacions.  See
+      Section 5 for additional discussion of the usage of this
+      parameter.
 
    Furthermore the AS can use the "cnf" parameter specified in section
    9.4 of [I-D.ietf-oauth-mtls] in an introspection response.  For CBOR-
    based interactions the AS MUST use the parameter mapping specified in
-   Figure 5.
+   Figure 5 and the value must follow the syntax of "cnf" claim values
+   from section 3.1 of [I-D.ietf-ace-cwt-proof-of-possession].
 
    Figure 4 shows an AS response to an introspection request including
    the "cnf" parameter to indicate the proof-of-possession key bound to
@@ -387,9 +389,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 
-
-
-Seitz                     Expires July 10, 2020                 [Page 7]
+Seitz                     Expires July 14, 2020                 [Page 7]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -445,7 +445,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 
-Seitz                     Expires July 10, 2020                 [Page 8]
+Seitz                     Expires July 14, 2020                 [Page 8]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -501,7 +501,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 
-Seitz                     Expires July 10, 2020                 [Page 9]
+Seitz                     Expires July 14, 2020                 [Page 9]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -557,7 +557,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 
-Seitz                     Expires July 10, 2020                [Page 10]
+Seitz                     Expires July 14, 2020                [Page 10]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -613,7 +613,7 @@ Internet-Draft              ACE-OAuth-Params                January 2020
 
 
 
-Seitz                     Expires July 10, 2020                [Page 11]
+Seitz                     Expires July 14, 2020                [Page 11]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
@@ -663,16 +663,25 @@ Internet-Draft              ACE-OAuth-Params                January 2020
               Representation (CBOR)", RFC 7049, DOI 10.17487/RFC7049,
               October 2013, <https://www.rfc-editor.org/info/rfc7049>.
 
-   [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
-              RFC 8152, DOI 10.17487/RFC8152, July 2017,
-              <https://www.rfc-editor.org/info/rfc8152>.
 
 
 
-Seitz                     Expires July 10, 2020                [Page 12]
+
+
+
+Seitz                     Expires July 14, 2020                [Page 12]
 
 Internet-Draft              ACE-OAuth-Params                January 2020
 
+
+   [RFC7800]  Jones, M., Bradley, J., and H. Tschofenig, "Proof-of-
+              Possession Key Semantics for JSON Web Tokens (JWTs)",
+              RFC 7800, DOI 10.17487/RFC7800, April 2016,
+              <https://www.rfc-editor.org/info/rfc7800>.
+
+   [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
+              RFC 8152, DOI 10.17487/RFC8152, July 2017,
+              <https://www.rfc-editor.org/info/rfc8152>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -716,13 +725,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-Seitz                     Expires July 10, 2020                [Page 13]
+Seitz                     Expires July 14, 2020                [Page 13]

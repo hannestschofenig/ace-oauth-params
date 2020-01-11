@@ -16,6 +16,8 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7250.xml">
 <!ENTITY RFC7252 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7252.xml">
+<!ENTITY RFC7800 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7800.xml">
 <!ENTITY RFC8152 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8152.xml">
 <!ENTITY RFC8174 SYSTEM
@@ -52,7 +54,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-ace-oauth-params-10" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-ace-oauth-params-11" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -184,8 +186,10 @@ target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in 
 	expected to be able to generate better symmetric keys than a
 	constrained client.  The AS MUST verify that the client really is in
 	possession of the corresponding key.  Values of this parameter follow
-	the syntax and semantics of the "cnf" claim from section 3.1 of <xref
-	target="I-D.ietf-ace-cwt-proof-of-possession"/>.</t>
+	the syntax and semantics of the "cnf" claim either from section 3.1 of
+	<xref target="I-D.ietf-ace-cwt-proof-of-possession"/> for CBOR-based
+	interactions or from section 3.1 of <xref target="RFC7800"/> for
+	JSON-based interactions.</t>
       </list>
   </t>
 
@@ -231,10 +235,11 @@ Payload:
 	MAY be present for asymmetric proof-of-possession keys.  This field
 	contains the proof-of-possession key that the AS selected for the
 	token. 	Values of this parameter follow the syntax and semantics of the
-	"cnf" claim from section 3.1 of <xref
-	target="I-D.ietf-ace-cwt-proof-of-possession"/>. 
-	See <xref target="paramCnf"/> for additional discussion of the usage of
-	this parameter.<vspace blankLines="1"/></t>
+	"cnf" claim either from section 3.1 of
+	<xref target="I-D.ietf-ace-cwt-proof-of-possession"/> for CBOR-based
+	interactions of from section 3.1 of <xref target="RFC7800"/> for
+	JSON-based interactions.  See <xref target="paramCnf"/> for additional
+	discussion of the usage of this parameter.<vspace blankLines="1"/></t>
 
 	<t hangText="rs_cnf"><vspace blankLines="0"/>
 	OPTIONAL if the token type is "pop" and asymmetric keys are used.
@@ -243,10 +248,11 @@ Payload:
 	absent, either the RS does not use a public key or the AS knows that
 	the RS can authenticate itself to the client without additional
 	information.  Values of this parameter follow the syntax and semantics
-	of the "cnf" claim from section 3.1 of <xref
-	target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
-	target="paramCnf"/> for additional discussion of the usage of
-	this parameter. </t>
+	of the "cnf" claim either from section 3.1 of
+	<xref target="I-D.ietf-ace-cwt-proof-of-possession"/> for CBOR-based
+	interactions or from section 3.1 of <xref target="RFC7800"/> for
+	JSON-based interactions.  See <xref target="paramCnf"/> for additional
+	discussion of the usage of this parameter. </t>
       </list>
     </t>
 
@@ -329,17 +335,20 @@ Payload:
       <xref target="RFC7250"/> and it has several such keys (e.g., for
       different elliptic curves), the AS can give the RS a hint using this
       parameter, as to which key it should use.  Values of this parameter
-      follow the syntax and semantics of the "cnf" claim from section 3.1 of
-      <xref target="I-D.ietf-ace-cwt-proof-of-possession"/>.  See <xref
-      target="paramCnf"/> for additional discussion of the usage of this
-      parameter. </t>
+      follow the syntax and semantics of the "cnf" claim from either
+      section 3.1 of <xref target="I-D.ietf-ace-cwt-proof-of-possession"/>
+      for CBOR-based interactions or section 3.1 of <xref target="RFC7800"/>
+      for JSON-based interacions.  See <xref target="paramCnf"/> for additional
+      discussion of the usage of this parameter. </t>
     </list>
     </t>
 
     <t>Furthermore the AS can use the "cnf" parameter specified in section 9.4
     of <xref target="I-D.ietf-oauth-mtls"/> in an introspection response.
     For CBOR-based interactions the AS MUST use the parameter mapping specified
-    in <xref target="fig:cborParameters"/>.</t>
+    in <xref target="fig:cborParameters"/> and the value must follow the
+    syntax of "cnf" claim values from section 3.1 of
+    <xref target="I-D.ietf-ace-cwt-proof-of-possession"/>.</t>
     
     <t><xref target="fig:introRes"/> shows an AS response to an introspection
     request including the "cnf" parameter to indicate the proof-of-possession
@@ -638,6 +647,7 @@ Payload:
       &RFC2119;
       &RFC6749;
       &RFC7049;
+      &RFC7800;
       &RFC8152;
       &RFC8174;
       &RFC8259;
