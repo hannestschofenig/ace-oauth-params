@@ -438,6 +438,21 @@ Payload:
 </section>
 
 <section anchor="iana" title="IANA Considerations">
+  
+  <section anchor="IANAOAuthTokenType"
+           title="OAuth Access Token Types">
+    <t>This specification registers the following error in the IANA "OAuth
+   Access Token Types" established by <xref target="RFC6750"/>:</t>
+    <t><?rfc subcompact="yes"?>
+    <list style='symbols'>
+      <t>Name: <spanx style="verb">pop</spanx></t>
+      <t>Additional Token Endpoint Response Parameters: none</t>
+	    <t>HTTP Authentication Scheme(s): Bearer</t>
+      <t>Change Controller: IESG</t>
+      <t>Reference: [this document]</t>
+    </list></t>
+  </section>
+	
   <section anchor="IANAOAuthParameter"
            title="OAuth Parameter Registration">
     <t>This section registers the following parameters in the "OAuth
